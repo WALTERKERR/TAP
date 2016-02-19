@@ -1,0 +1,36 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<div id="container" style="width:100%; height:400px;"></div>
+
+<script>
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'San Francisco'
+        },
+        xAxis: {
+            categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature'
+            }
+        },
+        series: [{
+            name: 'National Average',
+            data: [98.8, 98.7, 98.5, 98.7, 98.8, 98.8, 98.7]
+        }, {
+            name: 'San Francisco Average',
+            data: [98.9, 98.9, 99, 99, 98.5, 99]
+        }]
+    });
+});
+
+</script>
+<script type="text/javascript" src="/js/themes/gray.js"></script>
+
