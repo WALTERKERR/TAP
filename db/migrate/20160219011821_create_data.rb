@@ -6,6 +6,7 @@ class CreateData < ActiveRecord::Migration
       t.float :temp
       t.datetime :time
       t.string :zip
+      t.string :street_address
       t.string :city
       t.string :state
 

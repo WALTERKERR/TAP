@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20160219011821) do
     t.float    "temp"
     t.datetime "time"
     t.string   "zip"
+    t.string   "street_address"
     t.string   "city"
     t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
