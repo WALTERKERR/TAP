@@ -8,10 +8,10 @@ class DataController < ApplicationController
     # @data = Datum.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
 
     # Calculates average of each city to display on map index
-    all_cities = Datum.select(:city, :state).distinct
+    all_cities = Datum.select(:city, :state).where("time >= ?", Date.today - 7).distinct
     @data = []
     all_cities.each do |city_info|
-      city_data = Datum.where(city: city_info.city, state: city_info.state)
+      city_data = Datum.where(city: city_info.city, state: city_info.state).where("time >= ?", Date.today - 7)
       coordinates = Geocoder.coordinates("#{city_info.city}, #{city_info.state}")
       avg_temp = city_data.reduce(0) {|sum, reading| sum + reading.temp} / city_data.length
       data_hash = { latitude: coordinates[0], longitude: coordinates[1], temp: avg_temp.round(2), city: city_info.city, state: city_info.state}

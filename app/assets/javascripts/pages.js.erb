@@ -20,18 +20,23 @@ $(document).ready(function(){
       var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
       if (d.temp >= 99.5) {
         var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-          icon: L.mapbox.marker.icon({'marker-color': 'FF6666'}),
-          content: content
+          icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
+          content: content,
+          city: d.city,
+          state: d.state
         });
       } else {
         var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+
           icon: L.mapbox.marker.icon({'marker-color': '0044FF'}),
-          content: content
+          content: content,
+          city: d.city,
+          state: d.state
         });
       };
       marker.bindPopup(content);
       marker.on('click', function(e){
-        // console.log('hi' + i);
+        console.log(this.options.city + ", " + this.options.state);
       })
       markers.addLayer(marker);
     }
