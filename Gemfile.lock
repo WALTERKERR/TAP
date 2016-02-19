@@ -146,6 +146,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  jbuilder (~> 2.0)
+  jquery-rails
+  pg (~> 0.15)
+  rails (= 4.2.5)
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
@@ -159,4 +163,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.11.2
+   1.10.6
