@@ -5,7 +5,7 @@ class DataController < ApplicationController
     city = params[:city]
     state = params[:state]
     timeframe = params[:timeframe]
-    @data = Data.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
+    @data = Datum.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
     render json: @data
   end
 

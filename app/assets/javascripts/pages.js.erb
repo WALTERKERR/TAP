@@ -1,25 +1,60 @@
 $(document).ready(function(){
-
   L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
   var map = L.mapbox.map('map', 'mapbox.dark').setView([39.114102, -94.627478], 5);
 
   var data = [
-  { name: 'Location A', category: 'Store', street: 'Market', lat: 39.984, lng: -75.343 },
-  { name: 'Location B', category: 'House', street: 'Broad', lat: 39.284, lng: -75.833 },
-  { name: 'Location C', category: 'Office', street: 'South', lat: 39.123, lng: -74.534 }
+  { city: "San Francisco", temp: "98.3", latitude: 39.984, longitude: -75.343 },
+  { city: "San Francisco", temp: "99.7", latitude: 39.284, longitude: -75.833 },
+  { city: "San Francisco", temp: "98.5", latitude: 39.123, longitude: -74.534 }
   ];
 
-  var geojson_objects = GeoJSON.parse(data, {Point: ['lat', 'lng']});
+  // var geojson_objects = GeoJSON.parse(data, {Point: ['latitude', 'longitude']});
 
-  var myLayer = L.mapbox.featureLayer().addTo(map);
-  myLayer.on('layeradd', function(e){
-    var marker = e.layer;
-    feature = marker.feature;
-    var content = '<h2>'+ feature.properties.name+'<\/h2>' + '<p>'+feature.properties.category+'</p><a href="http://www.google.com">ClickMe</a>';
+  var markers = new L.MarkerClusterGroup();
+
+  for (var i = 0; i < data.length; i ++) {
+    var d = data[i]
+    var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
+    if (d.temp >= 99.5) {
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': 'FF6666'}),
+        content: content
+      });
+    } else {
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': '0044FF'}),
+        content: content
+      });
+    };
     marker.bindPopup(content);
-  });
+    marker.on('click', function(e){
+      // console.log('hi' + i);
+    })
+    markers.addLayer(marker);
+  }
+  // for (var i = 0; i < geojson_objects.features.length; i ++) {
+  //   var g = geojson_objects.features[i];
+  //   var city = g.properties.city
+  //   var temp = g.properties.temp
+  //   var content = '<h2><a href="http://www.google.com">'+ city + '</a></h2><p>'+ temp +'</p>'
+  //   console.log(geojson_objects.features[i]);
+  //   var marker = L.marker(new L.LatLng(g.geometry.coordinates[1], g.geometry.coordinates[0]),{
+  //     icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
+  //     content: content
+  //   });
+  //   marker.bindPopup(content);
+  //   markers.addLayer(marker);
+  // }
 
-  myLayer.setGeoJSON(geojson_objects);
+  map.addLayer(markers);
+  // var myLayer = L.mapbox.featureLayer().addTo(map);
+  // myLayer.on('layeradd', function(e){
+  //   var marker = e.layer;
+  //   feature = marker.feature;
+  //   var content = '<h2><a href="http://www.google.com">'+ feature.properties.city+'</a></h2><p>'+feature.properties.temp+'</p>';
+  //   marker.bindPopup(content);
+  // });
 
+  // myLayer.setGeoJSON(geojson_objects);
 });
 
