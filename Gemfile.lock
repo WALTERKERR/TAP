@@ -52,6 +52,7 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
+    geocoder (1.3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -75,6 +76,7 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -88,6 +90,9 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5)
       sprockets-rails
+    rails-api (0.4.0)
+      actionpack (>= 3.2.11)
+      railties (>= 3.2.11)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -145,6 +150,13 @@ DEPENDENCIES
   jquery-rails
   pg (~> 0.15)
   rails (= 4.2.5)
+  geocoder
+  jbuilder (~> 2.0)
+  jquery-rails
+  pg (~> 0.15)
+  rack-cors
+  rails (= 4.2.5)
+  rails-api
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   uglifier (>= 1.3.0)

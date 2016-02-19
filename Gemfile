@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'rack-cors', :require => 'rack/cors'
+
+gem 'geocoder'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -13,6 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
+gem 'rails-api'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
