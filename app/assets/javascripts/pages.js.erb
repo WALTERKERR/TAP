@@ -1,0 +1,25 @@
+$(document).ready(function(){
+
+  L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+  var map = L.mapbox.map('map', 'mapbox.dark').setView([39.114102, -94.627478], 5);
+
+  var data = [
+  { name: 'Location A', category: 'Store', street: 'Market', lat: 39.984, lng: -75.343 },
+  { name: 'Location B', category: 'House', street: 'Broad', lat: 39.284, lng: -75.833 },
+  { name: 'Location C', category: 'Office', street: 'South', lat: 39.123, lng: -74.534 }
+  ];
+
+  var geojson_objects = GeoJSON.parse(data, {Point: ['lat', 'lng']});
+
+  var myLayer = L.mapbox.featureLayer().addTo(map);
+  myLayer.on('layeradd', function(e){
+    var marker = e.layer;
+    feature = marker.feature;
+    var content = '<h2>'+ feature.properties.name+'<\/h2>' + '<p>'+feature.properties.category+'</p><a href="http://www.google.com">ClickMe</a>';
+    marker.bindPopup(content);
+  });
+
+  myLayer.setGeoJSON(geojson_objects);
+
+});
+
