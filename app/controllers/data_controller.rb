@@ -1,13 +1,7 @@
 class DataController < ApplicationController
 
   def index
-    # p params
-    # city = params[:city]
-    # state = params[:state]
-    # timeframe = params[:timeframe].to_i
-    # @data = Datum.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
 
-    # Calculates average of each city to display on map index
     all_cities = Datum.select(:city, :state).where("time >= ?", Date.today - 7).distinct
     @data = []
     all_cities.each do |city_info|
@@ -17,6 +11,14 @@ class DataController < ApplicationController
       data_hash = { latitude: coordinates[0], longitude: coordinates[1], temp: avg_temp.round(2), city: city_info.city, state: city_info.state}
       @data << data_hash
     end
+    render json: @data
+  end
+
+  def find
+    city = params[:city]
+    state = params[:state]
+    timeframe = params[:timeframe].to_i
+    @data = Datum.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
     render json: @data
   end
 
