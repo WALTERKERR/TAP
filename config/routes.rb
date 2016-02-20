@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'charts/index'
+  get '/find' => 'data#find'
 
 
   get 'maps/chart'
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

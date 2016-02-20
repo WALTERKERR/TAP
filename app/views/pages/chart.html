@@ -15,7 +15,7 @@ $(function () {
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3000/data?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
         dataType: 'JSON'
     })
     .done(function(response){
@@ -97,7 +97,7 @@ $(function () {
         timeFrame = $(e.target).attr('id')
         $.ajax({
             method: "GET",
-            url: "http://localhost:3000/data?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+            url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
             dataType: 'JSON'
         })
         .done(function(response){
