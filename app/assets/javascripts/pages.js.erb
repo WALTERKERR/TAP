@@ -1,21 +1,17 @@
 $(document).ready(function(){
   L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+
+  getMarkerData();
+
+});
+
+
+var getMarkerData = function(){
   var map = L.mapbox.map('map', 'mapbox.dark').setView([39.114102, -94.627478], 4);
+    $.get('/data', 'json').done(function(data){
+      var markers = new L.MarkerClusterGroup();
 
-  // var data = [
-  // { city: "San Francisco", temp: "98.3", latitude: 39.984, longitude: -75.343 },
-  // { city: "San Francisco", temp: "99.7", latitude: 39.284, longitude: -75.833 },
-  // { city: "San Francisco", temp: "98.5", latitude: 39.123, longitude: -74.534 }
-  // ];
-
-  $.ajax({
-    method: 'GET',
-    url: '/data',
-    dataType: 'json'
-  }).done(function(data){
-    var markers = new L.MarkerClusterGroup();
-
-    for (var i = 0; i < data.length; i ++) {
+      for (var i = 0; i < data.length; i ++) {
       var d = data[i];
       var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
       if (d.temp >= 99.5) {
@@ -42,34 +38,6 @@ $(document).ready(function(){
       })
       markers.addLayer(marker);
     }
-    map.addLayer(markers);
-  })
-
-  // var geojson_objects = GeoJSON.parse(data, {Point: ['latitude', 'longitude']});
-
-
-  // for (var i = 0; i < geojson_objects.features.length; i ++) {
-  //   var g = geojson_objects.features[i];
-  //   var city = g.properties.city
-  //   var temp = g.properties.temp
-  //   var content = '<h2><a href="http://www.google.com">'+ city + '</a></h2><p>'+ temp +'</p>'
-  //   console.log(geojson_objects.features[i]);
-  //   var marker = L.marker(new L.LatLng(g.geometry.coordinates[1], g.geometry.coordinates[0]),{
-  //     icon: L.mapbox.marker.icon({'marker-symbol': 'post', 'marker-color': '0044FF'}),
-  //     content: content
-  //   });
-  //   marker.bindPopup(content);
-  //   markers.addLayer(marker);
-  // }
-
-  // var myLayer = L.mapbox.featureLayer().addTo(map);
-  // myLayer.on('layeradd', function(e){
-  //   var marker = e.layer;
-  //   feature = marker.feature;
-  //   var content = '<h2><a href="http://www.google.com">'+ feature.properties.city+'</a></h2><p>'+feature.properties.temp+'</p>';
-  //   marker.bindPopup(content);
-  // });
-
-  // myLayer.setGeoJSON(geojson_objects);
-});
-
+      map.addLayer(markers);
+    })
+};
