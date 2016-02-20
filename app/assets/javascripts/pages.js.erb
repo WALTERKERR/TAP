@@ -11,7 +11,7 @@ $(document).ready(function(){
   $.ajax({
     method: 'GET',
     url: '/data',
-    contentType: 'json'
+    dataType: 'json'
   }).done(function(data){
     var markers = new L.MarkerClusterGroup();
 
@@ -23,15 +23,17 @@ $(document).ready(function(){
           icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
           content: content,
           city: d.city,
-          state: d.state
+          state: d.state,
+          temp: d.temp
         });
       } else {
         var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
 
-          icon: L.mapbox.marker.icon({'marker-color': '#99cfe0'}),
+          icon: L.mapbox.marker.icon({'marker-color': '#99cfe0', 'marker-symbol': 'ice-cream'}),
           content: content,
           city: d.city,
-          state: d.state
+          state: d.state,
+          temp: d.temp
         });
       };
       marker.bindPopup(content);
