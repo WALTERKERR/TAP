@@ -1,31 +1,40 @@
+Datum.destroy_all
+
 3.times do |outside_counter|
   3.times do |inside_counter|
-    Datum.create(street_address: "633 Folsom Street", zip: "94107", temp:98.25 + rand(-0.73..0.73), time: Date.today + (outside_counter+1) + inside_counter)
+    Datum.create(street_address: "633 Folsom Street", zip: "94107", temp:98.25 + rand(-0.73..0.73), time: Date.today - (outside_counter+1) + inside_counter)
   end
+  sleep(0.5)
+end
+
+
+
+3.times do |outside_counter|
+  3.times do |inside_counter|
+    Datum.create(street_address: "1600 Clifton Rd", zip: "30333", temp:98.25 + rand(5..8), time: Date.today - (outside_counter+1) + inside_counter)
+  end
+  sleep(0.5)
 end
 
 3.times do |outside_counter|
   3.times do |inside_counter|
-    Datum.create(street_address: "1600 Clifton Rd", zip: "30333", temp:98.25 + rand(5..8), time: Date.today + (outside_counter+1) + inside_counter)
+    Datum.create(street_address: "Kennedy Parkway North", zip: "32899", temp:98.25 + rand(-0.73..0.73), time: Date.today - (outside_counter+1) + inside_counter)
   end
+  sleep(0.5)
 end
 
 3.times do |outside_counter|
   3.times do |inside_counter|
-    Datum.create(street_address: "Kennedy Parkway North", zip: "32899", temp:98.25 + rand(-0.73..0.73), time: Date.today + (outside_counter+1) + inside_counter)
+    Datum.create(street_address: "60 Garden St", zip: "02138", temp:98.25 + rand(-0.73..0.73), time: Date.today - (outside_counter+1) + inside_counter)
   end
+  sleep(0.5)
 end
 
 3.times do |outside_counter|
   3.times do |inside_counter|
-    Datum.create(street_address: "60 Garden St", zip: "02138", temp:98.25 + rand(-0.73..0.73), time: Date.today + (outside_counter+1) + inside_counter)
+    Datum.create(street_address: "907 Whitehead Street", zip: "33040", temp:98.25 + rand(-0.73..0.73), time: Date.today - (outside_counter+1) + inside_counter)
   end
-end
-
-3.times do |outside_counter|
-  3.times do |inside_counter|
-    Datum.create(street_address: "907 Whitehead Street", zip: "33040", temp:98.25 + rand(-0.73..0.73), time: Date.today + (outside_counter+1) + inside_counter)
-  end
+  sleep(0.5)
 end
 
 

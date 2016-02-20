@@ -1,0 +1,166 @@
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<div id="container" style="width:100%; height:400px;"></div>
+
+<script>
+
+$(function () {
+
+    //User Input
+    var cityName = "San Francisco";
+    var stateName = "California";
+    var timeFrame = 7;
+
+
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:3000/data?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        dataType: 'JSON'
+    })
+    .done(function(response){
+        //Chart Data
+        var chartData = response;
+
+        var todayDate = new Date();
+        var dates = [];
+        for (i=1; i <= timeFrame; i++){
+            var newDate = new Date();
+            newDate.setDate(todayDate.getDate() - (timeFrame - i));
+            dates.push(newDate.toJSON().slice(0,10));
+        }
+
+        var avgTemps = [];
+        dates.forEach(function(date){
+            var dayTemps = chartData.filter(function(data){
+                return (data["time"].slice(0,10) === date);
+            })
+            var sum = Object.keys(dayTemps).reduce(function(a, b){
+                return a + dayTemps[b].temp;
+            }, 0)
+            console.log("sum: " + sum)
+            if (sum === 0) {
+                avgTemps.push(null);
+            } else {
+                avgTemps.push(sum/dayTemps.length);
+            }
+        })
+
+        // var nationalAvgTemps = [];
+        // dates.forEach(function(date){
+        //     var dayTemps = chartData.filter(function(data){
+        //         return (data["time"].slice(0,10) === date);
+        //     })
+        //     var sum = Object.keys(dayTemps).reduce(function(a, b){
+        //         return a + dayTemps[b].temp;
+        //     }, 0)
+        //     console.log("sum: " + sum)
+        //     if (sum === 0) {
+        //         avgTemps.push(null);
+        //     } else {
+        //         avgTemps.push(sum/dayTemps.length);
+        //     }
+        // })
+
+
+        $('#container').highcharts({
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: cityName
+            },
+            xAxis: {
+                categories: dates
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature'
+                }
+            },
+            series: [{
+                name: 'National Average',
+                data: [ 98.13245, 98.2327, 98.354563457, 98.22353235, 98.32353235, 98.1327, 98.3545969]
+            }, {
+                name: cityName + " Average",
+                data: avgTemps
+            }]
+
+        });
+
+       $('#container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
+    })
+
+    //trigger for interactive chart
+    $('#container').on('click', 'a', function(e){
+        e.preventDefault();
+        timeFrame = $(e.target).attr('id')
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:3000/data?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+            dataType: 'JSON'
+        })
+        .done(function(response){
+            var chartData = response;
+
+            var todayDate = new Date();
+            var dates = [];
+            for (i=1; i <= timeFrame; i++){
+                var newDate = new Date();
+                newDate.setDate(todayDate.getDate() - (timeFrame - i));
+                dates.push(newDate.toJSON().slice(0,10));
+            }
+
+            var avgTemps = [];
+            dates.forEach(function(date){
+                var dayTemps = chartData.filter(function(data){
+                    return (data["time"].slice(0,10) === date);
+                })
+                var sum = Object.keys(dayTemps).reduce(function(a, b){
+                    return a + dayTemps[b].temp;
+                }, 0)
+                console.log("sum: " + sum)
+                if (sum === 0) {
+                    avgTemps.push(null);
+                } else {
+                    avgTemps.push(sum/dayTemps.length);
+                }
+            })
+
+            $('#container').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: cityName
+                },
+                xAxis: {
+                    categories: dates
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature'
+                    }
+                },
+                series: [{
+                    name: cityName + " Average",
+                    data: avgTemps
+                }]
+
+            });
+
+           $('#container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
+       });
+
+
+    })
+
+
+
+});
+
+</script>
+
+
+<!-- <script type="text/javascript" src="/js/themes/gray.js"></script> -->
+
