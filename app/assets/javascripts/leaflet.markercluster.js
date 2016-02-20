@@ -176,11 +176,10 @@
                 var markers = t.getAllChildMarkers();
                 var high_temp = false;
                 for (var i = 0; i < markers.length; i++){
-                  if (high_temp == false){
                     if (markers[i].options.temp >= 99.5) {
                       high_temp = true;
+                      break;
                     }
-                  };
                 };
                 if (high_temp == false){
                   var e = t.getChildCount(),

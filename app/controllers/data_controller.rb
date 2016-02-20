@@ -1,7 +1,7 @@
 class DataController < ApplicationController
 
   def index
-
+    # Calculate average temperatures for each city
     all_cities = Datum.select(:city, :state).where("time >= ?", Date.today - 7).distinct
     @data = []
     all_cities.each do |city_info|
