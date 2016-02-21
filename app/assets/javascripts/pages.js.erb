@@ -51,6 +51,7 @@ var getMarkerData = function(){
       displayChart(this.options.city, this.options.state);
     })
     markers.addLayer(marker);
+    $('#loading').hide();
   }
     map.addLayer(markers);
   })
