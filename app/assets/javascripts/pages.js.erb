@@ -14,10 +14,10 @@ var mapClick = function(){
   });
 }
 
-
 var getMarkerData = function(){
   var map = L.mapbox.map('map', 'mapbox.dark', { zoomControl: false }).setView([39.114102, -94.627478], 4);
   new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+
   $.get('/data', 'json').done(function(data){
     var markers = new L.MarkerClusterGroup();
 
@@ -44,10 +44,9 @@ var getMarkerData = function(){
     };
     // marker.bindPopup(content);
     marker.on('click', function(e){
-      // global_city = this.options.city;
-      // global_state = this.options.state;
       $('.sidebar-right').css('display', 'none');
       $('.mini-submenu-right').css('display', 'none');
+      map.panTo([e.latlng.lat, e.latlng.lng]);
       displayChart(this.options.city, this.options.state);
     })
     markers.addLayer(marker);
@@ -88,7 +87,6 @@ var displayChart = function(clickedCity, clickedState){
           var sum = Object.keys(dayTemps).reduce(function(a, b){
               return a + dayTemps[b].temp;
           }, 0)
-          console.log("sum: " + sum)
           if (sum === 0) {
               avgTemps.push(null);
           } else {
@@ -151,7 +149,6 @@ var displayChart = function(clickedCity, clickedState){
                 var sum = Object.keys(dayTemps).reduce(function(a, b){
                     return a + dayTemps[b].temp;
                 }, 0)
-                console.log("sum: " + sum)
                 if (sum === 0) {
                     avgTemps.push(null);
                 } else {
@@ -180,10 +177,10 @@ var displayChart = function(clickedCity, clickedState){
                 }]
 
             });
-          $('#chart-container').show();
+        $('#chart-container').show();
 
-          $('#chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
-       });
+        $('#chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
+      });
     })
 }
 
