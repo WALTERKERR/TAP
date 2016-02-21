@@ -14,9 +14,25 @@ var bindListeners = function(){
 var searchBoxSubmit = function(e){
   e.preventDefault();
   var searchInput = this.elements[0].value;
-  var citySearch = searchInput.match(/^([a-zA-Z\s]+?),/)[1];
-  var stateSearch = searchInput.match(/, ?(\w+)/)[1];
-  displayChart(citySearch, stateSearch);
+  var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
+  var stateInput = searchInput.match(/, ?(\w+)/);
+  if (cityInput === null || stateInput === null) {
+    displaySearchError();
+  } else {
+    $.ajax({
+      method: 'GET',
+      url: "http://localhost:3000/find_city?city=" + cityInput[1] + "&state=" + stateInput[1],
+      dataType: 'json'
+    }).done(function(response){
+      displayChart(cityInput[1], stateInput[1]);
+    }).fail(function(response){
+      displaySearchError();
+    })
+  }
+}
+
+var displaySearchError = function(){
+  console.log("error")
 }
 
 var mapClick = function(){
