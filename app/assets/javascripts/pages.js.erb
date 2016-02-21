@@ -3,6 +3,7 @@ $(document).ready(function(){
   L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
   getMarkerData();
   bindListeners();
+  $('#loading').hide();
 });
 
 String.prototype.capitalize = function(){
@@ -92,7 +93,6 @@ var getMarkerData = function(){
       displayChart(this.options.city, this.options.state);
     })
     markers.addLayer(marker);
-    $('#loading').hide();
   }
     map.addLayer(markers);
   })
