@@ -7,11 +7,11 @@ class DataController < ApplicationController
     all_cities.each do |city_info|
       city_data = Datum.where(city: city_info.city, state: city_info.state).where("time >= ?", Date.today - 7)
 
-      coordinates = Geocoder.coordinates("#{city_info.city}, #{city_info.state}")
+      coordinates = Coordinate.find_by(city: city_info.city, state: city_info.state)
       # coordinates = [city_data.first.latitude, city_data.first.longitude]
 
       avg_temp = city_data.reduce(0) {|sum, reading| sum + reading.temp} / city_data.length
-      data_hash = { latitude: coordinates[0], longitude: coordinates[1], temp: avg_temp.round(2), city: city_info.city, state: city_info.state}
+      data_hash = { latitude: coordinates.latitude, longitude: coordinates.longitude, temp: avg_temp.round(2), city: city_info.city, state: city_info.state}
       @data << data_hash
     end
     render json: @data

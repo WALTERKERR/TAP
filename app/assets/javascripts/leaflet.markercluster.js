@@ -176,7 +176,7 @@
                 var markers = t.getAllChildMarkers();
                 var high_temp = false;
                 for (var i = 0; i < markers.length; i++){
-                    if (markers[i].options.temp >= 99.5) {
+                    if (markers[i].options.temp >= 92.5) {
                       high_temp = true;
                       break;
                     }
