@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'charts/index'
   get '/find' => 'data#find'
 
-
-  get 'maps/chart'
+  get '/upload' => 'pages#upload'
+  post '/upload' => 'pages#parse_upload'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

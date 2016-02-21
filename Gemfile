@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rack-cors', :require => 'rack/cors'
-
 gem 'geocoder'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'font-awesome-rails'
