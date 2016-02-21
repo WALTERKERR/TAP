@@ -5,6 +5,12 @@ $(document).ready(function(){
   bindListeners();
 });
 
+String.prototype.capitalize = function(){
+    return this.toLowerCase().replace( /\b\w/g, function (m) {
+        return m.toUpperCase();
+    });
+};
+
 var bindListeners = function(){
   $('#search-box').on('submit', searchBoxSubmit);
   $('#map').on('click', mapClick);
@@ -21,10 +27,10 @@ var searchBoxSubmit = function(e){
   } else {
     $.ajax({
       method: 'GET',
-      url: "http://localhost:3000/find_city?city=" + cityInput[1] + "&state=" + stateInput[1],
+      url: "http://localhost:3000/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
-      displayChart(cityInput[1], stateInput[1]);
+      displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
     }).fail(function(response){
       displaySearchError();
     })
