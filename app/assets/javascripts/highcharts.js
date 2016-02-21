@@ -1,3 +1,10 @@
+/*
+ Highcharts JS v4.2.3 (2016-02-08)
+
+ (c) 2009-2016 Torstein Honsi
+
+ License: www.highcharts.com/license
+*/
 (function(E, X) {
     typeof module === "object" && module.exports ? module.exports = E.document ? X(E) : X : E.Highcharts = X(E)
 })(typeof window !== "undefined" ? window : this, function(E) {
@@ -642,7 +649,7 @@
             defaultSeriesType: "line",
             ignoreHiddenSeries: !0,
             spacing: [10, 10, 15, 10],
-            backgroundColor: "#6B7B99",
+            backgroundColor: "#FFFFFF",
             plotBorderColor: "#C0C0C0",
             resetZoomButton: {
                 theme: {
