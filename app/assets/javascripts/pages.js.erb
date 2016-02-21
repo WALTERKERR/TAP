@@ -2,16 +2,36 @@ $(document).ready(function(){
 
   L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
   getMarkerData();
-  mapClick();
-
+  bindListeners();
 });
 
+var bindListeners = function(){
+  $('#search-box').on('submit', searchBoxSubmit);
+  $('#map').on('click', mapClick);
+  $('.navbar-brand').on('click', showSidebar);
+}
+
+var searchBoxSubmit = function(e){
+  e.preventDefault();
+  var searchInput = this.elements[0].value;
+  var citySearch = searchInput.match(/^([a-zA-Z\s]+?),/)[1];
+  var stateSearch = searchInput.match(/, ?(\w+)/)[1];
+  displayChart(citySearch, stateSearch);
+}
+
 var mapClick = function(){
-  $('#map').on('click', function(){
-    $('#chart-container').hide();
-    $('.sidebar-right').css('display', 'none');
-    $('.mini-submenu-right').css('display', 'none');
-  });
+  $('#chart-container').hide();
+  hideSidebar();
+}
+
+var hideSidebar = function(){
+  $('.sidebar-right').hide();
+  $('.mini-submenu-right').hide();
+}
+
+var showSidebar = function(){
+  $('.sidebar-right').show();
+  $('.mini-submenu-right').show();
 }
 
 var getMarkerData = function(){
@@ -44,8 +64,6 @@ var getMarkerData = function(){
     };
     // marker.bindPopup(content);
     marker.on('click', function(e){
-      $('.sidebar-right').css('display', 'none');
-      $('.mini-submenu-right').css('display', 'none');
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displayChart(this.options.city, this.options.state);
     })
@@ -57,6 +75,8 @@ var getMarkerData = function(){
 };
 
 var displayChart = function(clickedCity, clickedState){
+
+    hideSidebar();
 
     var cityName = clickedCity;
     var stateName = clickedState;
