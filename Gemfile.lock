@@ -160,7 +160,6 @@ DEPENDENCIES
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
-  json
   pg (~> 0.15)
   rack-cors
   rails (= 4.2.5)
