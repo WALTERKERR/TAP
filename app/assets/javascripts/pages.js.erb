@@ -2,16 +2,61 @@ $(document).ready(function(){
 
   L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
   getMarkerData();
-  mapClick();
-
+  bindListeners();
+  $('#loading').hide();
 });
 
+String.prototype.capitalize = function(){
+    return this.toLowerCase().replace( /\b\w/g, function (m) {
+        return m.toUpperCase();
+    });
+};
+
+var bindListeners = function(){
+  $('#search-box').on('submit', searchBoxSubmit);
+  $('#map').on('click', mapClick);
+  $('.navbar-brand').on('click', showSidebar);
+}
+
+var searchBoxSubmit = function(e){
+  e.preventDefault();
+  var searchInput = this.elements[0].value;
+  var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
+  var stateInput = searchInput.match(/, ?(\w+)/);
+  if (cityInput === null || stateInput === null) {
+    displaySearchError();
+  } else {
+    $.ajax({
+      method: 'GET',
+      url: "http://localhost:3000/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
+      dataType: 'json'
+    }).done(function(response){
+      displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      $('#search-box').trigger('reset');
+    }).fail(function(response){
+      displaySearchError();
+    })
+  }
+}
+
+var displaySearchError = function(){
+  $('.search-error').show();
+  $('.search-error').fadeOut(4000);
+}
+
 var mapClick = function(){
-  $('#map').on('click', function(){
-    $('#chart-container').hide();
-    $('.sidebar-right').css('display', 'none');
-    $('.mini-submenu-right').css('display', 'none');
-  });
+  $('#chart-container').hide();
+  hideSidebar();
+}
+
+var hideSidebar = function(){
+  $('.sidebar-right').hide();
+  $('.mini-submenu-right').hide();
+}
+
+var showSidebar = function(){
+  $('.sidebar-right').show();
+  $('.mini-submenu-right').show();
 }
 
 var getMarkerData = function(){
@@ -44,19 +89,18 @@ var getMarkerData = function(){
     };
     // marker.bindPopup(content);
     marker.on('click', function(e){
-      $('.sidebar-right').css('display', 'none');
-      $('.mini-submenu-right').css('display', 'none');
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displayChart(this.options.city, this.options.state);
     })
     markers.addLayer(marker);
-    $('#loading').hide();
   }
     map.addLayer(markers);
   })
 };
 
 var displayChart = function(clickedCity, clickedState){
+
+    hideSidebar();
 
     var cityName = clickedCity;
     var stateName = clickedState;
@@ -99,7 +143,7 @@ var displayChart = function(clickedCity, clickedState){
               type: 'line'
           },
           title: {
-              text: cityName
+              text: cityName + ', ' + stateName
           },
           xAxis: {
               categories: dates
@@ -161,7 +205,7 @@ var displayChart = function(clickedCity, clickedState){
                     type: 'line'
                 },
                 title: {
-                    text: cityName
+                    text: cityName + ', ' + stateName
                 },
                 xAxis: {
                     categories: dates

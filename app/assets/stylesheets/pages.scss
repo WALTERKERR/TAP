@@ -69,3 +69,11 @@ body {
   position: absolute;
   z-index: 50;
 }
+
+.search-error {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  z-index: 50;
+  display: none;
+}

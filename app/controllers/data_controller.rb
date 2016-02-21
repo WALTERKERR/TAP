@@ -24,6 +24,12 @@ class DataController < ApplicationController
     render json: @data
   end
 
-
+  def find_city
+    if @coordinate = Coordinate.find_by(city: params[:city], state: params[:state])
+      render json: @coordinate
+    else
+      render json: @coordinate, status: :not_found
+    end
+  end
 
 end
