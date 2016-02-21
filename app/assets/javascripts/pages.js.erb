@@ -31,6 +31,7 @@ var searchBoxSubmit = function(e){
       dataType: 'json'
     }).done(function(response){
       displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      $('#search-box').trigger('reset');
     }).fail(function(response){
       displaySearchError();
     })
@@ -38,7 +39,8 @@ var searchBoxSubmit = function(e){
 }
 
 var displaySearchError = function(){
-  console.log("error")
+  $('.search-error').show();
+  $('.search-error').fadeOut(4000);
 }
 
 var mapClick = function(){
