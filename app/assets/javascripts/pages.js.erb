@@ -29,7 +29,7 @@ var searchBoxSubmit = function(e){
   } else {
     $.ajax({
       method: 'GET',
-      url: "http://localhost:3000/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
+      url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
       displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
@@ -102,13 +102,15 @@ var getMarkerData = function(){
 
 var displayChart = function(clickedCity, clickedState){
 
+    hideSidebar();
+
     var cityName = clickedCity;
     var stateName = clickedState;
     var timeFrame = 7;
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
         dataType: 'JSON'
     })
     .done(function(response){
@@ -170,7 +172,7 @@ var displayChart = function(clickedCity, clickedState){
         timeFrame = $(e.target).attr('id')
         $.ajax({
             method: "GET",
-            url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+            url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
             dataType: 'JSON'
         })
         .done(function(response){

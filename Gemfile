@@ -32,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-gem 'dotenv-rails'
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -47,3 +47,6 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
