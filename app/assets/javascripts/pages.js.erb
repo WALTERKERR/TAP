@@ -29,7 +29,7 @@ var searchBoxSubmit = function(e){
   } else {
     $.ajax({
       method: 'GET',
-      url: "http://localhost:3000/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
+      url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
       displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
@@ -69,10 +69,8 @@ var getMarkerData = function(){
 
     for (var i = 0; i < data.length; i ++) {
     var d = data[i];
-    console.log(d.temp);
     var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
     if (d.temp >= 92.5) {
-      console.log('red');
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
         content: content,
@@ -82,7 +80,7 @@ var getMarkerData = function(){
       });
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-        console.log('blue');
+
         icon: L.mapbox.marker.icon({'marker-color': '#99cfe0'}),
         content: content,
         city: d.city,
@@ -90,7 +88,7 @@ var getMarkerData = function(){
         temp: d.temp
       });
     };
-    marker.bindPopup(content);
+    // marker.bindPopup(content);
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displayChart(this.options.city, this.options.state);
@@ -104,13 +102,15 @@ var getMarkerData = function(){
 
 var displayChart = function(clickedCity, clickedState){
 
+    hideSidebar();
+
     var cityName = clickedCity;
     var stateName = clickedState;
     var timeFrame = 7;
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
         dataType: 'JSON'
     })
     .done(function(response){
@@ -172,7 +172,7 @@ var displayChart = function(clickedCity, clickedState){
         timeFrame = $(e.target).attr('id')
         $.ajax({
             method: "GET",
-            url: "http://localhost:3000/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+            url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
             dataType: 'JSON'
         })
         .done(function(response){
