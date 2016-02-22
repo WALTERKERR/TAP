@@ -4,6 +4,7 @@ $(document).ready(function(){
   getMarkerData();
   bindListeners();
   $('#loading').hide();
+  // displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
@@ -98,9 +99,8 @@ var getMarkerData = function(){
   })
 };
 
-var displayChart = function(clickedCity, clickedState){
 
-    hideSidebar();
+var displayChart = function(clickedCity, clickedState){
 
     var cityName = clickedCity;
     var stateName = clickedState;
@@ -158,7 +158,6 @@ var displayChart = function(clickedCity, clickedState){
               name: cityName + " Average",
               data: avgTemps
           }]
-
       });
       $('#chart-container').show();
 
@@ -199,7 +198,6 @@ var displayChart = function(clickedCity, clickedState){
                     avgTemps.push(sum/dayTemps.length);
                 }
             })
-
             $('#chart-container').highcharts({
                 chart: {
                     type: 'line'
