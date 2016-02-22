@@ -70,7 +70,7 @@ var getMarkerData = function(){
     for (var i = 0; i < data.length; i ++) {
     var d = data[i];
     var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
-    if (d.temp >= 92.5) {
+    if (d.temp > 99.5) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
         content: content,
