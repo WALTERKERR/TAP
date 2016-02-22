@@ -61,7 +61,7 @@ var showSidebar = function(){
 }
 
 var getMarkerData = function(){
-  var map = L.mapbox.map('map', 'mapbox.dark', { zoomControl: false }).setView([39.114102, -94.627478], 4);
+  var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false }).setView([39.114102, -94.627478], 4);
   new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
   $.get('/data', 'json').done(function(data){
@@ -81,7 +81,7 @@ var getMarkerData = function(){
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
 
-        icon: L.mapbox.marker.icon({'marker-color': '#99cfe0'}),
+        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe'}),
         content: content,
         city: d.city,
         state: d.state,
