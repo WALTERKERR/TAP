@@ -3,8 +3,8 @@
 
 //     hideSidebar();
 
-//     var cityName = clickedCity;
-//     var stateName = clickedState;
+//     var cityName = "Oakland";
+//     var stateName = "California";
 //     var timeFrame = 7;
 
 //     $.ajax({
@@ -90,76 +90,76 @@
 // };
 
 
-// // var displayHeatMap = function(dates, heatMapData, cityName){
+// var displayHeatMap = function(dates, heatMapData, cityName){
 
-// //     var testHeatData = [
-// //         [0, 0, 5], [1, 0, 9], [2, 0, 8], [3, 0, 4], [4, 0, 7], [5, 0, 8], [6, 0, 3],
-// //         [0, 1, 32], [1, 1, 38], [2, 1, 48], [3, 1, 47], [4, 1, 38], [5, 1, 35], [6, 1, 24],
-// //         [0, 2, 125], [1, 2, 135], [2, 2, 120], [3, 2, 134], [4, 2, 132], [5, 2, 124], [6, 2, 134],
-// //         [0, 3, 134], [1, 3, 122], [2, 3, 134], [3, 3, 129], [4, 3, 126], [5, 3, 130], [6, 3, 127],
-// //         [0, 4, 49], [1, 4, 48], [2, 4, 56], [3, 4, 64], [4, 4, 70], [5, 4, 88],  [6, 4, 95],
-// //         [0, 5, 18], [1, 5, 14], [2, 5, 25], [3, 5, 26], [4, 5, 30], [5, 5, 45], [6, 5, 51],
-// //         [0, 6, 19], [1, 6, 14], [2, 6, 18], [3, 6, 18], [4, 6, 16], [5, 6, 11], [6, 6, 18]
-// //         ];
+//     var testHeatData = [
+//         [0, 0, 5], [1, 0, 9], [2, 0, 8], [3, 0, 4], [4, 0, 7], [5, 0, 8], [6, 0, 3],
+//         [0, 1, 32], [1, 1, 38], [2, 1, 48], [3, 1, 47], [4, 1, 38], [5, 1, 35], [6, 1, 24],
+//         [0, 2, 125], [1, 2, 135], [2, 2, 120], [3, 2, 134], [4, 2, 132], [5, 2, 124], [6, 2, 134],
+//         [0, 3, 134], [1, 3, 122], [2, 3, 134], [3, 3, 129], [4, 3, 126], [5, 3, 130], [6, 3, 127],
+//         [0, 4, 49], [1, 4, 48], [2, 4, 56], [3, 4, 64], [4, 4, 70], [5, 4, 88],  [6, 4, 95],
+//         [0, 5, 18], [1, 5, 14], [2, 5, 25], [3, 5, 26], [4, 5, 30], [5, 5, 45], [6, 5, 51],
+//         [0, 6, 19], [1, 6, 14], [2, 6, 18], [3, 6, 18], [4, 6, 16], [5, 6, 11], [6, 6, 18]
+//         ];
 
-// //     $('#heatmap-container').highcharts({
+//     $('#heatmap-container').highcharts({
 
-// //         chart: {
-// //             type: 'heatmap',
-// //             marginTop: 40,
-// //             marginBottom: 80,
-// //             plotBorderWidth: 1
-// //         },
+//         chart: {
+//             type: 'heatmap',
+//             marginTop: 40,
+//             marginBottom: 80,
+//             plotBorderWidth: 1
+//         },
 
 
-// //         title: {
-// //             text: 'Temperature data by day for ' + cityName
-// //         },
+//         title: {
+//             text: 'Temperature data by day for ' + cityName
+//         },
 
-// //         yAxis: {
-// //             categories: ['<95 (Hypothermia)', '95-97.69 (Below Average)', '97.7-98.5 (Normal)', '98.5-99.5 (Normal)', '99.5-100.9 (Hyperthermia/Fever)', '100.9 - 104 (Severe Hyperthermia)', '>104 (Hyperpyrexia)']
-// //         },
+//         yAxis: {
+//             categories: ['<95 (Hypothermia)', '95-97.69 (Below Average)', '97.7-98.5 (Normal)', '98.5-99.5 (Normal)', '99.5-100.9 (Hyperthermia/Fever)', '100.9 - 104 (Severe Hyperthermia)', '>104 (Hyperpyrexia)']
+//         },
 
-// //         xAxis: {
-// //             categories: dates,
-// //             title: null
-// //         },
+//         xAxis: {
+//             categories: dates,
+//             title: null
+//         },
 
-// //         colorAxis: {
-// //             min: 0,
-// //             minColor: '#FFFFFF',
-// //             maxColor: Highcharts.getOptions().colors[0]
-// //         },
+//         colorAxis: {
+//             min: 0,
+//             minColor: '#FFFFFF',
+//             maxColor: Highcharts.getOptions().colors[0]
+//         },
 
-// //         legend: {
-// //             align: 'right',
-// //             layout: 'vertical',
-// //             margin: 0,
-// //             verticalAlign: 'top',
-// //             y: 25,
-// //             symbolHeight: 280
-// //         },
+//         legend: {
+//             align: 'right',
+//             layout: 'vertical',
+//             margin: 0,
+//             verticalAlign: 'top',
+//             y: 25,
+//             symbolHeight: 280
+//         },
 
-// //         tooltip: {
-// //             formatter: function () {
-// //                 return 'On <b>' + this.series.xAxis.categories[this.point.x] + '</b>, <b>' +
-// //                     this.point.value + '</b> people registered between <br><b>' + this.series.yAxis.categories[this.point.y];
-// //             }
-// //         },
+//         tooltip: {
+//             formatter: function () {
+//                 return 'On <b>' + this.series.xAxis.categories[this.point.x] + '</b>, <b>' +
+//                     this.point.value + '</b> people registered between <br><b>' + this.series.yAxis.categories[this.point.y];
+//             }
+//         },
 
-// //         series: [{
-// //             name: 'Temperature by count',
-// //             borderWidth: 1,
-// //             data: heatMapData,
-// //             // data: testHeatData,
-// //             dataLabels: {
-// //                 enabled: true,
-// //                 color: '#000000'
-// //             }
-// //         }]
+//         series: [{
+//             name: 'Temperature by count',
+//             borderWidth: 1,
+//             data: heatMapData,
+//             // data: testHeatData,
+//             dataLabels: {
+//                 enabled: true,
+//                 color: '#000000'
+//             }
+//         }]
 
-// //     });
-// // }
+//     });
+// }
 
 // var displayScatterPlot = function(avgAmbientTemps, avgTemps, dates){
 
