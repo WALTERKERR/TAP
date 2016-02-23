@@ -23,9 +23,9 @@ var bindListeners = function(){
 }
 
 var hideLandingPage = function(){
-    $('.overlay').hide();
-    $('.landing-row').hide();
-    $('.map-search').show();
+    $('.overlay').fadeOut('slow');
+    $('.landing-row').fadeOut('slow');
+    $('.map-search').fadeIn('slow');
 }
 
 var searchBoxSubmit = function(e){
@@ -61,7 +61,7 @@ var displaySearchError = function(){
 }
 
 var mapClick = function(){
-  $('#chart-container').hide();
+  $('#chart-container').fadeOut('slow');
   // hideSidebar();
 }
 
