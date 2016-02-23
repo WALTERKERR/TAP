@@ -227,9 +227,14 @@ body {
   padding: 5px;
 }
 
+.nav-logo {
+  padding-top: 5px!important;
+}
+
 #nav-logo {
-  height: 100%;
+  height: 40px;
   width: auto;
+  margin-top: 0;
   padding-left: 15px;
 }
 
@@ -241,6 +246,12 @@ body {
 .landing-logo img {
   height: 110px;
   width: auto;
+}
+
+.charts-overlay {
+  width: 80%;
+  z-index: 50;
+  position: absolute;
 }
 /*.btn-xs{
   font-size:11px;
