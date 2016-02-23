@@ -108,6 +108,9 @@ var getMarkerData = function(){
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
+
+      $('.mini-submenu-right').css('display', "none");
+      // $('#accordion-right').css('display', null);
     })
     markers.addLayer(marker);
   }

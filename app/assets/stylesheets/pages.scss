@@ -5,6 +5,7 @@
 body {
   margin:0;
   padding:0;
+  font-family: 'Oxygen'!important;
 }
 
 .navbar { opacity: 0.8; }
@@ -92,7 +93,7 @@ body {
 }
 
 .navbar-brand {
-  font-family: 'Oxygen';
+  /*font-family: 'Oxygen';*/
   color: #ffffff!important;
 }
 
@@ -130,7 +131,7 @@ body {
 }
 
 .landing-row {
-  font-family: 'Oxygen';
+  /*font-family: 'Oxygen';*/
   position: absolute!important;
   max-width: 100%
 }
@@ -226,9 +227,14 @@ body {
   padding: 5px;
 }
 
+.nav-logo {
+  padding-top: 5px!important;
+}
+
 #nav-logo {
-  height: 100%;
+  height: 40px;
   width: auto;
+  margin-top: 0;
   padding-left: 15px;
 }
 
@@ -241,6 +247,7 @@ body {
   height: 110px;
   width: auto;
 }
+
 /*.btn-xs{
   font-size:11px;
   line-height:14px;

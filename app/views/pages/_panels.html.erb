@@ -2,7 +2,7 @@
   <div class="col-xs-9 col-sm-4 col-md-4 col-lg-3 map-search">
     <form id="search-box">
       <div class="input-group search-bar">
-        <input type="text" class="  search-query form-control" placeholder="Search by City and State"/>
+        <input type="text" class="  search-query form-control" placeholder="Search by City, State"/>
           <span class="input-group-btn">
             <button class="btn btn-danger submit-button" type="submit">
             <span class="glyphicon glyphicon-search"></span>
@@ -11,10 +11,6 @@
       </div>
     </form>
   </div>
-  <div class="col-sm-12 col-md-12 sidebar pull-left">
-    <div class="panel-body" id="chart-container"></div>
-  </div>
-  <div class="col-sm-4 col-md-6 mid"></div>
   <div class="col-sm-4 col-md-4 sidebar sidebar-right pull-right">
     <div class="panel-group sidebar-body" id="accordion-right" style="display: none;">
       <div class="panel panel-default">
@@ -22,7 +18,7 @@
           <h4 class="panel-title">
             <a data-toggle="collapse" href="#taskpane">
               <i class="fa fa-tasks"></i>
-              Task Pane
+              Charts Panel
             </a>
             <span class="pull-right slide-submenu">
               <i class="fa fa-chevron-right"></i>
@@ -30,29 +26,26 @@
           </h4>
         </div>
         <div id="taskpane" class="panel-collapse collapse in">
-    <div class="panel-body" id="chart-sidepanel-body">
-    </div>
-     <div id="linechart-container-sidebar" class="small-chart display-inline-block"></div><br>
-      <div class="hover-div">
-      <div id="heatmap-container-sidebar" class="small-chart display-inline-block"></div>
-      </div>
-
-          </div>
+          <!-- <div class="panel-body" id="chart-sidepanel-body"> -->
+            <div id="linechart-container-sidebar" class="small-chart display-inline-block"></div>
+            <!-- <div class="hover-div"> -->
+            <div id="heatmap-container-sidebar" class="small-chart display-inline-block"></div>
+            <!-- </div> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
   </div>
-  <div class="col-sm-12 col-md-12 sidebar pull-left">
+</div>
+  <!-- <div class="col-sm-12 col-md-12 sidebar pull-left">
     <div class="panel-body" id="chart-container"></div>
     <div class="panel-body" id="dual-line-chart-main">
-    <div class="panel-body" id="line-chart-top"></div>
-     <div class="panel-body" id="line-chart-bottom"></div>
+      <div class="panel-body" id="line-chart-top"></div>
+      <div class="panel-body" id="line-chart-bottom"></div>
    </div>
-  </div>
-</div>
+  </div> -->
 <div class="mini-submenu mini-submenu-right pull-right">
   <i class="fa fa-tasks"></i>
-</div>
 </div>
 
 
