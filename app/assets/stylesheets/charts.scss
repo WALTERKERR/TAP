@@ -1,7 +1,10 @@
 // Place all the styles related to the charts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+.highcharts-container {
+  width: 100%!important;
+  height: 100%!important;
+}
 #chart-container {
   width: 100%;
 }
@@ -27,8 +30,9 @@
 }
 
 .charts-overlay {
+  display: none;
   top: 150px;
-  z-index: 50;
+  z-index: 52;
   position: absolute!important;
 }
 
@@ -60,5 +64,5 @@
 }
 
 .sidebar-text {
-
 }
+

@@ -164,6 +164,10 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
     $('#chart-container').show();
+    $('.charts-overlay').show();
+    var index = Highcharts.charts.length - 1
+    var chart = Highcharts.charts[index]
+    chart.reflow();
   })
 }
 
@@ -227,7 +231,12 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     e.preventDefault();
     clearDivs();
     displayLineChart(cityName, stateName, dates, avgTemps);
+    $('.sidebar-right .sidebar-body').hide('slide');
+    $('.mini-submenu-right').fadeIn();
     $('#chart-container').show();
-    })
+    var index = Highcharts.charts.length - 1
+    var chart = Highcharts.charts[index]
+    chart.reflow();
+  })
 
 }
