@@ -289,13 +289,13 @@ end
 counter = 0
 30.times do
   20.times do
-    Datum.create(city: "Juno", state: "Alaska", temp:97.7 + rand(0..1.8), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
+    Datum.create(city: "Juneau", state: "Alaska", temp:97.7 + rand(0..1.8), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
   end
   10.times do
-    Datum.create(city: "Juno", state: "Alaska", temp:95 + rand(0..5.9), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
+    Datum.create(city: "Juneau", state: "Alaska", temp:95 + rand(0..5.9), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
   end
   5.times do
-    Datum.create(city: "Juno", state: "Alaska", temp:98.6 + rand(0..5.9), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
+    Datum.create(city: "Juneau", state: "Alaska", temp:98.6 + rand(0..5.9), time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
   end
 
   counter += 1
