@@ -4,7 +4,7 @@ $(document).ready(function(){
   getMarkerData();
   bindListeners();
   $('#loading').hide();
-  displayTestCharts("San Francisco", "California");
+  // displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
@@ -97,7 +97,6 @@ var getMarkerData = function(){
     map.addLayer(markers);
   })
 };
-
 
 var displayChart = function(clickedCity, clickedState){
 
@@ -225,5 +224,163 @@ var displayChart = function(clickedCity, clickedState){
         $('#chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
       });
     })
+
+
+
 }
 
+var displayHeatMap = function(dates, heatMapData, cityName){
+console.log('we made it')
+    $('#chart-container').highcharts({
+
+        chart: {
+            type: 'heatmap',
+            marginTop: 40,
+            marginBottom: 80,
+            plotBorderWidth: 1
+        },
+
+
+        title: {
+            text: 'Temperature data by day for ' + cityName
+        },
+
+        yAxis: {
+            categories: ['<95 (Hypothermia)', '95-97.69 (Below Average)', '97.7-98.5 (Normal)', '98.5-99.5 (Normal)', '99.5-100.9 (Hyperthermia/Fever)', '100.9 - 104 (Severe Hyperthermia)', '>104 (Hyperpyrexia)']
+        },
+
+        xAxis: {
+            categories: dates,
+            title: null
+        },
+
+        colorAxis: {
+            min: 0,
+            minColor: '#FFFFFF',
+            maxColor: Highcharts.getOptions().colors[0]
+        },
+
+        legend: {
+            align: 'right',
+            layout: 'vertical',
+            margin: 0,
+            verticalAlign: 'top',
+            y: 25,
+            symbolHeight: 280
+        },
+
+        tooltip: {
+            formatter: function () {
+                return 'On <b>' + this.series.xAxis.categories[this.point.x] + '</b>, <b>' +
+                    this.point.value + '</b> people registered between <br><b>' + this.series.yAxis.categories[this.point.y];
+            }
+        },
+
+        series: [{
+            name: 'Temperature by count',
+            borderWidth: 1,
+            data: heatMapData,
+            // data: testHeatData,
+            dataLabels: {
+                enabled: true,
+                color: '#000000'
+            }
+        }]
+
+    });
+
+
+}
+
+var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
+    var charts = [],
+    options;
+
+    function syncTooltip(container, p) {
+        var i = 0;
+        for (; i < charts.length; i++) {
+            if (container.id != charts[i].container.id) {
+                if(charts[i].tooltip.shared) {
+                    charts[i].tooltip.refresh([charts[i].series[0].data[p]]);
+                }
+                else {
+                    charts[i].tooltip.refresh(charts[i].series[0].data[p]);
+                }
+            }
+        }
+    }
+
+    options = {
+        plotOptions: {
+            series: {
+                point: {
+                    events: {
+                        mouseOver: function () {
+                            syncTooltip(this.series.chart.container, this.x);
+                        }
+                    }
+                }
+            }
+        },
+
+    };
+
+    charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
+        chart: {
+            renderTo: 'line-chart-top'
+        },
+        tooltip: {
+            shared: true,
+            valueDecimals: 2
+        },
+        title: {
+          text: cityName + ", " + stateName
+        },
+        series: [{
+            data: avgTemps,
+            name: "Temperature"
+        }],
+        xAxis: {
+            categories: dates,
+            labels: { enabled: false }
+        },
+        yAxis: {
+          title: {
+              text: 'Temperature'
+          }
+        },
+        legend: {
+            enabled: false
+        }
+    }));
+
+
+    charts[1] = new Highcharts.Chart($.extend(true, {}, options, {
+        chart: {
+            renderTo: 'line-chart-bottom'
+        },
+        tooltip: {
+            shared: false
+        },
+        title: {
+            text: ''
+        },
+        series: [{
+            data: avgHumidity,
+            name: "Humidity",
+            color: 'green'
+        }],
+        xAxis: {
+            categories: dates
+        },
+        yAxis: {
+          title: {
+              text: 'Humidity'
+          }
+        },
+        legend: {
+            enabled: false
+        }
+    }));
+
+}

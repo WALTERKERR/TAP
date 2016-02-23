@@ -80,13 +80,23 @@ var displaySideChart = function(clickedCity, clickedState){
         console.log(date + ":" + index);
       })
 
-      displayLineChart(avgHumidity, avgTemps, dates, cityName, stateName);
-      displayHeatMap(dates, heatMapData, cityName, stateName);
+
+      $('#heatmap-holder').remove();
+      displayLineChartSideBar(avgHumidity, avgTemps, dates, cityName, stateName);
+      displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
     });
 };
 
 
-var displayHeatMap = function(dates, heatMapData, cityName, stateName){
+
+var clearDivs = function(){
+      $('#line-chart-top').empty();
+      $('#line-chart-bottom').empty();
+      $('#chart-container').empty();
+};
+
+
+var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
 
     var testHeatData = [
         [0, 0, 5], [1, 0, 9], [2, 0, 8], [3, 0, 4], [4, 0, 7], [5, 0, 8], [6, 0, 3],
@@ -159,20 +169,19 @@ var displayHeatMap = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-console.log('we got this far')
-$('#heatmap-container').append('<div class="small-chart float-right display-inline-block bottom-padding-none"><a href="#" id="heatmap-city">Link to Temp Chart</a></div>');
+$('#heatmap-container').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="heatmap-holder"><a href="#" id="heatmap-city">Link to Temp Chart</a></div>');
   $('#heatmap-city').click(function(e){
     e.preventDefault();
-    console.log(cityName);
-    console.log(stateName);
-    displayCharts(cityName, stateName)
+    clearDivs();
+    displayHeatMap(dates, heatMapData, cityName);
+    $('#chart-container').show();
   })
 }
 
 
 
 
-var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
+var displayLineChartSideBar = function(avgHumidity, avgTemps, dates, cityName, stateName){
     var charts = [],
     options;
 
@@ -210,7 +219,9 @@ var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateNam
 $('.dual-line-chart').append('<div class="small-chart float-right display-inline-block bottom-padding-none"><a href="#" id="dual-line-city">Link to Temp Chart</a></div>');
   $('#dual-line-city').click(function(e){
     e.preventDefault();
-    displayChart(cityName, stateName)
+    clearDivs();
+    displayLineChart(avgHumidity, avgTemps, dates, cityName, stateName);
+    $('#dual-line-chart-main').show();
   })
 
 
