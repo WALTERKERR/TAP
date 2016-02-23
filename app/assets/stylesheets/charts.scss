@@ -3,20 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #chart-container {
-  float: left;
-  width: 100%;
 }
 
 #chart-sidepanel {
   padding: 0px;
 }
 
-#chart-sidepanel-body {
+#taskpane {
   height: 100%;
 }
 
-#heatmap-container{
-height: 25%;
+#chart-sidepanel-body {
+  /*height: 100%;*/
+}
+
+#linechart-container-sidebar {
+  height: 100%;
+}
+
+#heatmap-container-sidebar {
+  height: 100%;
 }
 
 .small-chart {
