@@ -1,13 +1,23 @@
 <div class="row main-row">
   <div class="col-xs-9 col-sm-4 col-md-4 col-lg-3  sidebar pull-left">
-    <form class="input-group search-bar" id="search-box" role="search">
+    <form id="search-box">
+      <div class="input-group search-bar">
+        <input type="text" class="  search-query form-control" placeholder="Search" />
+          <span class="input-group-btn">
+            <button class="btn btn-danger submit-button" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+      </div>
+    </form>
+    <!-- <form class="input-group search-bar" id="search-box" role="search">
       <div class="form-group">
         <input type="text" class="form-control search-form" placeholder="Search for city, state">
       </div>
       <span class="input-group-btn">
         <button type="submit" class="btn btn-default submit-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </span>
-    </form>
+    </form> -->
   </div>
   <div class="col-sm-12 col-md-12 sidebar pull-left">
     <div class="panel-body" id="chart-container"></div>
