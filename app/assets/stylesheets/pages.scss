@@ -15,6 +15,7 @@ body {
   bottom: 0;
   width: 100%;
   z-index: 35;
+  background-color: black;
 }
 
 #map .ol-zoom { font-size: 1.2em; }
@@ -24,7 +25,7 @@ body {
 .zoom-top-collapsed { margin-top: 45px; }
 
 .mini-submenu {
-  display:none;
+  display: block;
   background-color: rgba(255, 255, 255, 0.46);
   border: 1px solid rgba(0, 0, 0, 0.9);
   border-radius: 4px;
@@ -75,4 +76,191 @@ body {
   left: 20%;
   z-index: 50;
   display: none;
+}
+
+.panel {
+  border-color: #222222!important;
+}
+
+.panel-heading {
+  background-color: #222222!important;
+}
+
+.panel-title {
+  color: #ffffff!important;
+}
+
+.navbar-brand {
+  color: #ffffff!important;
+}
+
+.map-search {
+  z-index: 49;
+  margin-left: 30px;
+  display: none;
+}
+
+.search-bar {
+  margin: 30px 0 0 0;
+  border-radius: 8px 0px 0px 8px;
+  -moz-border-radius: 8px 0px 0px 8px;
+  -webkit-border-radius: 8px 0px 0px 8px;
+  border: 0px solid #000000;
+  -webkit-box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+  box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+}
+
+.form-control {
+  border-radius: 8px 0 0 8px!important;
+  padding: 20px!important;
+}
+
+.submit-button {
+  border-radius: 0px 8px 8px 0px;
+  -moz-border-radius: 0px 8px 8px 0px;
+  -webkit-border-radius: 0px 8px 8px 0px;
+  border: 0px solid #000000;
+  -webkit-box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+  box-shadow: 1px 2px 41px -7px rgba(0,0,0,0.75);
+  padding: 10px!important;
+}
+
+.landing-row {
+  position: absolute!important;
+  max-width: 100%
+}
+
+.landing {
+  display: initial;
+  z-index: 55;
+  position: absolute;
+  margin-top: 8%;
+  /*background-color: black;*/
+  height: 500px;
+  color: #ffffff;
+}
+
+.headline {
+  padding: 5px;
+  text-align: center;
+}
+
+.headline h1 {
+  margin-top: 25px;
+}
+.headline p {
+  margin: 20px 0 0 0;
+}
+
+.landing-link {
+  text-align: center;
+  /*padding: 5px;*/
+  /*margin-left: 40px;*/
+}
+.overlay {
+  background-color: #000;
+  bottom: 0;
+  display: initial;
+  left: 0;
+  opacity: 0.7;
+  filter: alpha(opacity = 50); /* IE7 & 8 */
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.jump-button {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+  font-size:14px;
+  line-height:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  /*padding:8px 20px;*/
+}
+
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-outlined.btn-white {
+  background: none;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.btn-outlined.btn-white:hover,
+.btn-outlined.btn-white:active {
+  color: #d9534f;
+  background: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+#jump {
+  margin: 0 auto;
+  padding: 5px;
+}
+
+#nav-logo {
+  height: 100%;
+  width: auto;
+  padding-left: 15px;
+}
+
+.logo-container {
+  text-align: center;
+  font-size: 4em;
+}
+
+.landing-logo img {
+  height: 110px;
+  width: auto;
+}
+/*.btn-xs{
+  font-size:11px;
+  line-height:14px;
+  border: 1px solid;
+  padding:5px 10px;
+}
+
+.btn-sm{
+  font-size:12px;
+  line-height:16px;
+  border: 2px solid;
+  padding:8px 15px;
+}
+
+.btn-lg{
+  font-size:18px;
+  line-height:22px;
+  border: 4px solid;
+  padding:13px 40px;
+}*/
+
+@media only screen and (max-width: 500px) {
+  #jump {
+    font-size: 0.9em;
+  }
 }
