@@ -1,7 +1,23 @@
-<div class="row main-row" >
-  <div class="col-sm-4 col-md-3 sidebar sidebar-right pull-right" id="no-right-padding-panel">
-    <div class="panel-group sidebar-body" id="accordion-right">
-      <div class="panel panel-default" id="chart-sidepanel">
+<div class="row main-row">
+  <div class="col-xs-9 col-sm-4 col-md-4 col-lg-3 map-search">
+    <form id="search-box">
+      <div class="input-group search-bar">
+        <input type="text" class="  search-query form-control" placeholder="Search by City and State"/>
+          <span class="input-group-btn">
+            <button class="btn btn-danger submit-button" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-12 col-md-12 sidebar pull-left">
+    <div class="panel-body" id="chart-container"></div>
+  </div>
+  <div class="col-sm-4 col-md-6 mid"></div>
+  <div class="col-sm-4 col-md-3 sidebar sidebar-right pull-right">
+    <div class="panel-group sidebar-body" id="accordion-right" style="display: none;">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
             <a data-toggle="collapse" href="#taskpane">

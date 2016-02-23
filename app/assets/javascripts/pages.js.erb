@@ -13,17 +13,32 @@ String.prototype.capitalize = function(){
     });
 };
 
+
 var bindListeners = function(){
   $('#search-box').on('submit', searchBoxSubmit);
   $('#map').on('click', mapClick);
   $('.navbar-brand').on('click', showSidebar);
+  $('.main-search').on('submit', 'form', searchBoxSubmit);
+  $('.landing-link').on('click', hideLandingPage);
+}
+
+var hideLandingPage = function(){
+    $('.overlay').fadeOut('slow');
+    $('.landing-row').fadeOut('slow');
+    $('.map-search').fadeIn('slow');
 }
 
 var searchBoxSubmit = function(e){
   e.preventDefault();
+  hideLandingPage();
   var searchInput = this.elements[0].value;
   var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
-  var stateInput = searchInput.match(/, ?(\w+)/);
+  var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
+  if (stateInput[1].length === 2){
+    if (convertState(stateInput[1])){
+      stateInput[1] = convertState(stateInput[1]);
+    }
+  }
   if (cityInput === null || stateInput === null) {
     displaySearchError();
   } else {
@@ -46,7 +61,8 @@ var displaySearchError = function(){
 }
 
 var mapClick = function(){
-  $('#chart-container').hide();
+  $('#chart-container').fadeOut('slow');
+  // hideSidebar();
 }
 
 var hideSidebar = function(){
@@ -60,7 +76,8 @@ var showSidebar = function(){
 }
 
 var getMarkerData = function(){
-  var map = L.mapbox.map('map', 'mapbox.dark', { zoomControl: false }).setView([39.114102, -94.627478], 4);
+  var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false, minZoom: 4 }).setView([39.114102, -94.627478], 4);
+
   new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
 
   $.get('/data', 'json').done(function(data){
@@ -69,7 +86,7 @@ var getMarkerData = function(){
     for (var i = 0; i < data.length; i ++) {
     var d = data[i];
     var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
-    if (d.temp >= 92.5) {
+    if (d.temp > 99.5) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
         content: content,
@@ -80,7 +97,7 @@ var getMarkerData = function(){
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
 
-        icon: L.mapbox.marker.icon({'marker-color': '#99cfe0'}),
+        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe'}),
         content: content,
         city: d.city,
         state: d.state,
@@ -383,4 +400,59 @@ var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateNam
         }
     }));
 
+}
+
+STATES = {"AK" : "Alaska",
+      "AL" : "Alabama",
+      "AR" : "Arkansas",
+      "AZ" : "Arizona",
+      "CA" : "California",
+      "CO" : "Colorado",
+      "CT" : "Connecticut",
+      "DE" : "Delaware",
+      "FL" : "Florida",
+      "GA" : "Georgia",
+      "HI" : "Hawaii",
+      "IA" : "Iowa",
+      "ID" : "Idaho",
+      "IL" : "Illinois",
+      "IN" : "Indiana",
+      "KS" : "Kansas",
+      "KY" : "Kentucky",
+      "LA" : "Louisiana",
+      "MA" : "Massachusetts",
+      "MD" : "Maryland",
+      "ME" : "Maine",
+      "MI" : "Michigan",
+      "MN" : "Minnesota",
+      "MO" : "Missouri",
+      "MS" : "Mississippi",
+      "MT" : "Montana",
+      "NC" : "North Carolina",
+      "ND" : "North Dakota",
+      "NE" : "Nebraska",
+      "NH" : "New Hampshire",
+      "NJ" : "New Jersey",
+      "NM" : "New Mexico",
+      "NV" : "Nevada",
+      "NY" : "New York",
+      "OH" : "Ohio",
+      "OK" : "Oklahoma",
+      "OR" : "Oregon",
+      "PA" : "Pennsylvania",
+      "RI" : "Rhode Island",
+      "SC" : "South Carolina",
+      "SD" : "South Dakota",
+      "TN" : "Tennessee",
+      "TX" : "Texas",
+      "UT" : "Utah",
+      "VA" : "Virginia",
+      "VT" : "Vermont",
+      "WA" : "Washington",
+      "WI" : "Wisconsin",
+      "WV" : "West Virginia",
+      "WY" : "Wyoming"}
+
+var convertState = function(s) {
+  return STATES[s.toUpperCase()]
 }
