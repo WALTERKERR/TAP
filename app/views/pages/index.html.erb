@@ -1,9 +1,10 @@
 <div id="loading"><img src = "<%= asset_path('gps.gif') %>" ></div>
 <%= render partial: "navbar", layout: false %>
-
+<%= render partial: "landing", layout: false %>
 <div class="alert alert-danger search-error">
   <h5>Sorry! Data for the specified city and state does not exist.</h5>
 </div>
+<div class="overlay"></div>
 <div id='map'></div> <!-- MAP DIV -->
 
 
