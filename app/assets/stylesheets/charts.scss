@@ -25,6 +25,12 @@
   height: 100%;
 }
 
+.charts-overlay {
+  /*width: 80%;*/
+  z-index: 50;
+  position: absolute!important;
+}
+
 .small-chart {
  height: 10vh;
  padding: 5px;
