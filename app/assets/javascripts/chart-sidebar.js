@@ -158,7 +158,7 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-$('#heatmap-container-sidebar').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + ' to determine temperature percentile information.</div>');
+$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  This chart is useful for displaying the range of temperatures recorded to identify trends.</div>');
   $('#heatmap-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -222,11 +222,11 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
         },
           }]
       });
-      $('#linechart-container-sidebar').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View linechart data for ' + cityName + ' to determine temperature percentile information.</div>');
+      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View line chart data for ' + cityName + ' to view ambient and infared temperature readings.  This chart is useful for identifying trends and elmininating potential false positives.</div>');
   $('#linechart-link').click(function(e){
     e.preventDefault();
     clearDivs();
-    displayHeatMap(dates, heatMapData, cityName);
+    displayLineChart(cityName, stateName, dates, avgTemps);
     $('#chart-container').show();
     })
 
