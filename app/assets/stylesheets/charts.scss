@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #chart-container {
+  width: 100%;
 }
 
 #chart-sidepanel {
@@ -26,7 +27,7 @@
 }
 
 .charts-overlay {
-  /*width: 80%;*/
+  top: 150px;
   z-index: 50;
   position: absolute!important;
 }

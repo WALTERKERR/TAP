@@ -91,7 +91,7 @@ var displaySideChart = function(clickedCity, clickedState){
 
 
 var clearDivs = function(){
-      $('#chart-container').empty();
+  $('#chart-container').empty();
 };
 
 

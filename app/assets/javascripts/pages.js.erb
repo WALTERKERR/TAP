@@ -62,7 +62,6 @@ var displaySearchError = function(){
 
 var mapClick = function(){
   $('#chart-container').fadeOut('slow');
-  // hideSidebar();
 }
 
 var hideSidebar = function(){
@@ -109,8 +108,8 @@ var getMarkerData = function(){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
 
-      $('.mini-submenu-right').css('display', "none");
-      // $('#accordion-right').css('display', null);
+      $('.mini-submenu-right').hide();
+      $('.sidebar-right .sidebar-body').show('slide');
     })
     markers.addLayer(marker);
   }
@@ -119,8 +118,6 @@ var getMarkerData = function(){
 };
 
 var displayChart = function(clickedCity, clickedState){
-
-    hideSidebar();
 
     var cityName = clickedCity;
     var stateName = clickedState;
@@ -250,13 +247,12 @@ var displayChart = function(clickedCity, clickedState){
 }
 
 var displayHeatMap = function(dates, heatMapData, cityName){
-console.log('we made it')
     $('#chart-container').highcharts({
 
         chart: {
             type: 'heatmap',
-            marginTop: 40,
-            marginBottom: 80,
+            // marginTop: 60,
+            // marginBottom: 60,
             plotBorderWidth: 1
         },
 
