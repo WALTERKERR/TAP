@@ -4,7 +4,7 @@ $(document).ready(function(){
   getMarkerData();
   bindListeners();
   $('#loading').hide();
-  // displayTestCharts("San Francisco", "California");
+  displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
@@ -90,7 +90,7 @@ var getMarkerData = function(){
     // marker.bindPopup(content);
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
-      displayChart(this.options.city, this.options.state);
+      displaySideChart(this.options.city, this.options.state);
     })
     markers.addLayer(marker);
   }
