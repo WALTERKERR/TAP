@@ -108,6 +108,9 @@ var getMarkerData = function(){
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
+
+      $('.mini-submenu-right').css('display', "none");
+      // $('#accordion-right').css('display', null);
     })
     markers.addLayer(marker);
   }
@@ -115,71 +118,59 @@ var getMarkerData = function(){
   })
 };
 
-var displayChart = function(clickedCity, clickedState){
+var displayLineChart = function(cityName, stateName, dates, avgTemps){
 
-    hideSidebar();
-
-    var cityName = clickedCity;
-    var stateName = clickedState;
     var timeFrame = 7;
 
-    $.ajax({
-        method: "GET",
-        url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
-        dataType: 'JSON'
-    })
-    .done(function(response){
-        //Chart Data
-      var chartData = response;
-
-      var todayDate = new Date();
-      var dates = [];
-      for (i=1; i <= timeFrame; i++){
-          var newDate = new Date();
-          newDate.setDate(todayDate.getDate() - (timeFrame - i));
-          dates.push(newDate.toJSON().slice(0,10));
-      }
-
-      var avgTemps = [];
-      dates.forEach(function(date){
-          var dayTemps = chartData.filter(function(data){
-              return (data["time"].slice(0,10) === date);
-          })
-          var sum = Object.keys(dayTemps).reduce(function(a, b){
-              return a + dayTemps[b].temp;
-          }, 0)
-          if (sum === 0) {
-              avgTemps.push(null);
-          } else {
-              avgTemps.push(sum/dayTemps.length);
-          }
-      })
-
       $('#chart-container').highcharts({
-          chart: {
-              type: 'line'
+         chart: {
+              type: 'line',
+            marginTop: 50,
+            marginBottom: 50,
           },
+
+        tooltip: {
+            enabled: true
+        },
+
+
+        legend: {
+            enabled: true
+        },
+
+
           title: {
-              text: cityName + ', ' + stateName
+              text: "Average Human Temperatures Detected in " + cityName
           },
           xAxis: {
-              categories: dates
+              categories: dates,
+              title: "Dates",
+              dataLabels: {
+              enabled: true
+            }
           },
           yAxis: {
               title: {
-                  text: 'Temperature'
-              }
+              text: "Temperatures"
+              },
+
+          labels: {
+              enabled: true
+            }
           },
           series: [
           {
-              name: cityName + " Average",
-              data: avgTemps
+              name: "Average Temperatures",
+              data: avgTemps,
+              dataLabels: {
+                enabled: false,
+                color: '#000000'
+        },
           }]
       });
       $('#chart-container').show();
 
       $('#chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
-    })
 
     //trigger for interactive chart
     $('#chart-container').on('click', 'a', function(e){
@@ -216,23 +207,49 @@ var displayChart = function(clickedCity, clickedState){
                 }
             })
             $('#chart-container').highcharts({
-                chart: {
-                    type: 'line'
-                },
-                title: {
-                    text: cityName + ', ' + stateName
-                },
-                xAxis: {
-                    categories: dates
-                },
-                yAxis: {
-                    title: {
-                        text: 'Temperature'
-                    }
-                },
-                series: [{
-                    name: cityName + " Average",
-                    data: avgTemps
+          chart: {
+              type: 'line',
+            marginTop: 50,
+            marginBottom: 50,
+          },
+
+        tooltip: {
+            enabled: true
+        },
+
+
+        legend: {
+            enabled: true
+        },
+
+
+          title: {
+              text: "Average Human Temperatures Detected in " + cityName
+          },
+          xAxis: {
+              categories: dates,
+              title: "Dates",
+              dataLabels: {
+              enabled: true
+            }
+          },
+          yAxis: {
+              title: {
+              text: "Temperatures"
+              },
+
+          labels: {
+              enabled: true
+            }
+          },
+          series: [
+          {
+              name: "Average Temperatures",
+              data: avgTemps,
+              dataLabels: {
+                enabled: false,
+                color: '#000000'
+        },
                 }]
 
             });
@@ -247,7 +264,6 @@ var displayChart = function(clickedCity, clickedState){
 }
 
 var displayHeatMap = function(dates, heatMapData, cityName){
-console.log('we made it')
     $('#chart-container').highcharts({
 
         chart: {
@@ -309,98 +325,98 @@ console.log('we made it')
 
 }
 
-var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
-    var charts = [],
-    options;
+// var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
+//     var charts = [],
+//     options;
 
-    function syncTooltip(container, p) {
-        var i = 0;
-        for (; i < charts.length; i++) {
-            if (container.id != charts[i].container.id) {
-                if(charts[i].tooltip.shared) {
-                    charts[i].tooltip.refresh([charts[i].series[0].data[p]]);
-                }
-                else {
-                    charts[i].tooltip.refresh(charts[i].series[0].data[p]);
-                }
-            }
-        }
-    }
+//     function syncTooltip(container, p) {
+//         var i = 0;
+//         for (; i < charts.length; i++) {
+//             if (container.id != charts[i].container.id) {
+//                 if(charts[i].tooltip.shared) {
+//                     charts[i].tooltip.refresh([charts[i].series[0].data[p]]);
+//                 }
+//                 else {
+//                     charts[i].tooltip.refresh(charts[i].series[0].data[p]);
+//                 }
+//             }
+//         }
+//     }
 
-    options = {
-        plotOptions: {
-            series: {
-                point: {
-                    events: {
-                        mouseOver: function () {
-                            syncTooltip(this.series.chart.container, this.x);
-                        }
-                    }
-                }
-            }
-        },
+//     options = {
+//         plotOptions: {
+//             series: {
+//                 point: {
+//                     events: {
+//                         mouseOver: function () {
+//                             syncTooltip(this.series.chart.container, this.x);
+//                         }
+//                     }
+//                 }
+//             }
+//         },
 
-    };
+//     };
 
-    charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
-        chart: {
-            renderTo: 'line-chart-top'
-        },
-        tooltip: {
-            shared: true,
-            valueDecimals: 2
-        },
-        title: {
-          text: cityName + ", " + stateName
-        },
-        series: [{
-            data: avgTemps,
-            name: "Temperature"
-        }],
-        xAxis: {
-            categories: dates,
-            labels: { enabled: false }
-        },
-        yAxis: {
-          title: {
-              text: 'Temperature'
-          }
-        },
-        legend: {
-            enabled: false
-        }
-    }));
+//     charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
+//         chart: {
+//             renderTo: 'line-chart-top'
+//         },
+//         tooltip: {
+//             shared: true,
+//             valueDecimals: 2
+//         },
+//         title: {
+//           text: cityName + ", " + stateName
+//         },
+//         series: [{
+//             data: avgTemps,
+//             name: "Temperature"
+//         }],
+//         xAxis: {
+//             categories: dates,
+//             labels: { enabled: false }
+//         },
+//         yAxis: {
+//           title: {
+//               text: 'Temperature'
+//           }
+//         },
+//         legend: {
+//             enabled: false
+//         }
+//     }));
 
 
-    charts[1] = new Highcharts.Chart($.extend(true, {}, options, {
-        chart: {
-            renderTo: 'line-chart-bottom'
-        },
-        tooltip: {
-            shared: false
-        },
-        title: {
-            text: ''
-        },
-        series: [{
-            data: avgHumidity,
-            name: "Humidity",
-            color: 'green'
-        }],
-        xAxis: {
-            categories: dates
-        },
-        yAxis: {
-          title: {
-              text: 'Humidity'
-          }
-        },
-        legend: {
-            enabled: false
-        }
-    }));
+//     charts[1] = new Highcharts.Chart($.extend(true, {}, options, {
+//         chart: {
+//             renderTo: 'line-chart-bottom'
+//         },
+//         tooltip: {
+//             shared: false
+//         },
+//         title: {
+//             text: ''
+//         },
+//         series: [{
+//             data: avgHumidity,
+//             name: "Humidity",
+//             color: 'green'
+//         }],
+//         xAxis: {
+//             categories: dates
+//         },
+//         yAxis: {
+//           title: {
+//               text: 'Humidity'
+//           }
+//         },
+//         legend: {
+//             enabled: false
+//         }
+//     }));
 
-}
+// }
 
 STATES = {"AK" : "Alaska",
       "AL" : "Alabama",
