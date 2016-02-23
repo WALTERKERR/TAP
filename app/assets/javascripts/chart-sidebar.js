@@ -81,8 +81,9 @@ var displaySideChart = function(clickedCity, clickedState){
       })
 
 
-      $('#heatmap-holder').remove();
-      displayLineChartSideBar(avgHumidity, avgTemps, dates, cityName, stateName);
+      $('#heatmap-text-sidebar').remove();
+      $('#linechart-text-sidebar').remove();
+      displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
     });
 };
@@ -90,25 +91,13 @@ var displaySideChart = function(clickedCity, clickedState){
 
 
 var clearDivs = function(){
-      $('#line-chart-top').empty();
-      $('#line-chart-bottom').empty();
       $('#chart-container').empty();
 };
 
 
 var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
 
-    var testHeatData = [
-        [0, 0, 5], [1, 0, 9], [2, 0, 8], [3, 0, 4], [4, 0, 7], [5, 0, 8], [6, 0, 3],
-        [0, 1, 32], [1, 1, 38], [2, 1, 48], [3, 1, 47], [4, 1, 38], [5, 1, 35], [6, 1, 24],
-        [0, 2, 125], [1, 2, 135], [2, 2, 120], [3, 2, 134], [4, 2, 132], [5, 2, 124], [6, 2, 134],
-        [0, 3, 134], [1, 3, 122], [2, 3, 134], [3, 3, 129], [4, 3, 126], [5, 3, 130], [6, 3, 127],
-        [0, 4, 49], [1, 4, 48], [2, 4, 56], [3, 4, 64], [4, 4, 70], [5, 4, 88],  [6, 4, 95],
-        [0, 5, 18], [1, 5, 14], [2, 5, 25], [3, 5, 26], [4, 5, 30], [5, 5, 45], [6, 5, 51],
-        [0, 6, 19], [1, 6, 14], [2, 6, 18], [3, 6, 18], [4, 6, 16], [5, 6, 11], [6, 6, 18]
-        ];
-
-    $('#heatmap-container').highcharts({
+    $('#heatmap-container-sidebar').highcharts({
 
         chart: {
             type: 'heatmap',
@@ -169,8 +158,8 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-$('#heatmap-container').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="heatmap-holder"><a href="#" id="heatmap-city">Link to Temp Chart</a></div>');
-  $('#heatmap-city').click(function(e){
+$('#heatmap-container-sidebar').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + ' to determine temperature percentile information.</div>');
+  $('#heatmap-link').click(function(e){
     e.preventDefault();
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
@@ -179,83 +168,66 @@ $('#heatmap-container').append('<div class="small-chart float-right display-inli
 }
 
 
+var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
 
+      $('#linechart-container-sidebar').highcharts({
+          chart: {
+              type: 'line',
+            width: 150,
+            height: 150,
+            marginTop: 0,
+            marginBottom: 0,
+          },
 
-var displayLineChartSideBar = function(avgHumidity, avgTemps, dates, cityName, stateName){
-    var charts = [],
-    options;
-
-    charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
-        chart: {
-            renderTo: 'line-temp-container',
-            width: 150
-        },
         tooltip: {
-            shared: true,
-            text: null,
             enabled: false
         },
-        title: {
-          text: null,
-        },
-        series: [{
-            data: avgTemps,
-            name: null,
-        }],
-        xAxis: {
-            categories: dates,
-            labels: { enabled: false }
-        },
-        yAxis: {
-          title: {
-              text: null,
-          },
-          labels: { enabled: false },
-        },
+
+
         legend: {
             enabled: false
-        }
-    }));
-$('.dual-line-chart').append('<div class="small-chart float-right display-inline-block bottom-padding-none"><a href="#" id="dual-line-city">Link to Temp Chart</a></div>');
-  $('#dual-line-city').click(function(e){
+        },
+
+
+          title: {
+              text: null
+          },
+          xAxis: {
+              categories: dates,
+              title: null,
+              dataLabels: {
+              enabled: false
+            }
+          },
+          yAxis: {
+              title: {
+              text: null
+              },
+
+        tooltip: {
+            enabled: false,
+        },
+
+          labels: {
+              enabled: false
+            }
+          },
+          series: [
+          {
+              name: null,
+              data: avgTemps,
+              dataLabels: {
+                enabled: false,
+                color: '#000000'
+        },
+          }]
+      });
+      $('#linechart-container-sidebar').append('<div class="small-chart float-right display-inline-block bottom-padding-none id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View linechart data for ' + cityName + ' to determine temperature percentile information.</div>');
+  $('#linechart-link').click(function(e){
     e.preventDefault();
     clearDivs();
-    displayLineChart(avgHumidity, avgTemps, dates, cityName, stateName);
-    $('#dual-line-chart-main').show();
-  })
-
-
-    charts[1] = new Highcharts.Chart($.extend(true, {}, options, {
-        chart: {
-            renderTo: 'line-humid-container',
-            width: 150
-        },
-        tooltip: {
-            shared: false,
-            enabled: false
-        },
-        title: {
-            text: null
-        },
-        series: [{
-            data: avgHumidity,
-            name: null,
-            color: 'green'
-        }],
-        xAxis: {
-            categories: dates,
-            text: null,
-             labels: { enabled: false }
-        },
-        yAxis: {
-          title: {
-              text: null,
-          },
-         labels: { enabled: false }
-        },
-        legend: {
-            enabled: false
-        }
-    }));
+    displayHeatMap(dates, heatMapData, cityName);
+    $('#chart-container').show();
+    })
 
 }
