@@ -25,6 +25,7 @@ var bindListeners = function(){
 var hideLandingPage = function(){
     $('.overlay').hide();
     $('.landing-row').hide();
+    $('.map-search').show();
 }
 
 var searchBoxSubmit = function(e){
@@ -56,7 +57,7 @@ var displaySearchError = function(){
 
 var mapClick = function(){
   $('#chart-container').hide();
-  hideSidebar();
+  // hideSidebar();
 }
 
 var hideSidebar = function(){

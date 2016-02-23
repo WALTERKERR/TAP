@@ -91,12 +91,13 @@ body {
 }
 
 .navbar-brand {
-  padding-left: 40px!important;
   color: #ffffff!important;
 }
 
-.search-bar .submit-button {
-  /*display: none;*/
+.map-search {
+  z-index: 49;
+  margin-left: 30px;
+  display: none;
 }
 
 .search-bar {
@@ -142,15 +143,18 @@ body {
 }
 
 .headline {
-  margin-top: 5%;
   padding: 5px;
   text-align: center;
+}
+
+.headline p {
+  padding: 10px;
 }
 
 .landing-link {
   text-align: center;
   /*padding: 5px;*/
-  margin-left: 70px;
+  /*margin-left: 40px;*/
 }
 .overlay {
   background-color: #000;
@@ -166,6 +170,7 @@ body {
 }
 
 .jump-button {
+  text-align: center;
   margin-top: 40px;
 }
 
@@ -214,6 +219,22 @@ body {
   margin: 0 auto;
   padding: 5px;
 }
+
+#nav-logo {
+  height: 100%;
+  width: auto;
+  padding-left: 20px;
+}
+
+.logo-container {
+  text-align: center;
+  font-size: 4em;
+}
+
+.landing-logo img {
+  height: 110px;
+  width: auto;
+}
 /*.btn-xs{
   font-size:11px;
   line-height:14px;
@@ -234,3 +255,9 @@ body {
   border: 4px solid;
   padding:13px 40px;
 }*/
+
+@media only screen and (max-width: 500px) {
+  #jump {
+    font-size: 0.9em;
+  }
+}
