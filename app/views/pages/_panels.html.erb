@@ -10,14 +10,6 @@
         </span>
       </div>
     </form>
-    <!-- <form class="input-group search-bar" id="search-box" role="search">
-      <div class="form-group">
-        <input type="text" class="form-control search-form" placeholder="Search for city, state">
-      </div>
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-default submit-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-      </span>
-    </form> -->
   </div>
   <div class="col-sm-12 col-md-12 sidebar pull-left">
     <div class="panel-body" id="chart-container"></div>
@@ -38,17 +30,26 @@
           </h4>
         </div>
         <div id="taskpane" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <p>
-              Lorem ipsum dolor sit amet, vel an wisi propriae. Sea ut graece gloriatur. Per ei quando dicant vivendum. An insolens appellantur eos, doctus convenire vis et, at solet aeterno intellegebat qui.
-            </p>
-            <p>
-              Elitr minimum inciderint qui no. Ne mea quaerendum scriptorem consequuntur. Mel ea nobis discere dignissim, aperiam patrioque ei ius. Stet laboramus eos te, his recteque mnesarchum an, quo id adipisci salutatus. Quas solet inimicus eu per. Sonet conclusionemque id vis.
-            </p>
+    <div class="panel-body" id="chart-sidepanel-body">
+      <div class="display-inline-block float-left hover-div dual-line-chart">
+        <div id="line-temp-container" class="small-chart display-inline-block"></div>
+        <div id="line-humid-container" class="small-chart display-inline-block top-padding-none"></div>
+      </div>
+      <div class="hover-div">
+      <div id="heatmap-container" class="small-chart display-inline-block"></div>
+      </div>
+
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="col-sm-12 col-md-12 sidebar pull-left">
+    <div class="panel-body" id="chart-container"></div>
+    <div class="panel-body" id="dual-line-chart-main">
+    <div class="panel-body" id="line-chart-top"></div>
+     <div class="panel-body" id="line-chart-bottom"></div>
+   </div>
   </div>
 </div>
 <div class="mini-submenu mini-submenu-right pull-right">
