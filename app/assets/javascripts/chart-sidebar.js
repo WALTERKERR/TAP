@@ -83,15 +83,35 @@ var displaySideChart = function(clickedCity, clickedState){
 
       $('#heatmap-text-sidebar').remove();
       $('#linechart-text-sidebar').remove();
+
+
       displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
+      $('.panel-body').on('click', 'a', function(e){
+        // e.preventDefault();
+
+        clearDivs();
+        displayLineChart(cityName, stateName, dates, avgTemps);
+        displayHeatMap(dates, heatMapData, cityName);
+
+        $('.sidebar-right .sidebar-body').hide('slide');
+        $('.mini-submenu-right').fadeIn();
+        $('#line-chart-container').show();
+        $('#heat-chart-container').show();
+        $('.overlay').fadeIn();
+        $('.charts-overlay').fadeIn();
+        var index = Highcharts.charts.length - 1
+        var chart = Highcharts.charts[index]
+        chart.reflow();
+      })
     });
 };
 
 
 
 var clearDivs = function(){
-  $('#chart-container').empty();
+  $('#line-chart-container').empty();
+  $('#heat-chart-container').empty();
 };
 
 
@@ -159,16 +179,19 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
 
     });
 $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  This chart is useful for displaying the range of temperatures recorded to identify trends.</div>');
-  $('#heatmap-link').click(function(e){
-    e.preventDefault();
-    clearDivs();
-    displayHeatMap(dates, heatMapData, cityName);
-    $('#chart-container').show();
-    $('.charts-overlay').show();
-    var index = Highcharts.charts.length - 1
-    var chart = Highcharts.charts[index]
-    chart.reflow();
-  })
+  // $('#heatmap-link').click(function(e){
+  //   e.preventDefault();
+  //   // clearDivs();
+  //   // displayHeatMap(dates, heatMapData, cityName);
+  //   $('.sidebar-right .sidebar-body').hide('slide');
+  //   $('.mini-submenu-right').fadeIn();
+  //   $('#heat-chart-container').show();
+  //   $('.overlay').fadeIn();
+  //   $('.charts-overlay').fadeIn();
+  //   var index = Highcharts.charts.length - 1
+  //   var chart = Highcharts.charts[index]
+  //   chart.reflow();
+  // })
 }
 
 
@@ -227,16 +250,20 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
           }]
       });
       $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View line chart data for ' + cityName + ' to view ambient and infared temperature readings.  This chart is useful for identifying trends and elmininating potential false positives.</div>');
-  $('#linechart-link').click(function(e){
-    e.preventDefault();
-    clearDivs();
-    displayLineChart(cityName, stateName, dates, avgTemps);
-    $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
-    $('#chart-container').show();
-    var index = Highcharts.charts.length - 1
-    var chart = Highcharts.charts[index]
-    chart.reflow();
-  })
+  // $('#linechart-link').click(function(e){
+  //   e.preventDefault();
+  //   // clearDivs();
+  //   // displayLineChart(cityName, stateName, dates, avgTemps);
+  //   $('.sidebar-right .sidebar-body').hide('slide');
+  //   $('.mini-submenu-right').fadeIn();
+  //   $('#line-chart-container').show();
+  //   $('.overlay').fadeIn();
+  //   $('.charts-overlay').fadeIn();
+  //   var index = Highcharts.charts.length - 1
+  //   var chart = Highcharts.charts[index]
+  //   chart.reflow();
+  // })
 
 }
+
+

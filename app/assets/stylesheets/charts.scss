@@ -5,8 +5,15 @@
   width: 100%!important;
   height: 100%!important;
 }
-#chart-container {
-  width: 100%;
+
+#line-chart-container {
+  width: 80%;
+  margin: auto;
+}
+
+#heat-chart-container {
+  width: 80%;
+  margin: auto;
 }
 
 #chart-sidepanel {
@@ -63,6 +70,6 @@
   margin: 3px;
 }
 
-.sidebar-text {
+.dates-tab {
+  text-align: center;
 }
-

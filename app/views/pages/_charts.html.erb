@@ -1,30 +1,34 @@
-<div class="col-md-10 col-md-offset-1 charts-overlay">
-  <div id="chart-carousel" class="carousel slide" data-ride="carousel">
+<div class="col-md-12 charts-overlay">
+  <div id="chart-carousel col-md-8 col-md-offset-2" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target="#chart-carousel" data-slide-to="0" class="active"></li>
       <li data-target="#chart-carousel" data-slide-to="1"></li>
-      <li data-target="#chart-carousel" data-slide-to="2"></li>
-      <li data-target="#chart-carousel" data-slide-to="3"></li>
+      <!-- <li data-target="#chart-carousel" data-slide-to="2"></li>
+      <li data-target="#chart-carousel" data-slide-to="3"></li> -->
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-      <div class="item active" id="chart-container">
 
+      <div class="item active">
+        <div id="line-chart-container"></div>
+        <div class="dates-tab">
+          <a href="#" id="7">1-week </a>
+          <a href="#" id="14">2-weeks </a>
+          <a href="#" id="30">1-month</a>
+        </div>
       </div>
 
       <div class="item">
+        <div id="heat-chart-container"></div>
+      </div>
 
+      <!-- <div class="item">
       </div>
 
       <div class="item">
-
-      </div>
-
-      <div class="item">
-
-      </div>
+      </div> -->
     </div>
 
     <!-- Left and right controls -->
