@@ -7,12 +7,10 @@
 }
 
 #city-chart-container {
-  width: 80%;
   margin: auto;
 }
 
 #national-chart-container {
-  width: 80%;
   margin: auto;
 }
 
@@ -54,6 +52,7 @@
 
 .charts-overlay {
   display: none;
+  left: 10%;
   top: 150px;
   z-index: 52;
   position: absolute!important;

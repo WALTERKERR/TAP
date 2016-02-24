@@ -4,9 +4,10 @@ $(document).ready(function(){
   getMarkerData();
   bindListeners();
   $('#loading').hide();
-  // displayTestCharts("San Francisco", "California");
   tabSelect();
   displayNationalDataSidebar()
+  // displayNationalDataSidebarTest("San Francisco", "California");
+  // displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
@@ -18,7 +19,8 @@ String.prototype.capitalize = function(){
 
 var bindListeners = function(){
   $('#search-box').on('submit', searchBoxSubmit);
-  $('.overlay').on('click', mapClick);
+  // $('.overlay').on('click', mapClick);
+  $('#map').on('click', mapClick);
   $('.navbar-brand').on('click', showSidebar);
   $('.main-search').on('submit', 'form', searchBoxSubmit);
   $('.landing-link').on('click', hideLandingPage);
@@ -365,7 +367,6 @@ var displayNationalData = function(){
   })
   .done(function(response){
     var chartData = response;
-      // console.log(chartData);
       var todayDate = new Date();
       for (i=0; i < timeFrame; i++){
         var newDate = new Date();
@@ -396,7 +397,6 @@ var displayScatterPlotAmbientTemps = function(allTemps){
 
     scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
   }
-  console.log(scatterplotData);
 
   $('#national-chart-container').highcharts({
     chart: {
