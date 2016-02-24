@@ -8,12 +8,18 @@ body {
   font-family: 'Oxygen'!important;
 }
 
-.navbar { opacity: 0.8; }
+.navbar-default {
+  opacity: 0.7!important;
+  background-color: #000!important;
+  border: none!important;
+}
+
 .navbar-offset { margin-top: 50px; }
 
 #map {
-  position: absolute;
-  top: 50px;
+  position: fixed;
+  height: 100%;
+  /*top: 50px;*/
   bottom: 0;
   width: 100%;
   z-index: 35;
@@ -51,7 +57,10 @@ body {
   z-index: 40;
 }
 
-.sidebar { z-index: 45; }
+.sidebar {
+  z-index: 45;
+  margin-top: 30px;
+}
 
 .main-row { position: relative; top: 0; }
 
