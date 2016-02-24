@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  skip_before_action  :verify_authenticity_token, only: [:unicorn]
 
   def index
   end
@@ -43,9 +44,10 @@ class PagesController < ApplicationController
         state = cleaned_string.scan(/(?<=State\:).+(?=[Z])/)[0].gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
         puts "State: #{state}"
 
-        a = Datum.create(time: Time.now, temp: obj.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value )
+        a = Datum.create(time: Time.now, temp: obj_temp.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value.to_f )
       end
     end
+
   end
 
 end

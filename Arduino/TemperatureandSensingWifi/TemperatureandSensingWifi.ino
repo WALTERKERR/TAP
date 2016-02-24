@@ -142,8 +142,8 @@ void printWifiStatus() {
 
 void makeCallonServer(){
     client.connect(server, 80);// Make a HTTP request:
-    client.println("POST /test HTTP/1.1");
-    client.println("Host: lit-reaches-37868.herokuapp.com");
+    client.println("POST /unicorn HTTP/1.1");
+    client.println("Host: thermo-aggregation-project.herokuapp.com");
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println("Content-Length: 130");
     client.println();
@@ -176,8 +176,8 @@ void connectToServer(){
   if (client.connect(server, 80)) {
     Serial.println("connected to server");
     // Make a HTTP request:
-    client.println("POST /test HTTP/1.1");
-    client.println("Host: lit-reaches-37868.herokuapp.com");
+    client.println("POST /unicorn HTTP/1.1");
+    client.println("Host: thermo-aggregation-project.herokuapp.com");
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println("Content-Length: 16");
     client.println();
