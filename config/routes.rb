@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/upload' => 'pages#parse_upload'
   get '/test' => 'pages#test'
 
+  post '/unicorn' => 'pages#unicorn'
+
   root 'pages#index'
 
   resources :data
