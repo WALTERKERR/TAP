@@ -155,6 +155,19 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
             enabled: true
         },
 
+        navigator : {
+          enabled: true,
+                adaptToUpdatedData: false,
+                series : {
+                    data : dates
+                },
+        },
+
+        rangeSelector: {
+            enabled: true,
+            selected: 1,
+            allButtonsEnabled: true,
+        },
 
         legend: {
             enabled: true
