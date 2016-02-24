@@ -87,10 +87,12 @@ var displaySideChart = function(clickedCity, clickedState){
 
       displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
-      if (!!news[0]) {
-        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
+      if (news[0].title === news[1].title || !!!news[1]){
+        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div>");
+      } else if (!!news[0]) {
+        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
       } else {
-        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'>No Recent News</div>");
+        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'>No Recent News</div>");
       }
     });
 };
@@ -179,7 +181,7 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -251,7 +253,7 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     clearDivs();
     displayLineChart(cityName, stateName, dates, avgTemps);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -395,7 +397,7 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     clearDivs();
     displayScatterPlotAmbientTemps(allTemps);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -497,7 +499,7 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     clearDivs();
     displayScatterPlotHumidities(allDataPoints);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
