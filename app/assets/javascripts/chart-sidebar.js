@@ -88,25 +88,11 @@ var displaySideChart = function(clickedCity, clickedState){
 
       displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
-
-      $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
-      $('.panel-body').on('click', 'a', function(e){
-        // e.preventDefault();
-
-        clearDivs();
-        displayLineChart(cityName, stateName, dates, avgTemps);
-        displayHeatMap(dates, heatMapData, cityName);
-
-        $('.sidebar-right .sidebar-body').hide('slide');
-        $('.mini-submenu-right').fadeIn();
-        $('#line-chart-container').show();
-        $('#heat-chart-container').show();
-        $('.overlay').fadeIn();
-        $('.charts-overlay').fadeIn();
-        var index = Highcharts.charts.length - 1
-        var chart = Highcharts.charts[index]
-        chart.reflow();
-      })
+      if (!!news[0]) {
+        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
+      } else {
+        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'>No Recent News</div>");
+      }
     });
 };
 
