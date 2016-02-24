@@ -49,7 +49,7 @@ var searchBoxSubmit = function(e){
       url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
-      displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      displaySideChart(cityInput[1].capitalize(), stateInput[1].capitalize());
       $('#search-box').trigger('reset');
     }).fail(function(response){
       displaySearchError();
