@@ -286,7 +286,6 @@ var displayNationalDataSidebar = function(){
   })
   .done(function(response){
     var chartData = response;
-      // console.log(chartData);
       var todayDate = new Date();
       for (i=0; i < timeFrame; i++){
         var newDate = new Date();
@@ -320,7 +319,6 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
 
     scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
   }
-  console.log(scatterplotData);
 
   $('#ambient-temp-container-sidebar').highcharts({
     chart: {
@@ -426,7 +424,6 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
 
     scatterplotData.push({allInfaredTemperatures: allDataPoints[i][1], allHumidities: allDataPoints[i][0]});
   }
-  console.log(scatterplotData);
 
   $('#humidity-container-sidebar').highcharts({
     chart: {

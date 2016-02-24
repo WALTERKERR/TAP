@@ -359,7 +359,6 @@ var displayNationalData = function(){
   })
   .done(function(response){
     var chartData = response;
-      // console.log(chartData);
       var todayDate = new Date();
       for (i=0; i < timeFrame; i++){
         var newDate = new Date();
@@ -390,7 +389,6 @@ var displayScatterPlotAmbientTemps = function(allTemps){
 
     scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
   }
-  console.log(scatterplotData);
 
   $('#national-chart-container').highcharts({
     chart: {

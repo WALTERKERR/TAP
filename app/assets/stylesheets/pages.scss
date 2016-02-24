@@ -16,6 +16,10 @@ body {
 
 .navbar-offset { margin-top: 50px; }
 
+.navbar-logo {
+  padding: 5px 10px 0 15px!important;
+}
+
 #map {
   position: fixed;
   height: 100%;
@@ -236,15 +240,11 @@ body {
   padding: 5px;
 }
 
-.nav-logo {
-  padding-top: 5px!important;
-}
-
 #nav-logo {
   height: 40px;
   width: auto;
   margin-top: 0;
-  padding-left: 15px;
+  padding: 0 15px 0 15px;
 }
 
 .logo-container {
