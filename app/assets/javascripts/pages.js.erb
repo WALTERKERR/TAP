@@ -5,6 +5,8 @@ $(document).ready(function(){
   bindListeners();
   $('#loading').hide();
   // displayTestCharts("San Francisco", "California");
+  tabSelect();
+  displayNationalDataSidebar()
 });
 
 String.prototype.capitalize = function(){
@@ -65,6 +67,22 @@ var mapClick = function(){
   // hideSidebar();
 }
 
+var tabSelect = function() {
+  $('#nation-tab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+    $("#nationwide-charts").show();
+    $("#city-specific-charts").hide()
+  })
+
+  $('#city-tab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+    $("#nationwide-charts").hide();
+    $("#city-specific-charts").show()
+  })
+}
+
 var hideSidebar = function(){
   $('.sidebar-right').hide();
   $('.mini-submenu-right').hide();
@@ -108,9 +126,9 @@ var getMarkerData = function(){
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
-
-      $('.mini-submenu-right').css('display', "none");
-      // $('#accordion-right').css('display', null);
+      $("#city-tab").tab('show');
+      $("#nationwide-charts").hide();
+      $("#city-specific-charts").show();
     })
     markers.addLayer(marker);
   }
@@ -371,7 +389,7 @@ var displayScatterPlotAmbientTemps = function(allTemps){
   }
   console.log(scatterplotData);
 
-  $('#scatterplot-container').highcharts({
+  $('#chart-container').highcharts({
     chart: {
       type: 'scatter',
       zoomType: 'xy'
@@ -436,7 +454,7 @@ var displayScatterPlotAmbientTemps = function(allTemps){
       color: 'rgba(223, 83, 83, .5)',
       data: allTemps
 
-    },
+    }]
 
       });
 }
@@ -450,7 +468,7 @@ var displayScatterPlotHumidities = function(allDataPoints){
   }
   console.log(scatterplotData);
 
-  $('#scatterplot-container').highcharts({
+  $('#chart-container').highcharts({
     chart: {
       type: 'scatter',
       zoomType: 'xy'
@@ -514,10 +532,8 @@ var displayScatterPlotHumidities = function(allDataPoints){
       name: 'Human Temperature Readings',
       color: 'rgba(223, 83, 83, .5)',
       data: allDataPoints
-
-    },
-        ]
-      });
+    }]
+  });
 }
 
 

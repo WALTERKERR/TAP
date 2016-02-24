@@ -92,6 +92,7 @@ var displaySideChart = function(clickedCity, clickedState){
 
 var clearDivs = function(){
       $('#chart-container').empty();
+      $('#national-chart-container').empty()
 };
 
 
@@ -158,7 +159,7 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  This chart is useful for displaying the range of temperatures recorded to identify trends.</div>');
+$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  </div>');
   $('#heatmap-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -222,7 +223,7 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
         },
           }]
       });
-      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View line chart data for ' + cityName + ' to view ambient and infared temperature readings.  This chart is useful for identifying trends and elmininating potential false positives.</div>');
+      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View ' + cityName + ' temperature data.</div>');
   $('#linechart-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -230,4 +231,238 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     $('#chart-container').show();
     })
 
+}
+
+var displayNationalDataSidebar = function(){
+
+  var timeFrame = 7;
+  var dates = [];
+
+  $.ajax({
+    method: "GET",
+    url: "/find_all?timeframe=" + timeFrame,
+    dataType: 'JSON'
+  })
+  .done(function(response){
+    var chartData = response;
+      // console.log(chartData);
+      var todayDate = new Date();
+      for (i=0; i < timeFrame; i++){
+        var newDate = new Date();
+        newDate.setDate(todayDate.getDate() - (timeFrame - i));
+        dates.push(newDate.toJSON().slice(0,10));
+      }
+
+      var allTemps = []
+      chartData.forEach(function(item){
+        allTemps.push([item.ambient_temp, item.temp])
+      })
+
+       var allHumidities = []
+        chartData.forEach(function(item){
+          allHumidities.push([item.humidity, item.temp])
+        })
+
+    displayScatterPlotAmbientTempsSidebar(allTemps);
+    displayScatterPlotHumiditiesSidebar(allHumidities);
+  })
+
+}
+
+
+
+
+var displayScatterPlotAmbientTempsSidebar = function(allTemps){
+
+  var scatterplotData = []
+  for (var i = 0; i < allTemps.length; i++) {
+
+    scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
+  }
+  console.log(scatterplotData);
+
+  $('#ambient-temp-container-sidebar').highcharts({
+    chart: {
+      type: 'scatter',
+      zoomType: 'xy',
+      width: 150,
+      height: 150,
+      marginTop: 0,
+      marginBottom: 0,
+
+    },
+    title: {
+      text: null
+    },
+    subtitle: {
+      text: null
+    },
+    xAxis: {
+      title: {
+        enabled: false,
+        text: null
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true,
+      categories: null,
+      labels: {
+              enabled: false
+            }
+    },
+    yAxis: {
+      title: {
+        text: null
+      },
+      categories: null,
+      labels: {
+              enabled: false
+            }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 100,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+      borderWidth: 1,
+      enabled: false
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: false,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+            enabled: false
+        },
+      }
+    },
+    series: [{
+      name: null,
+      color: 'rgba(223, 83, 83, .5)',
+      data: allTemps
+
+    }]
+
+      });
+      $('.ambient-temp-holder-master').append('<div class="col-md-6" id="ambient-temp-text-sidebar"><a href="#" id="ambient-temp-link"><b>Ambient Temp Scatterplot</b></a><br>View scatterplot data to evaluate IR temperature and ambient temperature correlation.</div>');
+  $('#ambient-temp-link').click(function(e){
+    e.preventDefault();
+    clearDivs();
+    displayScatterPlotAmbientTemps(allTemps);
+    $('#national-chart-container').show();
+    })
+}
+
+var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
+
+  var scatterplotData = []
+  for (var i = 0; i < allDataPoints.length; i++) {
+
+    scatterplotData.push({allInfaredTemperatures: allDataPoints[i][1], allHumidities: allDataPoints[i][0]});
+  }
+  console.log(scatterplotData);
+
+  $('#humidity-container-sidebar').highcharts({
+    chart: {
+      type: 'scatter',
+      zoomType: 'xy',
+      width: 150,
+      height: 150,
+    },
+    title: {
+      text: null
+    },
+    subtitle: {
+      text: null
+    },
+    xAxis: {
+      title: {
+        enabled: false,
+        text: 'Humidity Percentage at Time of Reading'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true,
+      categories: null,
+      labels: {
+              enabled: false
+            }
+    },
+    yAxis: {
+      title: {
+        text: null
+      },
+      categories: null,
+      labels: {
+              enabled: false
+            }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 100,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+      borderWidth: 1,
+      enabled: false
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x} degrees F, {point.y}',
+          enabled: false
+        }
+      }
+    },
+    series: [{
+      name: null,
+      color: 'rgba(223, 83, 83, .5)',
+      data: allDataPoints
+    }]
+  });
+  $('.humidity-holder-master').append('<div class="col-md-6" id="humidity-text-sidebar"><a href="#" id="humidity-link"><b>Humidity Scatterplot</b></a><br>View scatterplot data to evaluate temperature and humidity correlation.</div>');
+    $('#humidity-link').click(function(e){
+    e.preventDefault();
+    clearDivs();
+    displayScatterPlotAmbientTemps(allTemps);
+    $('#chart-container').show();
+    })
 }
