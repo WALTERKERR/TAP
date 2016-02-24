@@ -67,3 +67,7 @@
 .marker-cluster-high-temp div {
   background-color: rgba(255, 102, 102, 0.6);
 }
+
+.leaflet-popup-pane {
+  font-family: 'Oxygen';
+}
