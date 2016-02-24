@@ -32,8 +32,8 @@ Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 #define DHTPIN 2     // what digital pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
-char ssid[] = "DevBootcamp"; //  your network SSID (name)
-char pass[] = "igeekallweek";    // your network password (use for WPA, or use as key for WEP)
+char ssid[] = "WIFISERVERNAME"; //  your network SSID (name)
+char pass[] = "WIFIPASSWORD";    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 
 int status = WL_IDLE_STATUS;
