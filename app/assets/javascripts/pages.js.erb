@@ -49,7 +49,7 @@ var searchBoxSubmit = function(e){
       url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
-      displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      displaySideChart(cityInput[1].capitalize(), stateInput[1].capitalize());
       $('#search-box').trigger('reset');
     }).fail(function(response){
       displaySearchError();
@@ -105,7 +105,7 @@ var getMarkerData = function(){
 
     for (var i = 0; i < data.length; i ++) {
     var d = data[i];
-    var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
+    var content = d.city + ", " + d.state;
     if (d.temp > 99.5) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'alcohol-shop'}),
@@ -124,7 +124,13 @@ var getMarkerData = function(){
         temp: d.temp
       });
     };
-    // marker.bindPopup(content);
+    marker.bindPopup(content);
+    marker.on('mouseover', function(e){
+      e.target.openPopup();
+    })
+    marker.on('mouseout', function(e){
+      e.target.closePopup();
+    })
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);

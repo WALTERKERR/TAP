@@ -10,6 +10,7 @@ var displaySideChart = function(clickedCity, clickedState){
         dataType: 'JSON'
     })
     .done(function(response){
+      var news = response.pop();
         //Chart Data
       var chartData = response;
 
@@ -77,7 +78,6 @@ var displaySideChart = function(clickedCity, clickedState){
         heatMapData.push([index, 4, chartData.filter(function(data){ return data["temp"] > 99.5 && data["temp"] <= 100.9 && data["time"].slice(0,10) === date }).length]);
         heatMapData.push([index, 5, chartData.filter(function(data){ return data["temp"] > 100.9 && data["temp"] <= 104 && data["time"].slice(0,10) === date }).length]);
         heatMapData.push([index, 6, chartData.filter(function(data){ return data["temp"] > 104 && data["time"].slice(0,10) === date }).length]);
-        console.log(date + ":" + index);
       })
 
 
@@ -87,24 +87,11 @@ var displaySideChart = function(clickedCity, clickedState){
 
       displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
-
-      // $('.panel-body').on('click', 'a', function(e){
-      //   // e.preventDefault();
-
-      //   clearDivs();
-      //   displayLineChart(cityName, stateName, dates, avgTemps);
-      //   displayHeatMap(dates, heatMapData, cityName);
-
-      //   $('.sidebar-right .sidebar-body').hide('slide');
-      //   $('.mini-submenu-right').fadeIn();
-      //   $('#line-chart-container').show();
-      //   $('#heat-chart-container').show();
-      //   $('.overlay').fadeIn();
-      //   $('.charts-overlay').fadeIn();
-      //   var index = Highcharts.charts.length - 1
-      //   var chart = Highcharts.charts[index]
-      //   chart.reflow();
-      // })
+      if (!!news[0]) {
+        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
+      } else {
+        $('#news-container-sidebar').html("<h4>Recent News</h4><div class='news-article'>No Recent News</div>");
+      }
     });
 };
 
@@ -125,8 +112,8 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
             marginTop: 0,
             marginBottom: 0,
             plotBorderWidth: 1,
-            width: 150,
-            height: 150
+            width: 125,
+            height: 125
         },
 
 
@@ -208,8 +195,8 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
       $('#linechart-container-sidebar').highcharts({
           chart: {
               type: 'line',
-            width: 150,
-            height: 150,
+            width: 125,
+            height: 125,
             marginTop: 0,
             marginBottom: 0,
           },

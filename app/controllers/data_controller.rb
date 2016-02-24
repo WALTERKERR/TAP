@@ -21,6 +21,11 @@ class DataController < ApplicationController
     state = params[:state]
     timeframe = params[:timeframe].to_i
     @data = Datum.where(city: city, state: state).where("time >= ?", Date.today - timeframe)
+    results = Google::Search::News.new do |search|
+      search.query = city + state + "Health"
+      search.size = :small
+    end
+    @data << results.first(2)
     render json: @data
   end
 
