@@ -32,15 +32,15 @@ Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 #define DHTPIN 2     // what digital pin we're connected to
 #define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
-char ssid[] = "NETWORKNAME"; //  your network SSID (name)
-char pass[] = "PASSWORD";    // your network password (use for WPA, or use as key for WEP)
+char ssid[] = "DevBootcamp"; //  your network SSID (name)
+char pass[] = "igeekallweek";    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;            // your network key Index number (needed only for WEP)
 
 int status = WL_IDLE_STATUS;
 // if you don't want to use DNS (and reduce your sketch size)
 // use the numeric IP instead of the name for the server:
 //IPAddress server(74,125,232,128);  // numeric IP for Google (no DNS)
-char server[] = "lit-reaches-37868.herokuapp.com";    // name address for Google (using DNS)
+char server[] = "thermo-aggregation-project.herokuapp.com";    // name address for Google (using DNS)
 
 // Initialize the Ethernet client library
 // with the IP address and port of the server
@@ -53,7 +53,7 @@ void setup() {
   Serial.begin(9600);
   dht.begin();
   mlx.begin();
-  
+
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -77,8 +77,8 @@ void setup() {
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
 
-    // wait 10 seconds for connection:
-    delay(10000);
+    // wait 4 seconds for connection:
+    delay(4000);
   }
   Serial.println("Connected to wifi");
   printWifiStatus();
@@ -88,8 +88,8 @@ void setup() {
   if (client.connect(server, 80)) {
     Serial.println("connected to server");
     // Make a HTTP request:
-    client.println("POST /test HTTP/1.1");
-    client.println("Host: lit-reaches-37868.herokuapp.com");
+    client.println("POST /unicorn HTTP/1.1");
+    client.println("Host: thermo-aggregation-project.herokuapp.com");
     client.println("Content-Type: application/x-www-form-urlencoded");
     client.println("Content-Length: 16");
     client.println();
@@ -98,12 +98,13 @@ void setup() {
  }
 }
 
+
 void loop() {
 
   while (client.available()) {
     char c = client.read();
     Serial.write(c);
-    delay(3000);
+    delay(2500);
     client.stop();
     makeCallonServer();
   }
@@ -113,9 +114,11 @@ void loop() {
     Serial.println();
     Serial.println("disconnecting from server.");
     client.stop();
+    Serial.println("Reconnecting to server.");
+    connectToServer();
 
     // do nothing forevermore:
-    while (true);
+//    while (true);
   }
 }
 
@@ -142,15 +145,45 @@ void makeCallonServer(){
     client.println("POST /test HTTP/1.1");
     client.println("Host: lit-reaches-37868.herokuapp.com");
     client.println("Content-Type: application/x-www-form-urlencoded");
-    client.println("Content-Length: 65");
+    client.println("Content-Length: 130");
     client.println();
-    client.println("ObjectTempF:"); client.println(mlx.readObjectTempF()); client.println(""); 
-    client.println("MQ-2 Value:"); client.println(analogRead(mq2Pin)); client.println("");
-    client.println("AmbientTempF:"); client.println(mlx.readAmbientTempF()); client.println("XXXXXXXXXXXXXX");
+    client.println("ObjectTemp:"); client.println(mlx.readObjectTempF());
+    client.println("MQ-2Value:"); client.println(analogRead(mq2Pin));
+    client.println("AmbientTemp:"); client.println(mlx.readAmbientTempF());
+    client.println("Humidity:"); client.println(dht.readHumidity());
+    client.println("City:"); client.println("San Diego");
+    client.println("State:"); client.println("California"); client.println("ZXXXXXXXXXXXXXXXXXXXXXXXXXXX");
     client.println("Connection: close");
     client.println();
+
 }
 
+void connectToServer(){
+  while (status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    status = WiFi.begin(ssid, pass);
 
+    // wait 10 seconds for connection:
+    delay(10000);
+  }
+  Serial.println("Connected to wifi");
+  printWifiStatus();
+
+  Serial.println("\nStarting connection to server...");
+  // if you get a connection, report back via serial:
+  if (client.connect(server, 80)) {
+    Serial.println("connected to server");
+    // Make a HTTP request:
+    client.println("POST /test HTTP/1.1");
+    client.println("Host: lit-reaches-37868.herokuapp.com");
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println("Content-Length: 16");
+    client.println();
+    client.println("message=Initiate");
+    client.println();
+ }
+}
 
 
