@@ -1,4 +1,111 @@
+var displaySideChartTest = function(clickedCity, clickedState){
 
+    var cityName = clickedCity;
+    var stateName = clickedState;
+    var timeFrame = 7;
+
+    $.ajax({
+        method: "GET",
+        url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        dataType: 'JSON'
+    })
+    .done(function(response){
+        //Chart Data
+      var chartData = response;
+
+      var todayDate = new Date();
+      var dates = [];
+      for (i=0; i < timeFrame; i++){
+          var newDate = new Date();
+          newDate.setDate(todayDate.getDate() - (timeFrame - i));
+          dates.push(newDate.toJSON().slice(0,10));
+      }
+
+      var avgAmbientTemps = []
+      dates.forEach(function(date) {
+          var dayAmbientTemps = chartData.filter(function(data){
+              return (data["time"].slice(0,10) === date);
+          })
+          var sum = Object.keys(dayAmbientTemps).reduce(function(a, b){
+              return a + dayAmbientTemps[b].ambient_temp;
+          }, 0)
+          if (sum === 0) {
+              avgAmbientTemps.push(null);
+          } else {
+              avgAmbientTemps.push(sum/dayAmbientTemps.length);
+          }
+      })
+
+      var avgTemps = [];
+      dates.forEach(function(date){
+          var dayTemps = chartData.filter(function(data){
+              return (data["time"].slice(0,10) === date);
+          })
+          var sum = Object.keys(dayTemps).reduce(function(a, b){
+              return a + dayTemps[b].temp;
+          }, 0)
+          if (sum === 0) {
+              avgTemps.push(null);
+          } else {
+              avgTemps.push(sum/dayTemps.length);
+          }
+      })
+
+
+    var avgHumidity = [];
+    dates.forEach(function(date){
+        var dayHumidities = chartData.filter(function(data){
+            return (data["time"].slice(0,10) === date);
+        })
+        var sum = Object.keys(dayHumidities).reduce(function(a, b){
+            return a + dayHumidities[b].humidity;
+        }, 0)
+        if (sum === 0) {
+            avgHumidity.push(null);
+        } else {
+            avgHumidity.push(sum/dayHumidities.length);
+        }
+      })
+
+      var heatMapData = [];
+
+      dates.forEach(function(date, index){
+        heatMapData.push([index, 0, chartData.filter(function(data){ return data["temp"] <= 95 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 1, chartData.filter(function(data){ return data["temp"] > 95 && data["temp"] <= 97.7 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 2, chartData.filter(function(data){ return data["temp"] > 97.7 && data["temp"] <= 98.5 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 3, chartData.filter(function(data){ return data["temp"] > 98.5 && data["temp"] <= 99.5 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 4, chartData.filter(function(data){ return data["temp"] > 99.5 && data["temp"] <= 100.9 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 5, chartData.filter(function(data){ return data["temp"] > 100.9 && data["temp"] <= 104 && data["time"].slice(0,10) === date }).length]);
+        heatMapData.push([index, 6, chartData.filter(function(data){ return data["temp"] > 104 && data["time"].slice(0,10) === date }).length]);
+        console.log(date + ":" + index);
+      })
+
+
+      $('#heatmap-text-sidebar').remove();
+      $('#linechart-text-sidebar').remove();
+
+
+      displayLineChartSideBar(cityName, stateName, dates, avgTemps);
+      displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
+      $('.panel-body').on('click', 'a', function(e){
+        // e.preventDefault();
+
+        clearDivs();
+        displayLineChart(cityName, stateName, dates, avgTemps);
+        displayHeatMap(dates, heatMapData, cityName);
+
+        $('.sidebar-right .sidebar-body').hide('slide');
+        $('.mini-submenu-right').fadeIn();
+        $('#line-chart-container').show();
+        $('#heat-chart-container').show();
+        $('.overlay').fadeIn();
+        $('.charts-overlay').fadeIn();
+        var index = Highcharts.charts.length - 1
+        var chart = Highcharts.charts[index]
+        chart.reflow();
+      })
+    });
+};
 
 
 

@@ -1,12 +1,13 @@
 $(document).ready(function(){
 
-  L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
-  getMarkerData();
-  bindListeners();
-  $('#loading').hide();
-  // displayTestCharts("San Francisco", "California");
-  tabSelect();
-  displayNationalDataSidebar()
+  // L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+  // getMarkerData();
+  // bindListeners();
+  // $('#loading').hide();
+  // tabSelect();
+  // displayNationalDataSidebar()
+  displayNationalDataSidebarTest("San Francisco", "California");
+  displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
