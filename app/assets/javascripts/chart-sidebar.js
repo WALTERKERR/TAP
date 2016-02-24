@@ -171,7 +171,7 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     e.preventDefault();
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
-    $('#chart-container').show();
+    $('#city-chart-container').show();
   })
 
   $('#heatmap-link').click(function(e){
@@ -181,12 +181,13 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     $('.sidebar-right .sidebar-body').hide('slide');
     $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
-    $('.overlay').fadeIn();
+    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
     chart.reflow();
   })
+
 }
 
 
