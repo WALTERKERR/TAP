@@ -108,7 +108,7 @@ var getMarkerData = function(){
     var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
     if (d.temp > 99.5) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-        icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'fire-station'}),
+        icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'alcohol-shop'}),
         content: content,
         city: d.city,
         state: d.state,
@@ -117,7 +117,7 @@ var getMarkerData = function(){
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
 
-        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe', 'marker-symbol': 'ice-cream'}),
+        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe', 'marker-symbol': 'slaughterhouse'}),
         content: content,
         city: d.city,
         state: d.state,

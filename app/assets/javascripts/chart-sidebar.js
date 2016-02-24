@@ -110,13 +110,10 @@ var displaySideChart = function(clickedCity, clickedState){
 
 
 var clearDivs = function(){
-<<<<<<< HEAD
       $('#chart-container').empty();
       $('#national-chart-container').empty()
-=======
   $('#line-chart-container').empty();
   $('#heat-chart-container').empty();
->>>>>>> 52776c8a402f68ebde4e038db1da9c1b79034468
 };
 
 
@@ -183,7 +180,6 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-<<<<<<< HEAD
 $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  </div>');
   $('#heatmap-link').click(function(e){
     e.preventDefault();
@@ -191,8 +187,7 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     displayHeatMap(dates, heatMapData, cityName);
     $('#chart-container').show();
   })
-=======
-$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  This chart is useful for displaying the range of temperatures recorded to identify trends.</div>');
+
   // $('#heatmap-link').click(function(e){
   //   e.preventDefault();
   //   // clearDivs();
@@ -206,7 +201,6 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
   //   var chart = Highcharts.charts[index]
   //   chart.reflow();
   // })
->>>>>>> 52776c8a402f68ebde4e038db1da9c1b79034468
 }
 
 
@@ -264,7 +258,6 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
         },
           }]
       });
-<<<<<<< HEAD
       $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View ' + cityName + ' temperature data.</div>');
   $('#linechart-link').click(function(e){
     e.preventDefault();
@@ -508,23 +501,5 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     $('#chart-container').show();
     })
 }
-=======
-      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View line chart data for ' + cityName + ' to view ambient and infared temperature readings.  This chart is useful for identifying trends and elmininating potential false positives.</div>');
-  // $('#linechart-link').click(function(e){
-  //   e.preventDefault();
-  //   // clearDivs();
-  //   // displayLineChart(cityName, stateName, dates, avgTemps);
-  //   $('.sidebar-right .sidebar-body').hide('slide');
-  //   $('.mini-submenu-right').fadeIn();
-  //   $('#line-chart-container').show();
-  //   $('.overlay').fadeIn();
-  //   $('.charts-overlay').fadeIn();
-  //   var index = Highcharts.charts.length - 1
-  //   var chart = Highcharts.charts[index]
-  //   chart.reflow();
-  // })
-
-}
 
 
->>>>>>> 52776c8a402f68ebde4e038db1da9c1b79034468
