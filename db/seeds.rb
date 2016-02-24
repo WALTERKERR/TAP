@@ -308,11 +308,11 @@ end
 
 counter = 0
 1.times do
-  400.times do
-    Datum.create(city: "Portland", state: "Oregon", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 65 + rand(0..15))
+  800.times do
+    Datum.create(city: "Portland", state: "Oregon", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 50 + rand(0..25))
   end
   2.times do
-    Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 50 + rand(0..25))
   end
   # 5.times do
   #   Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
