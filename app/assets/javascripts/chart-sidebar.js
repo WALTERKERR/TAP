@@ -11,7 +11,6 @@ var displaySideChart = function(clickedCity, clickedState){
     })
     .done(function(response){
       var news = response.pop();
-      console.log(news);
         //Chart Data
       var chartData = response;
 
@@ -274,7 +273,6 @@ var displayNationalDataSidebar = function(){
   })
   .done(function(response){
     var chartData = response;
-      // console.log(chartData);
       var todayDate = new Date();
       for (i=0; i < timeFrame; i++){
         var newDate = new Date();
