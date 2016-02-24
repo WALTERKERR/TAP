@@ -24,6 +24,13 @@ class DataController < ApplicationController
     render json: @data
   end
 
+  def find_all
+    timeframe = params[:timeframe].to_i
+    @all_data = Datum.all.where("time >= ?", Date.today - timeframe)
+    render json: @all_data
+  end
+
+
   def find_city
     # state = params[:state]
     # state = convert_state_abbr(params[:state].upcase) if state.length == 2

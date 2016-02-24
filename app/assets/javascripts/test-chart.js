@@ -1,7 +1,13 @@
 
+
+
+
+
+
+
+
 // var displayTestCharts = function(clickedCity, clickedState){
 
-//     hideSidebar();
 
 //     var cityName = "Oakland";
 //     var stateName = "California";
@@ -83,9 +89,9 @@
 //         console.log(date + ":" + index);
 //       })
 
-//       displayLineChart(avgHumidity, avgTemps, dates, cityName, stateName);
-//       displayHeatMap(dates, heatMapData, cityName);
-//       displayScatterPlot(avgAmbientTemps, avgTemps, dates);
+//       // displayLineChart(avgHumidity, avgTemps, dates, cityName, stateName);
+//       // displayHeatMap(dates, heatMapData, cityName);
+//       // displayScatterPlot(avgAmbientTemps, avgTemps, dates);
 //     });
 // };
 
@@ -161,88 +167,7 @@
 //     });
 // }
 
-// var displayScatterPlot = function(avgAmbientTemps, avgTemps, dates){
 
-//     var scatterplotData = []
-//     for (var i = 0; i < dates.length; i++) {
-
-//         scatterplotData.push({averageTemp: avgTemps[i], averageAmbientTemp: avgAmbientTemps[i], date: dates[i]});
-//     }
-//     console.log(scatterplotData);
-
-//     $('#scatterplot-container').highcharts({
-//         chart: {
-//             type: 'scatter',
-//             zoomType: 'xy'
-//         },
-//         title: {
-//             text: 'Body Temperature of 507 Individuals'
-//         },
-//         subtitle: {
-//             text: 'TAP'
-//         },
-//         xAxis: {
-//             title: {
-//                 enabled: true,
-//                 text: 'Dates'
-//             },
-//             startOnTick: true,
-//             endOnTick: true,
-//             showLastLabel: true
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Temperature'
-//             }
-//         },
-//         legend: {
-//             layout: 'vertical',
-//             align: 'left',
-//             verticalAlign: 'top',
-//             x: 100,
-//             y: 70,
-//             floating: true,
-//             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
-//             borderWidth: 1
-//         },
-//         plotOptions: {
-//             scatter: {
-//                 marker: {
-//                     radius: 5,
-//                     states: {
-//                         hover: {
-//                             enabled: true,
-//                             lineColor: 'rgb(100,100,100)'
-//                         }
-//                     }
-
-//                 },
-//                 states: {
-//                     hover: {
-//                         marker: {
-//                             enabled: false
-//                         }
-//                     }
-//                 },
-//                 tooltip: {
-//                     headerFormat: '<b>{series.name}</b><br>',
-//                     pointFormat: '{point.x} degrees F, {point.y}'
-//                 }
-//             }
-//         },
-//         series: [{
-//             name: 'Human Temperature Readings',
-//             color: 'rgba(119, 152, 191, .5)',
-//             data: avgTemps
-
-//         },
-//         {
-//             name: 'Average Daily Temperatures',
-//             color: 'rgba(223, 83, 83, .5)',
-//             data: avgAmbientTemps
-//         }]
-//     });
-// }
 
 
 // var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){

@@ -325,6 +325,214 @@ var displayHeatMap = function(dates, heatMapData, cityName){
 
 }
 
+
+var displayNationalData = function(){
+
+  var timeFrame = 7;
+  var dates = [];
+
+  $.ajax({
+    method: "GET",
+    url: "/find_all?timeframe=" + timeFrame,
+    dataType: 'JSON'
+  })
+  .done(function(response){
+    var chartData = response;
+      // console.log(chartData);
+      var todayDate = new Date();
+      for (i=0; i < timeFrame; i++){
+        var newDate = new Date();
+        newDate.setDate(todayDate.getDate() - (timeFrame - i));
+        dates.push(newDate.toJSON().slice(0,10));
+      }
+
+      var allTemps = []
+      chartData.forEach(function(item){
+        allTemps.push([item.ambient_temp, item.temp])
+      })
+
+       var allHumidities = []
+        chartData.forEach(function(item){
+          allHumidities.push([item.humidity, item.temp])
+        })
+
+    displayScatterPlotAmbientTemps(allTemps);
+    displayScatterPlotHumidities(allHumidities);
+  })
+
+}
+
+var displayScatterPlotAmbientTemps = function(allTemps){
+
+  var scatterplotData = []
+  for (var i = 0; i < allTemps.length; i++) {
+
+    scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
+  }
+  console.log(scatterplotData);
+
+  $('#scatterplot-container').highcharts({
+    chart: {
+      type: 'scatter',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'National Infared Temperature Readings'
+    },
+    subtitle: {
+      text: 'TAP'
+    },
+    xAxis: {
+      title: {
+        enabled: true,
+        text: 'Ambient Temperatures'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: 'Human Temperatures Measured Through Infrared'
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 100,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+      borderWidth: 1
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x} degrees F, {point.y}'
+        }
+      }
+    },
+    series: [{
+      name: 'Human Temperature Readings',
+      color: 'rgba(223, 83, 83, .5)',
+      data: allTemps
+
+    },
+
+      });
+}
+
+var displayScatterPlotHumidities = function(allDataPoints){
+
+  var scatterplotData = []
+  for (var i = 0; i < allDataPoints.length; i++) {
+
+    scatterplotData.push({allInfaredTemperatures: allDataPoints[i][1], allHumidities: allDataPoints[i][0]});
+  }
+  console.log(scatterplotData);
+
+  $('#scatterplot-container').highcharts({
+    chart: {
+      type: 'scatter',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'National Infared Temperature Readings'
+    },
+    subtitle: {
+      text: 'TAP'
+    },
+    xAxis: {
+      title: {
+        enabled: true,
+        text: 'Humidity Percentage at Time of Reading'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: 'Human Temperatures Measured Through Infrared'
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 100,
+      y: 70,
+      floating: true,
+      backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+      borderWidth: 1
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x} degrees F, {point.y}'
+        }
+      }
+    },
+    series: [{
+      name: 'Human Temperature Readings',
+      color: 'rgba(223, 83, 83, .5)',
+      data: allDataPoints
+
+    },
+        ]
+      });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
 //     var charts = [],
 //     options;
