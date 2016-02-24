@@ -180,13 +180,19 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
             }
           },
           yAxis: {
-              title: {
-              text: "Temperatures"
+            min:97,
+            max: 102,
+            // labels: {
+            //     formatter: function() {
+            //         if(this.isFirst)
+            //             return this.axis.dataMin;
+            //         return this.value;
+            //     }
+            // }
               },
 
           labels: {
-              enabled: true
-            }
+              enabled: true,
           },
           series: [
           {
