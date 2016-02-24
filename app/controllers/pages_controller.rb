@@ -46,6 +46,7 @@ class PagesController < ApplicationController
         a = Datum.create(time: Time.now, temp: obj.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value )
       end
     end
+
   end
 
 end
