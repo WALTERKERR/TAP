@@ -20,10 +20,6 @@
   padding: 0px;
 }
 
-#taskpane {
-  height: 100%;
-}
-
 #chart-sidepanel-body {
   /*height: 100%;*/
 }
@@ -33,6 +29,10 @@
 }
 
 #heatmap-container-sidebar {
+  height: 100%;
+}
+
+#news-container-sidebar {
   height: 100%;
 }
 
