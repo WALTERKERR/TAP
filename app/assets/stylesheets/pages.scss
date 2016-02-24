@@ -102,8 +102,12 @@ body {
 }
 
 .navbar-brand {
-  /*font-family: 'Oxygen';*/
   color: #ffffff!important;
+}
+
+#search-box {
+  position: fixed;
+  width: 274px;
 }
 
 .map-search {

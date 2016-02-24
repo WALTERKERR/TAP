@@ -22,6 +22,7 @@
 
 #taskpane {
   height: 100%;
+  overflow-y: scroll;
 }
 
 #chart-sidepanel-body {
@@ -34,6 +35,10 @@
 
 #heatmap-container-sidebar {
   height: 100%;
+}
+
+.news-holder-master {
+  padding-bottom: 25px;
 }
 
 .charts-overlay {
