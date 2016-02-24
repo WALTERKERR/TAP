@@ -6,12 +6,12 @@
   height: 100%!important;
 }
 
-#line-chart-container {
+#city-chart-container {
   width: 80%;
   margin: auto;
 }
 
-#heat-chart-container {
+#national-chart-container {
   width: 80%;
   margin: auto;
 }
@@ -34,6 +34,22 @@
 
 #heatmap-container-sidebar {
   height: 100%;
+}
+
+#ambient-temp-container-sidebar {
+  height: 100%;
+}
+
+#humidity-container-sidebar {
+  height: 100%;
+}
+
+#linechart-text-sidebar {
+  margin-top: 20px;
+}
+
+#ambient-temp-text-sidebar {
+  margin-top: 20px;
 }
 
 .charts-overlay {
