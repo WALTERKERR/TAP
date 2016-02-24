@@ -20,11 +20,6 @@
   padding: 0px;
 }
 
-#taskpane {
-  height: 100%;
-  overflow-y: scroll;
-}
-
 #chart-sidepanel-body {
   /*height: 100%;*/
 }
@@ -37,8 +32,8 @@
   height: 100%;
 }
 
-.news-holder-master {
-  padding-bottom: 25px;
+#news-container-sidebar {
+  height: 100%;
 }
 
 .charts-overlay {
