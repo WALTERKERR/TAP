@@ -179,7 +179,7 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -251,7 +251,7 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     clearDivs();
     displayLineChart(cityName, stateName, dates, avgTemps);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -395,7 +395,7 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     clearDivs();
     displayScatterPlotAmbientTemps(allTemps);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
@@ -497,7 +497,7 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     clearDivs();
     displayScatterPlotHumidities(allDataPoints);
     // $('.sidebar-right .sidebar-body').hide('slide');
-    $('.mini-submenu-right').fadeIn();
+    // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
     // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
