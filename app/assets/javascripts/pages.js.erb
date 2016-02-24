@@ -4,9 +4,10 @@ $(document).ready(function(){
   getMarkerData();
   bindListeners();
   $('#loading').hide();
-  // displayTestCharts("San Francisco", "California");
   tabSelect();
   displayNationalDataSidebar()
+  // displayNationalDataSidebarTest("San Francisco", "California");
+  // displayTestCharts("San Francisco", "California");
 });
 
 String.prototype.capitalize = function(){
@@ -18,7 +19,8 @@ String.prototype.capitalize = function(){
 
 var bindListeners = function(){
   $('#search-box').on('submit', searchBoxSubmit);
-  $('.overlay').on('click', mapClick);
+  // $('.overlay').on('click', mapClick);
+  $('#map').on('click', mapClick);
   $('.navbar-brand').on('click', showSidebar);
   $('.main-search').on('submit', 'form', searchBoxSubmit);
   $('.landing-link').on('click', hideLandingPage);
@@ -49,7 +51,7 @@ var searchBoxSubmit = function(e){
       url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
       dataType: 'json'
     }).done(function(response){
-      displayChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      displaySideChart(cityInput[1].capitalize(), stateInput[1].capitalize());
       $('#search-box').trigger('reset');
     }).fail(function(response){
       displaySearchError();
@@ -105,7 +107,7 @@ var getMarkerData = function(){
 
     for (var i = 0; i < data.length; i ++) {
     var d = data[i];
-    var content = '<h2><a href="http://www.google.com">'+ d.city + '</a></h2><p>'+ d.temp +'</p>';
+    var content = d.city + ", " + d.state;
     if (d.temp > 99.5) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'alcohol-shop'}),
@@ -124,7 +126,13 @@ var getMarkerData = function(){
         temp: d.temp
       });
     };
-    // marker.bindPopup(content);
+    marker.bindPopup(content);
+    marker.on('mouseover', function(e){
+      e.target.openPopup();
+    })
+    marker.on('mouseout', function(e){
+      e.target.closePopup();
+    })
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
@@ -185,13 +193,19 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
             }
           },
           yAxis: {
-              title: {
-              text: "Temperatures"
+            min:97,
+            max: 102,
+            // labels: {
+            //     formatter: function() {
+            //         if(this.isFirst)
+            //             return this.axis.dataMin;
+            //         return this.value;
+            //     }
+            // }
               },
 
           labels: {
-              enabled: true
-            }
+              enabled: true,
           },
           series: [
           {
@@ -372,7 +386,6 @@ var displayNationalData = function(){
   })
   .done(function(response){
     var chartData = response;
-      // console.log(chartData);
       var todayDate = new Date();
       for (i=0; i < timeFrame; i++){
         var newDate = new Date();
@@ -403,7 +416,6 @@ var displayScatterPlotAmbientTemps = function(allTemps){
 
     scatterplotData.push({allInfaredTemperatures: allTemps[i][1], allAmbientTemperatures: allTemps[i][0]});
   }
-  console.log(scatterplotData);
 
   $('#national-chart-container').highcharts({
     chart: {

@@ -16,6 +16,10 @@ body {
 
 .navbar-offset { margin-top: 50px; }
 
+.navbar-logo {
+  padding: 5px 5px 0 15px!important;
+}
+
 #map {
   position: fixed;
   height: 100%;
@@ -102,8 +106,12 @@ body {
 }
 
 .navbar-brand {
-  /*font-family: 'Oxygen';*/
   color: #ffffff!important;
+}
+
+#search-box {
+  position: fixed;
+  width: 274px;
 }
 
 .map-search {
@@ -236,15 +244,11 @@ body {
   padding: 5px;
 }
 
-.nav-logo {
-  padding-top: 5px!important;
-}
-
 #nav-logo {
   height: 40px;
   width: auto;
   margin-top: 0;
-  padding-left: 15px;
+  padding: 0 15px 0 15px;
 }
 
 .logo-container {
@@ -278,8 +282,36 @@ body {
   padding:13px 40px;
 }*/
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 400px) {
   #jump {
     font-size: 0.9em;
+  }
+  .navbar-brand {
+    font-size: 0.9em!important;
+  }
+  #nav-logo {
+    height: 30px;
+    width: auto;
+    margin-top: 0;
+    padding: 0 0 0 10px;
+  }
+  .navbar-logo {
+    padding: 10px 5px 0 15px!important;
+  }
+  .landing-logo img {
+    height: 80px;
+    width: auto;
+  }
+  .logo-container {
+    font-size: 2em;
+  }
+  .headline h1 {
+    font-size: 2em;
+    margin-top: 25px;
+  }
+}
+@media only screen and (max-height: 480px) {
+  .headline p {
+    display: none;
   }
 }
