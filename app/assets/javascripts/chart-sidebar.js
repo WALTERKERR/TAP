@@ -178,7 +178,7 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     e.preventDefault();
     clearDivs();
     displayHeatMap(dates, heatMapData, cityName);
-    $('.sidebar-right .sidebar-body').hide('slide');
+    // $('.sidebar-right .sidebar-body').hide('slide');
     $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
     // $('.overlay').fadeIn();
@@ -250,10 +250,10 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     e.preventDefault();
     clearDivs();
     displayLineChart(cityName, stateName, dates, avgTemps);
-    $('.sidebar-right .sidebar-body').hide('slide');
+    // $('.sidebar-right .sidebar-body').hide('slide');
     $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
-    $('.overlay').fadeIn();
+    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
@@ -394,10 +394,10 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     e.preventDefault();
     clearDivs();
     displayScatterPlotAmbientTemps(allTemps);
-    $('.sidebar-right .sidebar-body').hide('slide');
+    // $('.sidebar-right .sidebar-body').hide('slide');
     $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
-    $('.overlay').fadeIn();
+    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
@@ -496,10 +496,10 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     e.preventDefault();
     clearDivs();
     displayScatterPlotHumidities(allDataPoints);
-    $('.sidebar-right .sidebar-body').hide('slide');
+    // $('.sidebar-right .sidebar-body').hide('slide');
     $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
-    $('.overlay').fadeIn();
+    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
