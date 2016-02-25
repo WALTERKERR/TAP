@@ -38,14 +38,15 @@ var searchBoxSubmit = function(e){
   var searchInput = this.elements[0].value;
   var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
   var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
-  if (stateInput[1].length === 2){
-    if (convertState(stateInput[1])){
-      stateInput[1] = convertState(stateInput[1]);
-    }
-  }
+
   if (cityInput === null || stateInput === null) {
     displaySearchError();
   } else {
+    if (stateInput[1].length === 2){
+      if (convertState(stateInput[1])){
+        stateInput[1] = convertState(stateInput[1]);
+      }
+    }
     $.ajax({
       method: 'GET',
       url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
