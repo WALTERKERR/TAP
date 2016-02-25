@@ -1,9 +1,21 @@
 // Place all the styles related to the charts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .highcharts-container {
   width: 100%!important;
   height: 100%!important;
+  -webkit-box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+  border: 0px solid #000000;
+}
+
+#chart-sidepanel {
+  padding: 0px;
 }
 
 #city-chart-container {
@@ -14,48 +26,94 @@
   margin: auto;
 }
 
-#chart-sidepanel {
-  padding: 0px;
-}
-
 #city-specific-charts {
   display: none;
+  margin-top: 20px;
+  border: 2px outset #cccccc;
+}
+
+#nationwide-charts {
+  display: none;
+  margin-top: 20px;
+  border: 2px outset #cccccc;
+}
+
+.linechart-holder-master {
+  border-bottom: 1px solid #cccccc;
 }
 
 #linechart-container-sidebar {
-  height: 100%;
-}
-
-#heatmap-container-sidebar {
-  height: 100%;
-}
-
-#news-container-sidebar {
-  height: 100%;
-}
-
-#ambient-temp-container-sidebar {
-  height: 100%;
-}
-
-#humidity-container-sidebar {
+  padding: 15px;
   height: 100%;
 }
 
 #linechart-text-sidebar {
-  margin-top: 20px;
+  padding: 15px;
+}
+
+.heatmap-holder-master {
+
+}
+
+#heatmap-container-sidebar {
+  padding: 15px;
+  height: 100%;
+}
+
+#heatmap-text-sidebar {
+  padding: 15px;
+}
+
+#news-container-sidebar {
+  padding: 0 5px 0 5px;
+  height: 100%;
+}
+
+.news-header {
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.news-article {
+  padding: 10px 0 5px 0;
+}
+
+.news-holder-master {
+
+}
+
+.ambient-temp-holder-master {
+  border-bottom: 1px solid #cccccc;
+}
+
+#ambient-temp-container-sidebar {
+  padding: 15px;
+  height: 100%;
 }
 
 #ambient-temp-text-sidebar {
-  margin-top: 20px;
+  padding: 15px;
 }
+
+#humidity-container-sidebar {
+  padding: 15px;
+  height: 100%;
+}
+
+#humidity-text-sidebar {
+  padding: 15px;
+}
+
+
 
 .charts-overlay {
   display: none;
   left: 10%;
-  top: 150px;
+  top: 210px;
   z-index: 52;
   position: absolute!important;
+  padding: 0!important;
 }
 
 .small-chart {
