@@ -100,7 +100,7 @@ var showCityTabSidebar = function(){
 var getMarkerData = function(){
   var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false, minZoom: 4 }).setView([39.114102, -94.627478], 4);
 
-  new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+  new L.Control.Zoom({ position: 'bottomleft' }).addTo(map);
 
   $.get('/data', 'json').done(function(data){
     var markers = new L.MarkerClusterGroup();
