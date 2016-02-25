@@ -166,7 +166,7 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
         }]
 
     });
-$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Heatmap</b></a><br>View heatmap data for ' + cityName + '.  </div>');
+$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Human Temperature Heatmap</b></a><br>View the distribution of human temperatures recorded in ' + cityName + '.  </div>');
   $('#heatmap-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -245,7 +245,7 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
         },
           }]
       });
-      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Linechart</b></a><br>View ' + cityName + ' temperature data.</div>');
+      $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Human Temperature Readings</b></a><br>View recent temperatures recorded of people living in ' + cityName + '. </div>');
   $('#linechart-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -389,7 +389,7 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     }]
 
       });
-      $('.ambient-temp-holder-master').append('<div class="col-md-6" id="ambient-temp-text-sidebar"><a href="#" id="ambient-temp-link"><b>Ambient Temp Scatterplot</b></a><br>View scatterplot data to evaluate IR temperature and ambient temperature correlation.</div>');
+      $('.ambient-temp-holder-master').append('<div class="col-md-6" id="ambient-temp-text-sidebar"><a href="#" id="ambient-temp-link"><b>Human and Ambient Temperature Scatterplot</b></a><br>Evaluate if spikes in fevers are related to ambient temperature factors.</div>');
   $('#ambient-temp-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -491,7 +491,7 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
       data: allDataPoints
     }]
   });
-  $('.humidity-holder-master').append('<div class="col-md-6" id="humidity-text-sidebar"><a href="#" id="humidity-link"><b>Humidity Scatterplot</b></a><br>View scatterplot data to evaluate temperature and humidity correlation.</div>');
+  $('.humidity-holder-master').append('<div class="col-md-6" id="humidity-text-sidebar"><a href="#" id="humidity-link"><b>Humidity Scatterplot</b></a><br>Evaluate if spikes in fevers are related to humidity.</div>');
     $('#humidity-link').click(function(e){
     e.preventDefault();
     clearDivs();

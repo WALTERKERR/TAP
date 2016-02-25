@@ -413,7 +413,7 @@ var displayScatterPlotAmbientTemps = function(allTemps){
       text: 'National Infared Temperature Readings'
     },
     subtitle: {
-      text: 'TAP'
+      text: null,
     },
     xAxis: {
       title: {
@@ -460,7 +460,7 @@ var displayScatterPlotAmbientTemps = function(allTemps){
         },
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
-          pointFormat: '{point.x} degrees F, {point.y}'
+          pointFormat: '{point.y} human degrees F, {point.y} ambient degrees F'
         }
       }
     },
@@ -538,7 +538,7 @@ var displayScatterPlotHumidities = function(allDataPoints){
         },
         tooltip: {
           headerFormat: '<b>{series.name}</b><br>',
-          pointFormat: '{point.x} degrees F, {point.y}'
+          pointFormat: '{point.x} percent humidity, {point.y} degrees F'
         }
       }
     },
