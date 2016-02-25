@@ -11,9 +11,9 @@ $(document).ready(function(){
 });
 
 String.prototype.capitalize = function(){
-    return this.toLowerCase().replace( /\b\w/g, function (m) {
-        return m.toUpperCase();
-    });
+  return this.toLowerCase().replace( /\b\w/g, function (m) {
+    return m.toUpperCase();
+  });
 };
 
 
@@ -27,9 +27,9 @@ var bindListeners = function(){
 }
 
 var hideLandingPage = function(){
-    $('.overlay').fadeOut('slow');
-    $('.landing-row').fadeOut('slow');
-    $('.map-search').fadeIn('slow');
+  $('.overlay').fadeOut('slow');
+  $('.landing-row').fadeOut('slow');
+  $('.map-search').fadeIn('slow');
 }
 
 var searchBoxSubmit = function(e){
@@ -106,7 +106,7 @@ var getMarkerData = function(){
   $.get('/data', 'json').done(function(data){
     var markers = new L.MarkerClusterGroup();
 
-    for (var i = 0; i < data.length; i ++) {
+  for (var i = 0; i < data.length; i ++) {
     var d = data[i];
     var content = d.city + ", " + d.state;
     if (d.temp > 99.5) {
@@ -147,38 +147,45 @@ var getMarkerData = function(){
 
 var displayLineChart = function(cityName, stateName, dates, avgTemps){
 
-    var timeFrame = 7;
+  var timeFrame = 7;
 
-    var chart = $('#city-chart-container').highcharts({
-         chart: {
-              type: 'line',
-            marginTop: 50,
-            marginBottom: 50,
-          },
+  var chart = $('#city-chart-container').highcharts({
+   chart: {
+    type: 'line',
+    marginTop: 50,
+    marginBottom: 50,
+  },
 
-        tooltip: {
-            enabled: true
-        },
+  tooltip: {
+    enabled: true
+  },
+
+  navigator : {
+    enabled: true,
+    adaptToUpdatedData: false,
+    series : {
+      data : dates
+    },
+  },
+
+  legend: {
+    enabled: true
+  },
 
 
-        legend: {
-            enabled: true
-        },
-
-
-          title: {
-              text: "Average Human Temperatures Detected in " + cityName
-          },
-          xAxis: {
-              categories: dates,
-              title: "Dates",
-              dataLabels: {
-              enabled: true
-            }
-          },
-          yAxis: {
-            min:97,
-            max: 102,
+  title: {
+    text: "Average Human Temperatures Detected in " + cityName
+  },
+  xAxis: {
+    categories: dates,
+    title: "Dates",
+    dataLabels: {
+      enabled: true
+    }
+  },
+  yAxis: {
+    min:97,
+    max: 102,
             // labels: {
             //     formatter: function() {
             //         if(this.isFirst)
@@ -186,175 +193,179 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
             //         return this.value;
             //     }
             // }
-              },
+          },
 
           labels: {
-              enabled: true,
+            enabled: true,
           },
           series: [
           {
-              name: "Average Temperatures",
-              data: avgTemps,
-              dataLabels: {
-                enabled: false,
-                color: '#000000'
-        },
+            name: "Average Temperatures",
+            data: avgTemps,
+            dataLabels: {
+              enabled: false,
+              color: '#000000'
+            },
           }]
-      });
+        });
 
 
       // $('#line-chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
 
     //trigger for interactive chart
     $('.charts-overlay').on('click', 'a', function(e){
-        e.preventDefault();
-        timeFrame = $(e.target).attr('id')
-        $.ajax({
-            method: "GET",
-            url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
-            dataType: 'JSON'
+      e.preventDefault();
+      timeFrame = $(e.target).attr('id')
+      $.ajax({
+        method: "GET",
+        url: "/find?city=" + cityName + "&state=" + stateName + "&timeframe=" + timeFrame,
+        dataType: 'JSON'
+      })
+      .done(function(response){
+        var chartData = response;
+
+        var todayDate = new Date();
+        var dates = [];
+        for (i=1; i <= timeFrame; i++){
+          var newDate = new Date();
+          newDate.setDate(todayDate.getDate() - (timeFrame - i));
+          dates.push(newDate.toJSON().slice(0,10));
+        }
+
+        var avgTemps = [];
+        dates.forEach(function(date){
+          var dayTemps = chartData.filter(function(data){
+            return (data["time"].slice(0,10) === date);
+          })
+          var sum = Object.keys(dayTemps).reduce(function(a, b){
+            return a + dayTemps[b].temp;
+          }, 0)
+          if (sum === 0) {
+            avgTemps.push(null);
+          } else {
+            avgTemps.push(sum/dayTemps.length);
+          }
         })
-        .done(function(response){
-            var chartData = response;
-
-            var todayDate = new Date();
-            var dates = [];
-            for (i=1; i <= timeFrame; i++){
-                var newDate = new Date();
-                newDate.setDate(todayDate.getDate() - (timeFrame - i));
-                dates.push(newDate.toJSON().slice(0,10));
-            }
-
-            var avgTemps = [];
-            dates.forEach(function(date){
-                var dayTemps = chartData.filter(function(data){
-                    return (data["time"].slice(0,10) === date);
-                })
-                var sum = Object.keys(dayTemps).reduce(function(a, b){
-                    return a + dayTemps[b].temp;
-                }, 0)
-                if (sum === 0) {
-                    avgTemps.push(null);
-                } else {
-                    avgTemps.push(sum/dayTemps.length);
-                }
-            })
-            $('#city-chart-container').highcharts({
+        $('#city-chart-container').highcharts({
           chart: {
-              type: 'line',
+            type: 'line',
             marginTop: 50,
             marginBottom: 50,
           },
 
-        tooltip: {
+          tooltip: {
             enabled: true
-        },
+          },
 
 
-        legend: {
+          legend: {
             enabled: true
-        },
+          },
 
 
           title: {
-              text: "Average Human Temperatures Detected in " + cityName
+            text: "Average Human Temperatures Detected in " + cityName
           },
           xAxis: {
-              categories: dates,
-              title: "Dates",
-              dataLabels: {
+            categories: dates,
+            title: "Dates",
+            dataLabels: {
               enabled: true
             }
           },
           yAxis: {
-              title: {
+            title: {
               text: "Temperatures"
-              },
+            },
 
-          labels: {
+            labels: {
               enabled: true
             }
           },
           series: [
           {
-              name: "Average Temperatures",
-              data: avgTemps,
-              dataLabels: {
-                enabled: false,
-                color: '#000000'
-        },
-                }]
+            name: "Average Temperatures",
+            data: avgTemps,
+            dataLabels: {
+              enabled: false,
+              color: '#000000'
+            },
+          }]
 
-            });
+        });
 
         // $('#line-chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
       });
-    })
+})
 
 
 
 }
 
 var displayHeatMap = function(dates, heatMapData, cityName){
-    $('#city-chart-container').highcharts({
+  $('#city-chart-container').highcharts({
 
-        chart: {
-            type: 'heatmap',
-            // marginTop: 60,
-            // marginBottom: 60,
-            plotBorderWidth: 1
+    chart: {
+      type: 'heatmap',
+        // marginTop: 60,
+        // marginBottom: 60,
+        plotBorderWidth: 1
+      },
+
+      title: {
+        text: 'Temperature data by day for ' + cityName
+      },
+
+      navigator : {
+        enabled: true,
+        adaptToUpdatedData: false,
+        series : {
+          data : dates
         },
+      },
 
+      yAxis: {
+        categories: ['<95 (Hypothermia)', '95-97.69 (Below Average)', '97.7-98.5 (Normal)', '98.5-99.5 (Normal)', '99.5-100.9 (Hyperthermia/Fever)', '100.9 - 104 (Severe Hyperthermia)', '>104 (Hyperpyrexia)']
+      },
 
-        title: {
-            text: 'Temperature data by day for ' + cityName
-        },
+      xAxis: {
+        categories: dates,
+        title: null
+      },
 
-        yAxis: {
-            categories: ['<95 (Hypothermia)', '95-97.69 (Below Average)', '97.7-98.5 (Normal)', '98.5-99.5 (Normal)', '99.5-100.9 (Hyperthermia/Fever)', '100.9 - 104 (Severe Hyperthermia)', '>104 (Hyperpyrexia)']
-        },
+      colorAxis: {
+        min: 0,
+        minColor: '#FFFFFF',
+        maxColor: Highcharts.getOptions().colors[0]
+      },
 
-        xAxis: {
-            categories: dates,
-            title: null
-        },
+      legend: {
+        align: 'right',
+        layout: 'vertical',
+        margin: 0,
+        verticalAlign: 'top',
+        y: 25,
+        symbolHeight: 280
+      },
 
-        colorAxis: {
-            min: 0,
-            minColor: '#FFFFFF',
-            maxColor: Highcharts.getOptions().colors[0]
-        },
+      tooltip: {
+        formatter: function () {
+          return 'On <b>' + this.series.xAxis.categories[this.point.x] + '</b>, <b>' +
+          this.point.value + '</b> people registered between <br><b>' + this.series.yAxis.categories[this.point.y];
+        }
+      },
 
-        legend: {
-            align: 'right',
-            layout: 'vertical',
-            margin: 0,
-            verticalAlign: 'top',
-            y: 25,
-            symbolHeight: 280
-        },
-
-        tooltip: {
-            formatter: function () {
-                return 'On <b>' + this.series.xAxis.categories[this.point.x] + '</b>, <b>' +
-                    this.point.value + '</b> people registered between <br><b>' + this.series.yAxis.categories[this.point.y];
-            }
-        },
-
-        series: [{
-            name: 'Temperature by count',
-            borderWidth: 1,
-            data: heatMapData,
-            // data: testHeatData,
-            dataLabels: {
-                enabled: true,
-                color: '#000000'
-            }
-        }]
-
+      series: [{
+        name: 'Temperature by count',
+        borderWidth: 1,
+        data: heatMapData,
+        // data: testHeatData,
+        dataLabels: {
+          enabled: true,
+          color: '#000000'
+        }
+      }]
     });
-
-
 }
 
 
@@ -370,22 +381,22 @@ var displayNationalData = function(){
   })
   .done(function(response){
     var chartData = response;
-      var todayDate = new Date();
-      for (i=0; i < timeFrame; i++){
-        var newDate = new Date();
-        newDate.setDate(todayDate.getDate() - (timeFrame - i));
-        dates.push(newDate.toJSON().slice(0,10));
-      }
+    var todayDate = new Date();
+    for (i=0; i < timeFrame; i++){
+      var newDate = new Date();
+      newDate.setDate(todayDate.getDate() - (timeFrame - i));
+      dates.push(newDate.toJSON().slice(0,10));
+    }
 
-      var allTemps = []
-      chartData.forEach(function(item){
-        allTemps.push([item.ambient_temp, item.temp])
-      })
+    var allTemps = []
+    chartData.forEach(function(item){
+      allTemps.push([item.ambient_temp, item.temp])
+    })
 
-       var allHumidities = []
-        chartData.forEach(function(item){
-          allHumidities.push([item.humidity, item.temp])
-        })
+    var allHumidities = []
+    chartData.forEach(function(item){
+      allHumidities.push([item.humidity, item.temp])
+    })
 
     displayScatterPlotAmbientTemps(allTemps);
     displayScatterPlotHumidities(allHumidities);
@@ -405,6 +416,13 @@ var displayScatterPlotAmbientTemps = function(allTemps){
     chart: {
       type: 'scatter',
       zoomType: 'xy'
+    },
+    navigator : {
+      enabled: true,
+      adaptToUpdatedData: false,
+      series : {
+        data : allTemps
+      },
     },
     title: {
       text: 'National Infared Temperature Readings'
@@ -465,10 +483,8 @@ var displayScatterPlotAmbientTemps = function(allTemps){
       name: 'Human Temperature Readings',
       color: 'rgba(223, 83, 83, .5)',
       data: allTemps
-
-    }]
-
-      });
+    }],
+  });
 }
 
 var displayScatterPlotHumidities = function(allDataPoints){
@@ -483,6 +499,13 @@ var displayScatterPlotHumidities = function(allDataPoints){
     chart: {
       type: 'scatter',
       zoomType: 'xy'
+    },
+    navigator : {
+      enabled: true,
+      adaptToUpdatedData: false,
+      series : {
+        data : allDataPoints
+      },
     },
     title: {
       text: 'National Infared Temperature Readings'
@@ -654,55 +677,55 @@ var displayScatterPlotHumidities = function(allDataPoints){
 // }
 
 STATES = {"AK" : "Alaska",
-      "AL" : "Alabama",
-      "AR" : "Arkansas",
-      "AZ" : "Arizona",
-      "CA" : "California",
-      "CO" : "Colorado",
-      "CT" : "Connecticut",
-      "DE" : "Delaware",
-      "FL" : "Florida",
-      "GA" : "Georgia",
-      "HI" : "Hawaii",
-      "IA" : "Iowa",
-      "ID" : "Idaho",
-      "IL" : "Illinois",
-      "IN" : "Indiana",
-      "KS" : "Kansas",
-      "KY" : "Kentucky",
-      "LA" : "Louisiana",
-      "MA" : "Massachusetts",
-      "MD" : "Maryland",
-      "ME" : "Maine",
-      "MI" : "Michigan",
-      "MN" : "Minnesota",
-      "MO" : "Missouri",
-      "MS" : "Mississippi",
-      "MT" : "Montana",
-      "NC" : "North Carolina",
-      "ND" : "North Dakota",
-      "NE" : "Nebraska",
-      "NH" : "New Hampshire",
-      "NJ" : "New Jersey",
-      "NM" : "New Mexico",
-      "NV" : "Nevada",
-      "NY" : "New York",
-      "OH" : "Ohio",
-      "OK" : "Oklahoma",
-      "OR" : "Oregon",
-      "PA" : "Pennsylvania",
-      "RI" : "Rhode Island",
-      "SC" : "South Carolina",
-      "SD" : "South Dakota",
-      "TN" : "Tennessee",
-      "TX" : "Texas",
-      "UT" : "Utah",
-      "VA" : "Virginia",
-      "VT" : "Vermont",
-      "WA" : "Washington",
-      "WI" : "Wisconsin",
-      "WV" : "West Virginia",
-      "WY" : "Wyoming"}
+"AL" : "Alabama",
+"AR" : "Arkansas",
+"AZ" : "Arizona",
+"CA" : "California",
+"CO" : "Colorado",
+"CT" : "Connecticut",
+"DE" : "Delaware",
+"FL" : "Florida",
+"GA" : "Georgia",
+"HI" : "Hawaii",
+"IA" : "Iowa",
+"ID" : "Idaho",
+"IL" : "Illinois",
+"IN" : "Indiana",
+"KS" : "Kansas",
+"KY" : "Kentucky",
+"LA" : "Louisiana",
+"MA" : "Massachusetts",
+"MD" : "Maryland",
+"ME" : "Maine",
+"MI" : "Michigan",
+"MN" : "Minnesota",
+"MO" : "Missouri",
+"MS" : "Mississippi",
+"MT" : "Montana",
+"NC" : "North Carolina",
+"ND" : "North Dakota",
+"NE" : "Nebraska",
+"NH" : "New Hampshire",
+"NJ" : "New Jersey",
+"NM" : "New Mexico",
+"NV" : "Nevada",
+"NY" : "New York",
+"OH" : "Ohio",
+"OK" : "Oklahoma",
+"OR" : "Oregon",
+"PA" : "Pennsylvania",
+"RI" : "Rhode Island",
+"SC" : "South Carolina",
+"SD" : "South Dakota",
+"TN" : "Tennessee",
+"TX" : "Texas",
+"UT" : "Utah",
+"VA" : "Virginia",
+"VT" : "Vermont",
+"WA" : "Washington",
+"WI" : "Wisconsin",
+"WV" : "West Virginia",
+"WY" : "Wyoming"}
 
 var convertState = function(s) {
   return STATES[s.toUpperCase()]
