@@ -30,6 +30,7 @@ var hideLandingPage = function(){
   $('.overlay').fadeOut('slow');
   $('.landing-row').fadeOut('slow');
   $('.map-search').fadeIn('slow');
+  showSidebar();
 }
 
 var searchBoxSubmit = function(e){
@@ -67,7 +68,6 @@ var displaySearchError = function(){
 var mapClick = function(){
   $('#heat-chart-container').fadeOut('slow');
   $('#line-chart-container').fadeOut('slow');
-  $('.charts-overlay').hide();
   $('.overlay').fadeOut();
 }
 
@@ -212,9 +212,6 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
           }]
         });
 
-
-      // $('#line-chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
-
     //trigger for interactive chart
     $('.charts-overlay').on('click', 'a', function(e){
       e.preventDefault();
@@ -297,7 +294,6 @@ var displayLineChart = function(cityName, stateName, dates, avgTemps){
 
         });
 
-        // $('#line-chart-container').append('<a href="#" id="7">1-week </a><a href="#" id="14">2-weeks </a><a href="#" id="30">1-month</a>');
       });
 })
 
@@ -572,15 +568,6 @@ var displayScatterPlotHumidities = function(allDataPoints){
     }]
   });
 }
-
-
-
-
-
-
-
-
-
 
 
 
