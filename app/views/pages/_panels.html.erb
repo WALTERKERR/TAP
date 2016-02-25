@@ -3,13 +3,16 @@
     <form id="search-box">
       <div class="input-group search-bar">
         <input type="text" class="  search-query form-control" placeholder="Search by City, State"/>
-          <span class="input-group-btn">
+        <span class="input-group-btn">
             <button class="btn btn-danger submit-button" type="submit">
             <span class="glyphicon glyphicon-search"></span>
             </button>
         </span>
       </div>
     </form>
+    <div class="alert alert-danger search-error">
+      <h5>Sorry! Data for the specified city and state does not exist.</h5>
+    </div>
   </div>
   <div class="col-sm-4 col-md-4 sidebar sidebar-right pull-right">
     <div class="panel-group sidebar-body" id="accordion-right" style="display: none;">
