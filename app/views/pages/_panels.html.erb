@@ -3,13 +3,16 @@
     <form id="search-box">
       <div class="input-group search-bar">
         <input type="text" class="  search-query form-control" placeholder="Search by City, State"/>
-          <span class="input-group-btn">
+        <span class="input-group-btn">
             <button class="btn btn-danger submit-button" type="submit">
             <span class="glyphicon glyphicon-search"></span>
             </button>
         </span>
       </div>
     </form>
+    <div class="alert alert-danger search-error">
+      <h5>Sorry! Data for the specified city and state does not exist.</h5>
+    </div>
   </div>
   <div class="col-sm-4 col-md-4 sidebar sidebar-right pull-right">
     <div class="panel-group sidebar-body" id="accordion-right" style="display: none;">
@@ -38,13 +41,16 @@
             <div id="city-specific-charts">
               <div class="linechart-holder-master clearfix hover-div vertical-align-middle sidebar-holders">
                  <div id="linechart-container-sidebar" class="small-chart col-md-6"></div>
+                 <div id="no-city-selected">
+                  <h4>Select a city to view its charts!</h4>
+                </div>
               </div>
               <hr>
               <div class="heatmap-holder-master clearfix hover-div vertical-align-middle sidebar-holders">
                 <div id="heatmap-container-sidebar" class="small-chart col-md-6"></div>
               </div>
               <div class="news-holder-master clearfix hover-div vertical-align-middle sidebar-holders">
-                <div id="news-container-sidebar" class="small-chart col-md-12"></div>
+                <div id="news-container-sidebar" class="col-md-12"></div>
               </div>
             </div>
 
