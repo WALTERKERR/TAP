@@ -86,11 +86,12 @@ body {
 }
 
 .search-error {
-  position: absolute;
-  top: 10%;
-  left: 20%;
+  margin-top: 75px;
   z-index: 50;
   display: none;
+  width: 274px;
+  padding-top: 0!important;
+  padding-bottom: 0!important;
 }
 
 .panel {

@@ -21,7 +21,7 @@ var bindListeners = function(){
   $('#search-box').on('submit', searchBoxSubmit);
   // $('.overlay').on('click', mapClick);
   $('#map').on('click', mapClick);
-  $('.navbar-brand').on('click', showSidebar);
+  $('.navbar-brand').on('click', showCityTabSidebar);
   $('.main-search').on('submit', 'form', searchBoxSubmit);
   $('.landing-link').on('click', hideLandingPage);
 }
@@ -39,14 +39,15 @@ var searchBoxSubmit = function(e){
   var searchInput = this.elements[0].value;
   var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
   var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
-  if (stateInput[1].length === 2){
-    if (convertState(stateInput[1])){
-      stateInput[1] = convertState(stateInput[1]);
-    }
-  }
+
   if (cityInput === null || stateInput === null) {
     displaySearchError();
   } else {
+    if (stateInput[1].length === 2){
+      if (convertState(stateInput[1])){
+        stateInput[1] = convertState(stateInput[1]);
+      }
+    }
     $.ajax({
       method: 'GET',
       url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
@@ -54,6 +55,7 @@ var searchBoxSubmit = function(e){
     }).done(function(response){
       displaySideChart(cityInput[1].capitalize(), stateInput[1].capitalize());
       $('#search-box').trigger('reset');
+      showCityTabSidebar();
     }).fail(function(response){
       displaySearchError();
     })
@@ -62,7 +64,7 @@ var searchBoxSubmit = function(e){
 
 var displaySearchError = function(){
   $('.search-error').show();
-  $('.search-error').fadeOut(4000);
+  $('.search-error').fadeOut(6000);
 }
 
 var mapClick = function(){
@@ -74,38 +76,37 @@ var mapClick = function(){
 var tabSelect = function() {
   $('#nation-tab a').click(function (e) {
     e.preventDefault()
-    $(this).tab('show')
+    $(this).tab('show');
     $("#nationwide-charts").show();
     $("#city-specific-charts").hide()
   })
 
   $('#city-tab a').click(function (e) {
     e.preventDefault()
-    $(this).tab('show')
+    $(this).tab('show');
     $("#nationwide-charts").hide();
     $("#city-specific-charts").show()
   })
 }
 
-var hideSidebar = function(){
-  $('.sidebar-right').hide();
+var showCityTabSidebar = function(){
+  $("#city-tab").tab('show');
+  $("#nationwide-charts").hide();
+  $("#city-specific-charts").show();
   $('.mini-submenu-right').hide();
-}
-
-var showSidebar = function(){
-  $('.sidebar-right').show();
-  $('.mini-submenu-right').show();
+  $('.sidebar-right .sidebar-body').show('slide');
+  $('#no-city-selected').hide();
 }
 
 var getMarkerData = function(){
   var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false, minZoom: 4 }).setView([39.114102, -94.627478], 4);
 
-  new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+  new L.Control.Zoom({ position: 'bottomleft' }).addTo(map);
 
   $.get('/data', 'json').done(function(data){
     var markers = new L.MarkerClusterGroup();
 
-    for (var i = 0; i < data.length; i ++) {
+  for (var i = 0; i < data.length; i ++) {
     var d = data[i];
     var content = d.city + ", " + d.state;
     if (d.temp > 99.5) {
@@ -118,7 +119,6 @@ var getMarkerData = function(){
       });
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-
         icon: L.mapbox.marker.icon({'marker-color': '#2e37fe', 'marker-symbol': 'water'}),
         content: content,
         city: d.city,
@@ -136,11 +136,7 @@ var getMarkerData = function(){
     marker.on('click', function(e){
       map.panTo([e.latlng.lat, e.latlng.lng]);
       displaySideChart(this.options.city, this.options.state);
-      $("#city-tab").tab('show');
-      $("#nationwide-charts").hide();
-      $("#city-specific-charts").show();
-      $('.mini-submenu-right').hide();
-      $('.sidebar-right .sidebar-body').show('slide');
+      showCityTabSidebar();
     })
     markers.addLayer(marker);
   }
@@ -568,103 +564,6 @@ var displayScatterPlotHumidities = function(allDataPoints){
     }]
   });
 }
-
-
-
-
-
-// var displayLineChart = function(avgHumidity, avgTemps, dates, cityName, stateName){
-//     var charts = [],
-//     options;
-
-//     function syncTooltip(container, p) {
-//         var i = 0;
-//         for (; i < charts.length; i++) {
-//             if (container.id != charts[i].container.id) {
-//                 if(charts[i].tooltip.shared) {
-//                     charts[i].tooltip.refresh([charts[i].series[0].data[p]]);
-//                 }
-//                 else {
-//                     charts[i].tooltip.refresh(charts[i].series[0].data[p]);
-//                 }
-//             }
-//         }
-//     }
-
-//     options = {
-//         plotOptions: {
-//             series: {
-//                 point: {
-//                     events: {
-//                         mouseOver: function () {
-//                             syncTooltip(this.series.chart.container, this.x);
-//                         }
-//                     }
-//                 }
-//             }
-//         },
-
-//     };
-
-//     charts[0] = new Highcharts.Chart($.extend(true, {}, options, {
-//         chart: {
-//             renderTo: 'line-chart-top'
-//         },
-//         tooltip: {
-//             shared: true,
-//             valueDecimals: 2
-//         },
-//         title: {
-//           text: cityName + ", " + stateName
-//         },
-//         series: [{
-//             data: avgTemps,
-//             name: "Temperature"
-//         }],
-//         xAxis: {
-//             categories: dates,
-//             labels: { enabled: false }
-//         },
-//         yAxis: {
-//           title: {
-//               text: 'Temperature'
-//           }
-//         },
-//         legend: {
-//             enabled: false
-//         }
-//     }));
-
-
-//     charts[1] = new Highcharts.Chart($.extend(true, {}, options, {
-//         chart: {
-//             renderTo: 'line-chart-bottom'
-//         },
-//         tooltip: {
-//             shared: false
-//         },
-//         title: {
-//             text: ''
-//         },
-//         series: [{
-//             data: avgHumidity,
-//             name: "Humidity",
-//             color: 'green'
-//         }],
-//         xAxis: {
-//             categories: dates
-//         },
-//         yAxis: {
-//           title: {
-//               text: 'Humidity'
-//           }
-//         },
-//         legend: {
-//             enabled: false
-//         }
-//     }));
-
-// }
 
 STATES = {"AK" : "Alaska",
 "AL" : "Alabama",
