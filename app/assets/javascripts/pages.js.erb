@@ -33,7 +33,9 @@ var hideLandingPage = function(){
 
 var searchBoxSubmit = function(e){
   e.preventDefault();
-  hideLandingPage();
+  $('.overlay').fadeOut('slow');
+  $('.landing-row').fadeOut('slow');
+  $('.map-search').fadeIn('slow');
   var searchInput = this.elements[0].value;
   var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
   var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
@@ -95,7 +97,6 @@ var showCityTabSidebar = function(){
   $("#city-specific-charts").show();
   $('.mini-submenu-right').hide();
   $('.sidebar-right .sidebar-body').show('slide');
-  $('#no-city-selected').hide();
 }
 
 var showNationalTabSidebar = function(){
@@ -104,7 +105,6 @@ var showNationalTabSidebar = function(){
   $("#city-specific-charts").hide();
   $('.mini-submenu-right').hide();
   $('.sidebar-right .sidebar-body').show('slide');
-  $('#no-city-selected').show();
 }
 
 var getMarkerData = function(){
@@ -118,9 +118,9 @@ var getMarkerData = function(){
   for (var i = 0; i < data.length; i ++) {
     var d = data[i];
     var content = d.city + ", " + d.state;
-    if (d.temp > 99.5) {
+    if (d.temp > 99) {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-        icon: L.mapbox.marker.icon({'marker-color': 'FF6666', 'marker-symbol': 'alcohol-shop'}),
+        icon: L.mapbox.marker.icon({'marker-color': 'FF6666'}),
         content: content,
         city: d.city,
         state: d.state,
@@ -128,7 +128,7 @@ var getMarkerData = function(){
       });
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
-        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe', 'marker-symbol': 'water'}),
+        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe'}),
         content: content,
         city: d.city,
         state: d.state,

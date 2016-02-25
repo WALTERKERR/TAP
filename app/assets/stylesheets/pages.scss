@@ -261,7 +261,7 @@ body {
   width: auto;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 480px) {
   #jump {
     font-size: 0.9em;
   }
@@ -285,12 +285,12 @@ body {
     font-size: 2em;
   }
   .headline h1 {
-    font-size: 1em;
+    font-size: 1.5em;
     margin-top: 25px;
   }
-}
-@media only screen and (max-height: 480px) {
+
   .headline p {
     display: none;
   }
 }
+
