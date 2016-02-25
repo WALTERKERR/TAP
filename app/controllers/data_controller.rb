@@ -37,69 +37,11 @@ class DataController < ApplicationController
 
 
   def find_city
-    # state = params[:state]
-    # state = convert_state_abbr(params[:state].upcase) if state.length == 2
     if @coordinate = Coordinate.find_by(city: params[:city], state: params[:state])
       render json: @coordinate
     else
       render json: @coordinate, status: :not_found
     end
-  end
-
-  private
-
-  def convert_state_abbr(state)
-    states = {"AK" => "Alaska",
-      "AL" => "Alabama",
-      "AR" => "Arkansas",
-      "AZ" => "Arizona",
-      "CA" => "California",
-      "CO" => "Colorado",
-      "CT" => "Connecticut",
-      "DE" => "Delaware",
-      "FL" => "Florida",
-      "GA" => "Georgia",
-      "HI" => "Hawaii",
-      "IA" => "Iowa",
-      "ID" => "Idaho",
-      "IL" => "Illinois",
-      "IN" => "Indiana",
-      "KS" => "Kansas",
-      "KY" => "Kentucky",
-      "LA" => "Louisiana",
-      "MA" => "Massachusetts",
-      "MD" => "Maryland",
-      "ME" => "Maine",
-      "MI" => "Michigan",
-      "MN" => "Minnesota",
-      "MO" => "Missouri",
-      "MS" => "Mississippi",
-      "MT" => "Montana",
-      "NC" => "North Carolina",
-      "ND" => "North Dakota",
-      "NE" => "Nebraska",
-      "NH" => "New Hampshire",
-      "NJ" => "New Jersey",
-      "NM" => "New Mexico",
-      "NV" => "Nevada",
-      "NY" => "New York",
-      "OH" => "Ohio",
-      "OK" => "Oklahoma",
-      "OR" => "Oregon",
-      "PA" => "Pennsylvania",
-      "RI" => "Rhode Island",
-      "SC" => "South Carolina",
-      "SD" => "South Dakota",
-      "TN" => "Tennessee",
-      "TX" => "Texas",
-      "UT" => "Utah",
-      "VA" => "Virginia",
-      "VT" => "Vermont",
-      "WA" => "Washington",
-      "WI" => "Wisconsin",
-      "WV" => "West Virginia",
-      "WY" => "Wyoming"}
-      return states.values_at(state)[0]
   end
 
 end
