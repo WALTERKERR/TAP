@@ -46,8 +46,13 @@ end
 normal_temp = RandomGaussian.new(98.25, 0.73)
 
 
-sick_temp = RandomGaussian.new(99.5, 0.73)
+sick_temp = RandomGaussian.new(99, 0.73)
 
+normal_temps_ambient = RandomGaussian.new(65, 10.5)
+normal_humidity = RandomGaussian.new(0.3, 0.11)
+
+sick_humidity = RandomGaussian.new(0.6, 0.11)
+sick_temps_ambient = RandomGaussian.new(70, 8)
 
 
 
@@ -58,11 +63,11 @@ sick_temp = RandomGaussian.new(99.5, 0.73)
 
 counter = 0
 1.times do
-  1000.times do
-    Datum.create(city: "Oklahoma City", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.75 + rand(0.1..0.15), ambient_temp: 75 + rand(0..15))
+  500.times do
+    Datum.create(city: "Oklahoma City", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
-  100.times do
-    Datum.create(city: "Oklahoma City", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..7), humidity: 0.75 + rand(0.1..0.15), ambient_temp: 75 + rand(0..15))
+  200.times do
+    Datum.create(city: "Oklahoma City", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..7), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "New Orleans", state: "Louisiana", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.75 + rand(0.1..0.15), ambient_temp: 65 + rand(0..15))
@@ -95,11 +100,11 @@ end
 
 counter = 0
 1.times do
-  1000.times do
-    Datum.create(city: "Tulsa", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.74 + rand(0.0..0.11), ambient_temp: 75 + rand(0..15))
+  400.times do
+    Datum.create(city: "Tulsa", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
-  150.times do
-    Datum.create(city: "Tulsa", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..10), humidity: 0.74 + rand(0.1..0.21), ambient_temp: 75 + rand(0..15))
+  175.times do
+    Datum.create(city: "Tulsa", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..10), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
   # 8.times do
   #   Datum.create(city: "Deer Lodge", state: "Montana", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.25..0.31), ambient_temp: 65 + rand(0..15))
@@ -115,11 +120,11 @@ end
 
 counter = 0
 1.times do
-  1000.times do
-    Datum.create(city: "Norman", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..25), humidity: 0.74 + rand(0.0..0.2), ambient_temp: 75 + rand(0..15))
+  500.times do
+    Datum.create(city: "Norman", state: "Oklahoma", temp:normal_temp.rand, time: Date.today - rand(0..25), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
   150.times do
-    Datum.create(city: "Norman", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..8), humidity: 0.74 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Norman", state: "Oklahoma", temp:sick_temp.rand, time: Date.today - rand(0..8), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "New York", state: "New York", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.74 + rand(0.1..0.2), ambient_temp: 45 + rand(0..15))
@@ -138,10 +143,10 @@ end
 counter = 0
 1.times do
   300.times do
-    Datum.create(city: "Oakland", state: "California", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.1..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Oakland", state: "California", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Oakland", state: "California", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.1..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Oakland", state: "California", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Oakland", state: "California", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -155,10 +160,10 @@ end
 counter = 0
 1.times do
   300.times do
-    Datum.create(city: "Mountain View", state: "California", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Mountain View", state: "California", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Mountain View", state: "California", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Mountain View", state: "California", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Mountain View", state: "California", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -171,11 +176,11 @@ end
 
 counter = 0
 1.times do
-  100.times do
-    Datum.create(city: "Atlanta", state: "Georgia", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.0..0.8), ambient_temp: 65 + rand(0..15))
+  200.times do
+    Datum.create(city: "Atlanta", state: "Georgia", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   2.times do
-    Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0.0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.72 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -189,10 +194,10 @@ end
 counter = 0
 1.times do
   200.times do
-    Datum.create(city: "Boston", state: "Massachusetts", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Boston", state: "Massachusetts", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Boston", state: "Massachusetts", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.05 + rand(0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Boston", state: "Massachusetts", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Boston", state: "Massachusetts", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.68 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -207,10 +212,10 @@ end
 counter = 0
 1.times do
   300.times do
-    Datum.create(city: "Topeka", state: "Kansas", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Topeka", state: "Kansas", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   4.times do
-    Datum.create(city: "Topeka", state: "Kansas", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0..0.8), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Topeka", state: "Kansas", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Topeka", state: "Kansas", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.68 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -224,10 +229,10 @@ end
 counter = 0
 1.times do
   200.times do
-    Datum.create(city: "Happyland", state: "Connecticut", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.7), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Happyland", state: "Connecticut", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Happyland", state: "Connecticut", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.7), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Happyland", state: "Connecticut", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Happyland", state: "Connecticut", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.68 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -241,10 +246,10 @@ end
 counter = 0
 1.times do
   200.times do
-    Datum.create(city: "Why", state: "Arizona", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.7), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Why", state: "Arizona", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   2.times do
-    Datum.create(city: "Why", state: "Arizona", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.7), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Why", state: "Arizona", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Why", state: "Arizona", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.48 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
@@ -257,11 +262,11 @@ end
 
 counter = 0
 1.times do
-  250.times do
-    Datum.create(city: "Two Egg", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+  100.times do
+    Datum.create(city: "Two Egg", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   3.times do
-    Datum.create(city: "Two Egg", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Two Egg", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Two Egg", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
@@ -274,11 +279,11 @@ end
 
 counter = 0
 1.times do
-  200.times do
-    Datum.create(city: "Akron", state: "Ohio", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
+  100.times do
+    Datum.create(city: "Akron", state: "Ohio", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Akron", state: "Ohio", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Akron", state: "Ohio", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Akron", state: "Ohio", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -291,11 +296,11 @@ end
 
 counter = 0
 1.times do
-  200.times do
-    Datum.create(city: "Miami", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.44 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+  100.times do
+    Datum.create(city: "Miami", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   3.times do
-    Datum.create(city: "Miami", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Miami", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Miami", state: "Florida", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
@@ -308,11 +313,11 @@ end
 
 counter = 0
 1.times do
-  800.times do
-    Datum.create(city: "Portland", state: "Oregon", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 50 + rand(0..25))
+  200.times do
+    Datum.create(city: "Portland", state: "Oregon", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   2.times do
-    Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: rand(0.1..0.4), ambient_temp: 50 + rand(0..25))
+    Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Portland", state: "Oregon", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -325,11 +330,15 @@ end
 
 counter = 0
 1.times do
-  400.times do
-    Datum.create(city: "Honolulu", state: "Hawaii", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.4), ambient_temp: 75 + rand(0..15))
+  100.times do
+    Datum.create(city: "Honolulu", state: "Hawaii", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   1.times do
-    Datum.create(city: "Honolulu", state: "Hawaii", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.4), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Honolulu", state: "Hawaii", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
+  end
+
+  10.times do
+    Datum.create(city: "Honolulu", state: "Hawaii", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Honolulu", state: "Hawaii", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.75 + rand(0.15..0.2), ambient_temp: 75 + rand(0..15))
@@ -342,11 +351,11 @@ end
 
 counter = 0
 1.times do
-  400.times do
-    Datum.create(city: "Juneau", state: "Alaska", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.4), ambient_temp: 40 + rand(0..35))
+  100.times do
+    Datum.create(city: "Juneau", state: "Alaska", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   5.times do
-    Datum.create(city: "Juneau", state: "Alaska", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.4), ambient_temp: 40 + rand(0..35))
+    Datum.create(city: "Juneau", state: "Alaska", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Juneau", state: "Alaska", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.65 + rand(0.15..0.2), ambient_temp: 35 + rand(0..15))
@@ -359,11 +368,11 @@ end
 
 counter = 0
 1.times do
-  300.times do
-    Datum.create(city: "Fort Lauderdale", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+  100.times do
+    Datum.create(city: "Fort Lauderdale", state: "Florida", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   1.times do
-    Datum.create(city: "Fort Lauderdale", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
+    Datum.create(city: "Fort Lauderdale", state: "Florida", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Fort Lauderdale", state: "Florida", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 75 + rand(0..15))
@@ -376,11 +385,11 @@ end
 
 counter = 0
 1.times do
-  400.times do
-    Datum.create(city: "Lincoln", state: "Nebraska", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.05..0.5), ambient_temp: 40 + rand(0..35))
+  100.times do
+    Datum.create(city: "Lincoln", state: "Nebraska", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   2.times do
-    Datum.create(city: "Lincoln", state: "Nebraska", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.6), ambient_temp: 65 + rand(0..15))
+    Datum.create(city: "Lincoln", state: "Nebraska", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Lincoln", state: "Nebraska", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
@@ -393,11 +402,11 @@ end
 
 counter = 0
 1.times do
-  400.times do
-    Datum.create(city: "Cheyenne", state: "Wyoming", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.5), ambient_temp: 40 + rand(0..35))
+  100.times do
+    Datum.create(city: "Cheyenne", state: "Wyoming", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   2.times do
-    Datum.create(city: "Cheyenne", state: "Wyoming", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: 0.14 + rand(0.1..0.5), ambient_temp: 60 + rand(0..15))
+    Datum.create(city: "Cheyenne", state: "Wyoming", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   end
   # 5.times do
   #   Datum.create(city: "Cheyenne", state: "Wyoming", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.64 + rand(0.1..0.2), ambient_temp: 60 + rand(0..15))
