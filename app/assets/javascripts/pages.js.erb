@@ -33,7 +33,9 @@ var hideLandingPage = function(){
 
 var searchBoxSubmit = function(e){
   e.preventDefault();
-  hideLandingPage();
+  $('.overlay').fadeOut('slow');
+  $('.landing-row').fadeOut('slow');
+  $('.map-search').fadeIn('slow');
   var searchInput = this.elements[0].value;
   var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
   var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
@@ -95,7 +97,6 @@ var showCityTabSidebar = function(){
   $("#city-specific-charts").show();
   $('.mini-submenu-right').hide();
   $('.sidebar-right .sidebar-body').show('slide');
-  $('#no-city-selected').hide();
 }
 
 var showNationalTabSidebar = function(){
@@ -104,7 +105,6 @@ var showNationalTabSidebar = function(){
   $("#city-specific-charts").hide();
   $('.mini-submenu-right').hide();
   $('.sidebar-right .sidebar-body').show('slide');
-  $('#no-city-selected').show();
 }
 
 var getMarkerData = function(){
