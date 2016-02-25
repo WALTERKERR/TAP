@@ -75,14 +75,14 @@ var mapClick = function(){
 var tabSelect = function() {
   $('#nation-tab a').click(function (e) {
     e.preventDefault()
-    $(this).tab('show')
+    $(this).tab('show');
     $("#nationwide-charts").show();
     $("#city-specific-charts").hide()
   })
 
   $('#city-tab a').click(function (e) {
     e.preventDefault()
-    $(this).tab('show')
+    $(this).tab('show');
     $("#nationwide-charts").hide();
     $("#city-specific-charts").show()
   })
@@ -94,6 +94,7 @@ var showCityTabSidebar = function(){
   $("#city-specific-charts").show();
   $('.mini-submenu-right').hide();
   $('.sidebar-right .sidebar-body').show('slide');
+  $('#no-city-selected').hide();
 }
 
 var getMarkerData = function(){
