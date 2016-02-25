@@ -59,6 +59,8 @@ $(function(){
   $('.sidebar-right .slide-submenu').on('click',function() {
     var thisEl = $(this);
     thisEl.closest('.sidebar-body').fadeOut('slide',function(){
+      $('#city-chart-container').fadeOut();
+      $('#national-chart-container').fadeOut();
       $('.mini-submenu-right').fadeIn();
       applyMargins();
     });

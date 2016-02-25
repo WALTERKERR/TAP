@@ -82,11 +82,11 @@ var displaySideChart = function(clickedCity, clickedState){
       displayLineChartSideBar(cityName, stateName, dates, avgTemps);
       displayHeatMapSideBar(dates, heatMapData, cityName, stateName);
       if (!!news[1] && news[0].title !== news[1].title) {
-        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
+        $('#news-container-sidebar').html("<h4 class='news-header'>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div><div class='news-article'><a target='_blank' href='" + news[1].uri + "'>" + news[1].title + "</a></div>");
       } else if (!!news[0]){
-        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div>");
+        $('#news-container-sidebar').html("<h4 class='news-header'>Recent Health News</h4><div class='news-article'><a target='_blank' href='" + news[0].uri + "'>" + news[0].title + "</a></div>");
       } else {
-        $('#news-container-sidebar').html("<h4>Recent Health News</h4><div class='news-article'>No Recent News</div>");
+        $('#news-container-sidebar').html("<h4 class='news-header'>Recent Health News</h4><div class='news-article'>No Recent News</div>");
       }
     });
     $('#heatmap-text-sidebar').remove();
@@ -110,8 +110,8 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
       marginTop: 0,
       marginBottom: 0,
       plotBorderWidth: 1,
-      width: 125,
-      height: 125
+      width: 190,
+      height: 150
     },
 
     exporting: {
@@ -166,14 +166,7 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
             }
           }]
 
-    });
 $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Human Temperature Heatmap</b></a><br>View the distribution of human temperatures recorded in ' + cityName + '.  </div>');
-  $('#heatmap-link').click(function(e){
-    e.preventDefault();
-    clearDivs();
-    displayHeatMap(dates, heatMapData, cityName);
-    $('#city-chart-container').show();
-  })
 
   $('#heatmap-link').click(function(e){
     e.preventDefault();
@@ -182,7 +175,6 @@ $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatm
     // $('.sidebar-right .sidebar-body').hide('slide');
     // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
-    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
@@ -197,10 +189,10 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
   $('#linechart-container-sidebar').highcharts({
     chart: {
       type: 'line',
-      width: 125,
-      height: 125,
       marginTop: 0,
       marginBottom: 0,
+      width: 190,
+      height: 150,
     },
 
     exporting: {
@@ -247,6 +239,7 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
           }]
       });
       $('.linechart-holder-master').append('<div class="col-md-6" id="linechart-text-sidebar"><a href="#" id="linechart-link"><b>Human Temperature Readings</b></a><br>View recent temperatures recorded of people living in ' + cityName + '. </div>');
+
   $('#linechart-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -254,7 +247,6 @@ var displayLineChartSideBar = function(cityName, stateName, dates, avgTemps){
     // $('.sidebar-right .sidebar-body').hide('slide');
     // $('.mini-submenu-right').fadeIn();
     $('#city-chart-container').show();
-    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
@@ -313,7 +305,7 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     chart: {
       type: 'scatter',
       zoomType: 'xy',
-      width: 150,
+      width: 190,
       height: 150,
       marginTop: 0,
       marginBottom: 0,
@@ -393,6 +385,7 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
 
       });
       $('.ambient-temp-holder-master').append('<div class="col-md-6" id="ambient-temp-text-sidebar"><a href="#" id="ambient-temp-link"><b>Human and Ambient Temperature Scatterplot</b></a><br>Evaluate if spikes in fevers are related to ambient temperature factors.</div>');
+
   $('#ambient-temp-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -400,7 +393,6 @@ var displayScatterPlotAmbientTempsSidebar = function(allTemps){
     // $('.sidebar-right .sidebar-body').hide('slide');
     // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
-    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
@@ -420,7 +412,7 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     chart: {
       type: 'scatter',
       zoomType: 'xy',
-      width: 150,
+      width: 190,
       height: 150,
     },
     exporting: {
@@ -498,6 +490,7 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     }]
   });
   $('.humidity-holder-master').append('<div class="col-md-6" id="humidity-text-sidebar"><a href="#" id="humidity-link"><b>Humidity Scatterplot</b></a><br>Evaluate if spikes in fevers are related to humidity.</div>');
+
     $('#humidity-link').click(function(e){
     e.preventDefault();
     clearDivs();
@@ -505,7 +498,6 @@ var displayScatterPlotHumiditiesSidebar = function(allDataPoints){
     // $('.sidebar-right .sidebar-body').hide('slide');
     // $('.mini-submenu-right').fadeIn();
     $('#national-chart-container').show();
-    // $('.overlay').fadeIn();
     $('.charts-overlay').fadeIn();
     var index = Highcharts.charts.length - 1
     var chart = Highcharts.charts[index]
