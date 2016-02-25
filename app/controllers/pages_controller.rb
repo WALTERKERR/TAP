@@ -5,7 +5,11 @@ class PagesController < ApplicationController
   end
 
   def upload
-    render "upload", layout: false
+    if request.xhr?
+      render "_upload", layout: false
+    else
+      render "_upload"
+    end
   end
 
   def parse_upload
@@ -15,6 +19,7 @@ class PagesController < ApplicationController
     temps.each do |temperature|
       if temperature.to_f >= 85
         a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
+        a = Datum.create(time: Time.now, temp: obj_temp.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value.to_f )
       end
     end
     redirect_to root_path
@@ -30,9 +35,10 @@ class PagesController < ApplicationController
       cleaned_string = input_string.split.join
 
       obj_temp = cleaned_string.scan(/(?<=ObjectTemp\:)(\d+\.\d+)/)[0][0]
+      puts "Obj Temp: #{obj_temp}"
 
       if obj_temp.to_f > 85
-        puts "Obj Temp: #{obj_temp}"
+        puts "***STORING DATA***"
         mq2_value = cleaned_string.scan(/(?<=MQ-2Value\:)(\d+)/)[0][0]
         puts "MQ2 Value: #{mq2_value}"
         amb_temp = cleaned_string.scan(/(?<=AmbientTemp\:)(\d+\.\d+)/)[0][0]
