@@ -165,8 +165,9 @@ var displayHeatMapSideBar = function(dates, heatMapData, cityName, stateName){
               color: '#000000'
             }
           }]
+  });
 
-$('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Human Temperature Heatmap</b></a><br>View the distribution of human temperatures recorded in ' + cityName + '.  </div>');
+  $('.heatmap-holder-master').append('<div class="col-md-6 sidebar-text" id="heatmap-text-sidebar"><a href="#" id="heatmap-link"><b>Human Temperature Heatmap</b></a><br>View the distribution of human temperatures recorded in ' + cityName + '.  </div>');
 
   $('#heatmap-link').click(function(e){
     e.preventDefault();
