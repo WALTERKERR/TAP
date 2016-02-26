@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  skip_before_action  :verify_authenticity_token, only: [:unicorn]
 
   def index
   end
@@ -21,36 +20,4 @@ class PagesController < ApplicationController
     end
     redirect_to root_path
   end
-
-  def test
-    render 'test'
-  end
-
-  def unicorn
-    unless params.keys.first == 'message'
-      input_string = params.keys.first
-      cleaned_string = input_string.split.join
-
-      obj_temp = cleaned_string.scan(/(?<=ObjectTemp\:)(\d+\.\d+)/)[0][0]
-      puts "Obj Temp: #{obj_temp}"
-
-      if obj_temp.to_f > 92.5
-        puts "***STORING DATA***"
-        mq2_value = cleaned_string.scan(/(?<=MQ-2Value\:)(\d+)/)[0][0]
-        puts "MQ2 Value: #{mq2_value}"
-        amb_temp = cleaned_string.scan(/(?<=AmbientTemp\:)(\d+\.\d+)/)[0][0]
-        puts "Amb Temp: #{amb_temp}"
-        humidity = cleaned_string.scan(/(?<=Humidity\:)(\d+\.\d+)/)[0][0]
-        puts "Humidity: #{humidity.to_f}"
-        city = cleaned_string.scan(/(?<=City\:).+(?=State)/)[0].gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
-        puts "City: #{city}"
-        state = cleaned_string.scan(/(?<=State\:).+(?=[Z])/)[0].gsub(/(?<=[a-z])(?=[A-Z])/, ' ')
-        puts "State: #{state}"
-
-        a = Datum.create(time: Time.now, temp: obj_temp.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value.to_f )
-      end
-    end
-
-  end
-
 end
