@@ -34,7 +34,7 @@ class PagesController < ApplicationController
       obj_temp = cleaned_string.scan(/(?<=ObjectTemp\:)(\d+\.\d+)/)[0][0]
       puts "Obj Temp: #{obj_temp}"
 
-      if obj_temp.to_f > 85
+      if obj_temp.to_f > 92.5
         puts "***STORING DATA***"
         mq2_value = cleaned_string.scan(/(?<=MQ-2Value\:)(\d+)/)[0][0]
         puts "MQ2 Value: #{mq2_value}"
