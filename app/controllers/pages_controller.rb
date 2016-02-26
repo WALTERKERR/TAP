@@ -18,7 +18,7 @@ class PagesController < ApplicationController
     temps = file.scan(/(?<=ObjectTempF\:)(\d+\.\d+)/).flatten
     temps.each do |temperature|
       if temperature.to_f >= 85
-        a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
+        # a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
         a = Datum.create(time: Time.now, temp: obj_temp.to_f, city: city, state: state, humidity: humidity.to_f, ambient_temp: amb_temp.to_f, mq2: mq2_value.to_f )
       end
     end
