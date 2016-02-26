@@ -182,12 +182,12 @@ counter = 0
   #   Datum.create(city: "Atlanta", state: "Georgia", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
   # end
   # <-----------ZOMBIE SEEDS------------->
-  200.times do
-    Datum.create(city: "Atlanta", state: "Georgia", temp:zombie_temp.rand, time: Date.today - rand(0..30), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
-  end
-  2.times do
-    Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
-  end
+  # 200.times do
+  #   Datum.create(city: "Atlanta", state: "Georgia", temp:zombie_temp.rand, time: Date.today - rand(0..30), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
+  # end
+  # 2.times do
+  #   Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
+  # end
   # 5.times do
   #   Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - counter, humidity: 0.72 + rand(0.1..0.2), ambient_temp: 65 + rand(0..15))
   # end

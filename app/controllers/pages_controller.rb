@@ -19,13 +19,6 @@ class PagesController < ApplicationController
     parsed.each do |data|
       a = Datum.create(temp: data[0], humidity: data[1], ambient_temp: data[2], city: params[:city], state: params[:state], time: params[:date_input][:date])
     end
-    # file = uploaded_io.read.gsub(/[\\\"]/,"")
-    # temps = file.scan(/(?<=ObjectTempF\:)(\d+\.\d+)/).flatten
-    # temps.each do |temperature|
-    #   if temperature.to_f >= 85
-    #     a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
-    #   end
-    # end
     redirect_to root_path
   end
 
@@ -41,7 +34,7 @@ class PagesController < ApplicationController
       obj_temp = cleaned_string.scan(/(?<=ObjectTemp\:)(\d+\.\d+)/)[0][0]
       puts "Obj Temp: #{obj_temp}"
 
-      if obj_temp.to_f > 85
+      if obj_temp.to_f > 92.5
         puts "***STORING DATA***"
         mq2_value = cleaned_string.scan(/(?<=MQ-2Value\:)(\d+)/)[0][0]
         puts "MQ2 Value: #{mq2_value}"
