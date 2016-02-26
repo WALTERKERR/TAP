@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post '/upload' => 'pages#parse_upload'
   get '/test' => 'pages#test'
 
-  post '/unicorn' => 'pages#unicorn'
+  post '/unicorn' => 'data#unicorn'
 
   root 'pages#index'
 
