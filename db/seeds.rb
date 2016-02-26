@@ -46,7 +46,7 @@ end
 normal_temp = RandomGaussian.new(98.25, 0.73)
 
 
-sick_temp = RandomGaussian.new(99, 0.73)
+sick_temp = RandomGaussian.new(100, 0.73)
 
 normal_temps_ambient = RandomGaussian.new(65, 10.5)
 normal_humidity = RandomGaussian.new(0.3, 0.11)
