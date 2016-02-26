@@ -6,6 +6,7 @@ $(document).ready(function(){
   $('#loading').hide();
   tabSelect();
   displayNationalDataSidebar();
+  navBarListeners();
 });
 
 String.prototype.capitalize = function(){
@@ -13,6 +14,29 @@ String.prototype.capitalize = function(){
     return m.toUpperCase();
   });
 };
+
+var navBarListeners = function(){
+  $('.navbar-links').on('click', 'a', function(e){
+    e.preventDefault();
+    var link = $(this).attr('href');
+    $.ajax({
+      method: "GET",
+      url: link
+    }).done(function(response){
+      $('#navbar-popup').html(response);
+      $('#navbar-popup').show();
+    });
+  })
+
+  $(document).on('click', function(e){
+    if (!$("#navbar-popup").is(e.target) // if the target of the click isn't the $("#navbar-popup")...
+    && $("#navbar-popup").has(e.target).length === 0) // ... nor a descendant of the $("#navbar-popup")
+    {
+    $("#navbar-popup").hide();
+    }
+  })
+
+}
 
 
 var bindListeners = function(){

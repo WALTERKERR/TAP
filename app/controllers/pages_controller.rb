@@ -5,7 +5,11 @@ class PagesController < ApplicationController
   end
 
   def upload
-    render "upload", layout: false
+    if request.xhr?
+      render "_upload", layout: false
+    else
+      render "_upload"
+    end
   end
 
   def parse_upload
@@ -35,9 +39,10 @@ class PagesController < ApplicationController
       cleaned_string = input_string.split.join
 
       obj_temp = cleaned_string.scan(/(?<=ObjectTemp\:)(\d+\.\d+)/)[0][0]
+      puts "Obj Temp: #{obj_temp}"
 
       if obj_temp.to_f > 85
-        puts "Obj Temp: #{obj_temp}"
+        puts "***STORING DATA***"
         mq2_value = cleaned_string.scan(/(?<=MQ-2Value\:)(\d+)/)[0][0]
         puts "MQ2 Value: #{mq2_value}"
         amb_temp = cleaned_string.scan(/(?<=AmbientTemp\:)(\d+\.\d+)/)[0][0]
