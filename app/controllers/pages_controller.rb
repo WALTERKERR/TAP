@@ -11,6 +11,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def about
+    if request.xhr?
+      render "_about", layout: false
+    else
+      render "_about"
+    end
+  end
+
   def parse_upload
     uploaded_io = params[:data]
     file = uploaded_io.tempfile.open
