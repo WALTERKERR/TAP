@@ -149,6 +149,15 @@ var getMarkerData = function(){
         state: d.state,
         temp: d.temp
       });
+    } else if (d.temp < 89) {
+      console.log('testing')
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': '#fece35', 'marker-symbol': 'danger', 'marker-size': 'large'}),
+        content: content,
+        city: d.city,
+        state: d.state,
+        temp: d.temp
+      });
     } else {
       var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
         icon: L.mapbox.marker.icon({'marker-color': '#2e37fe'}),
