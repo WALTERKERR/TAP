@@ -10,13 +10,18 @@ class PagesController < ApplicationController
 
   def parse_upload
     uploaded_io = params[:data]
-    file = uploaded_io.read.gsub(/[\\\"]/,"")
-    temps = file.scan(/(?<=ObjectTempF\:)(\d+\.\d+)/).flatten
-    temps.each do |temperature|
-      if temperature.to_f >= 85
-        a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
-      end
+    file = uploaded_io.tempfile.open
+    parsed = CSV.parse(file)
+    parsed.each do |data|
+      a = Datum.create(temp: data[0], humidity: data[1], ambient_temp: data[2], city: params[:city], state: params[:state], time: params[:date_input][:date])
     end
+    # file = uploaded_io.read.gsub(/[\\\"]/,"")
+    # temps = file.scan(/(?<=ObjectTempF\:)(\d+\.\d+)/).flatten
+    # temps.each do |temperature|
+    #   if temperature.to_f >= 85
+    #     a = Datum.create(temp: temperature.to_f, city: params[:city], state: params[:state], time: params[:date_input][:date])
+    #   end
+    # end
     redirect_to root_path
   end
 
