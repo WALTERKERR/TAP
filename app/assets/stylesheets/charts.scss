@@ -105,6 +105,22 @@
   padding: 15px;
 }
 
+#navbar-popup {
+  display: none;
+  background-color: white;
+  left: 30px;
+  top: 140px;
+  z-index: 54;
+  position: absolute!important;
+  padding: 15px!important;
+  -webkit-box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  box-shadow: 5px 4px 8px 1px rgba(0,0,0,0.75);
+  border-radius: 8px 8px 8px 8px;
+  -moz-border-radius: 8px 8px 8px 8px;
+  -webkit-border-radius: 8px 8px 8px 8px;
+  border: 0px solid #000000;
+}
 
 
 .charts-overlay {
