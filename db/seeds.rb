@@ -54,6 +54,7 @@ normal_humidity = RandomGaussian.new(0.3, 0.11)
 sick_humidity = RandomGaussian.new(0.6, 0.11)
 sick_temps_ambient = RandomGaussian.new(70, 8)
 
+zombie_temp = RandomGaussian.new(85.5, 0.73)
 
 
 
@@ -176,8 +177,13 @@ end
 
 counter = 0
 1.times do
+  # <-----------NORMAL SEEDS------------->
+  # 200.times do
+  #   Datum.create(city: "Atlanta", state: "Georgia", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
+  # end
+  # <-----------ZOMBIE SEEDS------------->
   200.times do
-    Datum.create(city: "Atlanta", state: "Georgia", temp:normal_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
+    Datum.create(city: "Atlanta", state: "Georgia", temp:zombie_temp.rand, time: Date.today - rand(0..30), humidity: sick_humidity.rand, ambient_temp: sick_temps_ambient.rand)
   end
   2.times do
     Datum.create(city: "Atlanta", state: "Georgia", temp:sick_temp.rand, time: Date.today - rand(0..30), humidity: normal_humidity.rand, ambient_temp: normal_temps_ambient.rand)
