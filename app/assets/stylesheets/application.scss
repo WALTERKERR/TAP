@@ -19,7 +19,7 @@
  @import "bootstrap";
 
 body {
-  font-family: 'Oxygen';
+  font-family: 'Oxygen'!important;
 }
 
 .navbar-default {
@@ -36,7 +36,7 @@ body {
   border-color: #222222;
 }
 
-.panel-title, .navbar-brand {
+.panel-title {
   color: #ffffff;
 }
 
@@ -56,6 +56,10 @@ body {
 
 .landing-row {
   position: absolute;
+}
+
+.navbar-header .navbar-brand {
+  color: #ffffff;
 }
 
 @media only screen and (max-width: 480px) {
