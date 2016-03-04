@@ -19,7 +19,7 @@
  @import "bootstrap";
 
 body {
-  font-family: 'Oxygen'!important;
+  font-family: 'Oxygen';
 }
 
 .navbar-default {
@@ -38,6 +38,10 @@ body {
 
 .panel-title {
   color: #ffffff;
+}
+
+.panel .panel-heading {
+  background-color: #222222;
 }
 
 .form-control {
