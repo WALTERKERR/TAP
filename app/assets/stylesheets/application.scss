@@ -11,10 +11,67 @@
  * file per style scope.
  *
  *= require font-awesome
- *= require pages.scss
  *= require_tree .
  *= require_self
  */
  @import "font-awesome";
  @import "bootstrap-sprockets";
- @import "bootstrap"
+ @import "bootstrap";
+
+body {
+  font-family: 'Oxygen';
+}
+
+.navbar-default {
+  opacity: 0.7;
+  background-color: #000;
+  border: none;
+}
+
+.navbar-logo {
+  padding: 5px 5px 0 15px;
+}
+
+.panel {
+  border-color: #222222;
+}
+
+.panel-title {
+  color: #ffffff;
+}
+
+.panel .panel-heading {
+  background-color: #222222;
+}
+
+.form-control {
+  border-radius: 8px 0 0 8px;
+  padding: 20px;
+}
+
+.search-error {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.submit-button {
+  padding: 10px;
+}
+
+.landing-row {
+  position: absolute;
+}
+
+.navbar-header .navbar-brand {
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar-brand {
+    font-size: 0.9em;
+  }
+
+  .navbar-logo {
+    padding: 10px 5px 0 15px;
+  }
+}

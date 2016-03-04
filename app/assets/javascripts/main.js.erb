@@ -1,0 +1,188 @@
+$(document).ready(function(){
+
+  L.mapbox.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+  getMarkerData();
+  bindListeners();
+  $('#loading').hide();
+  tabSelect();
+  displayNationalDataSidebar();
+  navBarListeners();
+});
+
+String.prototype.capitalize = function(){
+  return this.toLowerCase().replace( /\b\w/g, function (m) {
+    return m.toUpperCase();
+  });
+};
+
+var navBarListeners = function(){
+  $('.navbar-links').on('click', 'a', function(e){
+    e.preventDefault();
+    var link = $(this).attr('href');
+    $.ajax({
+      method: "GET",
+      url: link
+    }).done(function(response){
+      $('#navbar-popup').html(response);
+      $('#navbar-popup').show();
+    });
+  })
+
+  $(document).on('click', function(e){
+    if (!$("#navbar-popup").is(e.target) // if the target of the click isn't the $("#navbar-popup")...
+    && $("#navbar-popup").has(e.target).length === 0) // ... nor a descendant of the $("#navbar-popup")
+    {
+    $("#navbar-popup").hide();
+    }
+  })
+}
+
+var bindListeners = function(){
+  $('#search-box').on('submit', searchBoxSubmit);
+  $('#map').on('click', mapClick);
+  $('.main-search').on('submit', 'form', searchBoxSubmit);
+  $('.landing-link').on('click', hideLandingPage);
+}
+
+var hideLandingPage = function(){
+  $('.overlay').fadeOut('slow');
+  $('.landing-row').fadeOut('slow');
+  $('.map-search').fadeIn('slow');
+  $('#city-tab a').hide();
+  showNationalTabSidebar();
+}
+
+
+var searchBoxSubmit = function(e){
+  e.preventDefault();
+  $('.overlay').fadeOut('slow');
+  $('.landing-row').fadeOut('slow');
+  $('.map-search').fadeIn('slow');
+  var searchInput = this.elements[0].value;
+  var cityInput = searchInput.match(/^([a-zA-Z\s]+?),/);
+  var stateInput = searchInput.match(/, ?(\w+\ ?\w+)/);
+
+  if (cityInput === null || stateInput === null) {
+    displaySearchError();
+  } else {
+    if (stateInput[1].length === 2){
+      if (convertState(stateInput[1])){
+        stateInput[1] = convertState(stateInput[1]);
+      }
+    }
+    $.ajax({
+      method: 'GET',
+      url: "/find_city?city=" + cityInput[1].capitalize() + "&state=" + stateInput[1].capitalize(),
+      dataType: 'json'
+    }).done(function(response){
+      displaySideChart(cityInput[1].capitalize(), stateInput[1].capitalize());
+      $('#search-box').trigger('reset');
+      showCityTabSidebar();
+    }).fail(function(response){
+      displaySearchError();
+    })
+  }
+}
+
+var displaySearchError = function(){
+  $('.search-error').show();
+  $('.search-error').fadeOut(9000);
+}
+
+var mapClick = function(){
+  $('#city-chart-container').fadeOut('slow');
+  $('#national-chart-container').fadeOut('slow');
+  $('.overlay').fadeOut();
+}
+
+var getMarkerData = function(){
+  var map = L.mapbox.map('map', 'mapbox.streets', { zoomControl: false, minZoom: 4 }).setView([39.114102, -94.627478], 4);
+
+  new L.Control.Zoom({ position: 'bottomleft' }).addTo(map);
+
+  $.get('/data', 'json').done(function(data){
+    var markers = new L.MarkerClusterGroup();
+
+  for (var i = 0; i < data.length; i ++) {
+    var d = data[i];
+    var content = d.city + ", " + d.state;
+    if (d.temp > 99) {
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': 'FF6666'}),
+        content: content,
+        city: d.city,
+        state: d.state,
+        temp: d.temp
+      });
+    } else if (d.temp < 89) {
+      console.log('testing')
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': '#fece35', 'marker-symbol': 'danger', 'marker-size': 'large'}),
+        content: content,
+        city: d.city,
+        state: d.state,
+        temp: d.temp
+      });
+    } else {
+      var marker = L.marker(new L.LatLng(d.latitude, d.longitude),{
+        icon: L.mapbox.marker.icon({'marker-color': '#2e37fe'}),
+        content: content,
+        city: d.city,
+        state: d.state,
+        temp: d.temp
+      });
+    };
+    marker.bindPopup(content);
+    marker.on('mouseover', function(e){
+      e.target.openPopup();
+    })
+    marker.on('mouseout', function(e){
+      e.target.closePopup();
+    })
+    marker.on('click', function(e){
+      map.panTo([e.latlng.lat, e.latlng.lng]);
+      displaySideChart(this.options.city, this.options.state);
+      $('#city-tab a').show();
+      $(".news-holder-master").show();
+      showCityTabSidebar();
+    })
+    markers.addLayer(marker);
+  }
+    map.addLayer(markers);
+  })
+};
+
+var displayNationalData = function(){
+
+  var timeFrame = 7;
+  var dates = [];
+
+  $.ajax({
+    method: "GET",
+    url: "/find_all?timeframe=" + timeFrame,
+    dataType: 'JSON'
+  })
+  .done(function(response){
+    var chartData = response;
+    var todayDate = new Date();
+    for (i=0; i < timeFrame; i++){
+      var newDate = new Date();
+      newDate.setDate(todayDate.getDate() - (timeFrame - i));
+      dates.push(newDate.toJSON().slice(0,10));
+    }
+
+    var allTemps = []
+    chartData.forEach(function(item){
+      allTemps.push([item.ambient_temp, item.temp])
+    })
+
+    var allHumidities = []
+    chartData.forEach(function(item){
+      allHumidities.push([item.humidity, item.temp])
+    })
+
+    displayScatterPlotAmbientTemps(allTemps);
+    displayScatterPlotHumidities(allHumidities);
+  })
+
+}
