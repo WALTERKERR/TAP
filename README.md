@@ -1,45 +1,30 @@
-# Project Title
-
-One Paragraph of project description goes here
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisities
-
-What things you need to install the software and how to install them
-
-
 # T.A.P. -- the Thermo-Aggregation Project
 
-The main and long-term goal of this project is to use sensor data from Arduinos modules to alert public health officials about communities that may be at risk for flu and infectious disease outbreaks.  The other goal of this project is to provide documentation to other Arduino enthusiasts on how to connect data
+The main and long-term goal of this project is to use sensor data from Arduinos modules to alert public health officials about communities that may be at risk for flu and infectious disease outbreaks.  The other goal of this project is to provide documentation to other Arduino enthusiasts on how to enable their Arduinos to connect to WiFi and connect to an API, since there is a lack of documentation on this topic.  
 
 Using infrared non-contact thermometers in public places, we passively collect human temperatures and feed that data realtime to our servers. Our systems immediately identify communities with abnormal temperature readings to notify authorities about potential public health concerns.
 
-In order to contribute to this open source project, people can upload data through their own Arduinos (an instruction guide will be provided for this), or if they have no access to an Arduino, people can also upload data with CSV files.
+## Details
+Data is collected from infrared thermometer sensors built on Arduino Uno boards. One of the benefits of using an infrared thermometer is that it can collect temperature data quickly and without actually making contact with a person. This means that an Arduino device with an infrared thermometer sensor could be affixed to a building entrance and collect and transmit temperature data for every person that walked by it, providing hundreds of data points a day.
+This application will work best when we have devices all over the country collecting and publishing information. Stay tuned for more information regarding how to build or acquire your own Arduino device and post data to our site! 
 
+In order to contribute to this open source project, people can:
+- upload data through their own Arduinos (instructions will be provided for this)
+- or if they have no access to an Arduino and its sensor modules, people can also upload data with CSV files.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+### How To Contribute Data
+#### For People Who Want To Upload CSV Files:
+The files must be formatted as .csv.  All temperatures are in Fahrenheit.
+1. Once on the main map view, click on "Upload Data".
+2. The data must be arranged in this sequence:
+    ```
+    [infrared-sensed-temperature],[humidity],[mq_2 (flammable gasses)]
+    ```
+    An example would be:
+    ```
+    85.0,0.8,75.0
+    86.0,0.7,76.0
+    87.0,0.9,78.0
+    85.0,0.8,75.0
+    86.0,0.7,76.0
+    ```
