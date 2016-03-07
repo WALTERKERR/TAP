@@ -44,7 +44,13 @@ These are the sensor modules that we have attached so far:
 
 You may use newer or better sensors than what was used here.
 
-
+##### How To Program The Arduino:
+The code that we used to program the Arduino is code that was modified from these:
+- [Adafruit-MLX90614-Library (the infrared sensor)](https://github.com/adafruit/Adafruit-MLX90614-Library)
+- [DHT-sensor-library (the humidity sensor)](https://github.com/adafruit/DHT-sensor-library)
+- [DHT-sensor-library (the humidity sensor)](https://github.com/adafruit/DHT-sensor-library)
+To see how we put it all together, here is our example:
+- https://github.com/WALTERKERR/TAP/tree/development/Arduino
 
 ## Contributor List (In Alphabetical Order)
 - Bernice Anne W. Chua
