@@ -43,3 +43,26 @@ These are the sensor modules that we have attached so far:
 - **MQ-2 Gas Sensor** = the flammable gasses sensor
 
 You may use newer or better sensors than what was used here.
+
+
+## Contributor List (In Alphabetical Order)
+- Bernice Anne W. Chua
+  - [GitHub](https://github.com/BerniceChua)
+  - [LinkedIn](https://linkedin.com/in/bernicechua415)
+  - [Twitter](https://twitter.com/ChuaBernice)
+- Luis De Castro
+  - [GitHub](https://github.com/HolixSF)
+  - [LinkedIn](https://www.linkedin.com/in/holixsf)
+- Michael Du
+  - [GitHub](https://github.com/supermikol)
+  - [LinkedIn](https://www.linkedin.com/in/michael-du-4927555)
+- Jonathan Huang
+  - [GitHub](https://github.com/jonwhuang)
+  - [LinkedIn](https://www.linkedin.com/in/jonathan-huang-84659971)
+- Walter Kerr (The Person Who Started This Idea)
+  - [GitHub](https://github.com/WALTERKERR)
+  - [LinkedIn](https://www.linkedin.com/in/walter-kerr-2163336a)
+License
+----
+
+MIT
