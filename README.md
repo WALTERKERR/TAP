@@ -45,6 +45,7 @@ These are the sensor modules that we have attached so far:
 You may use newer or better sensors than what was used here.
 
 
+
 ## Contributor List (In Alphabetical Order)
 - Bernice Anne W. Chua
   - [GitHub](https://github.com/BerniceChua)
@@ -62,6 +63,8 @@ You may use newer or better sensors than what was used here.
 - Walter Kerr (The Person Who Started This Idea)
   - [GitHub](https://github.com/WALTERKERR)
   - [LinkedIn](https://www.linkedin.com/in/walter-kerr-2163336a)
+
+
 License
 ----
 
