@@ -1,10 +1,11 @@
-# T.A.P. -- the Thermo-Aggregation Project
+# Thermo-Aggregation Project -- T.A.P.
+
+[Project Link](http://thermo-aggregation-project.herokuapp.com/)
 
 The main and long-term goal of this project is to use sensor data from Arduinos modules to alert public health officials about communities that may be at risk for flu and infectious disease outbreaks.  The other goal of this project is to provide documentation to other Arduino enthusiasts on how to enable their Arduinos to connect to WiFi and connect to an API, since there is a lack of documentation on this topic.  
 
 Using infrared non-contact thermometers in public places, we passively collect human temperatures and feed that data realtime to our servers. Our systems immediately identify communities with abnormal temperature readings to notify authorities about potential public health concerns.
 
-![Thermo-Aggregation Project Landing Page](/thermo-aggregation-project-landing-page.png?raw=true "Thermo-Aggregation Project Landing Page")
 
 ## Details
 Data is collected from infrared thermometer sensors built on Arduino Uno boards. One of the benefits of using an infrared thermometer is that it can collect temperature data quickly and without actually making contact with a person. This means that an Arduino device with an infrared thermometer sensor could be affixed to a building entrance and collect and transmit temperature data for every person that walked by it, providing hundreds of data points a day.
@@ -14,12 +15,11 @@ In order to contribute to this open source project, people can:
 - upload data through their own Arduinos (instructions will be provided for this)
 - or if they have no access to an Arduino and its sensor modules, people can also upload data with CSV files.
 
-![Thermo-Aggregation Project Main View](/thermo-aggregation-project-main-view.png?raw=true "Thermo-Aggregation Project Main View")
 
 ### How To Contribute Data
 #### For People Who Want To Upload CSV Files:
 The files must be formatted as .csv.  All temperatures are in Fahrenheit.
-![Thermo-Aggregation Project How To Upload CSV Files](/thermo-aggregation-project-upload-csv.png?raw=true "Thermo-Aggregation Project How To Upload CSV Files")
+
 1. Once on the main map view, click on "Upload Data".
 2. The data must be arranged in this sequence:
     ```
