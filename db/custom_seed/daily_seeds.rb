@@ -1,5 +1,5 @@
 # New Orleans, Louisiana - Sick
-
+Datum.delete(Datum.order(:created_at).limit(712))
 
   15.times do
     Datum.create(city: "New Orleans", state: "Louisiana", temp:97.7 + rand(0..1.8), time: Date.today, humidity: 0.75 + rand(0.1..0.15), ambient_temp: 65 + rand(0..15))
