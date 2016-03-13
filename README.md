@@ -22,17 +22,18 @@ The files must be formatted as .csv.  All temperatures are in Fahrenheit.
 
 1. Once on the main map view, click on "Upload Data".
 2. The data must be arranged in this sequence:
-    ```
+    ````
     [infrared-sensed-temperature],[humidity],[mq_2 (flammable gasses)]
-    ```
+    ````
+
     An example would be:
-    ```
+    ````
     85.0,0.8,75.0
     86.0,0.7,76.0
     87.0,0.9,78.0
     85.0,0.8,75.0
     86.0,0.7,76.0
-    ```
+    ````
 
 #### For People Who Want To Upload Data Through Their Arduinos
 ##### Hardware:
@@ -49,6 +50,7 @@ The code that we used to program the Arduino is code that was modified from thes
 - [Adafruit-MLX90614-Library (the infrared sensor)](https://github.com/adafruit/Adafruit-MLX90614-Library)
 - [DHT-sensor-library (the humidity sensor)](https://github.com/adafruit/DHT-sensor-library)
 - [DHT-sensor-library (the humidity sensor)](https://github.com/adafruit/DHT-sensor-library)
+
 To see how we put it all together, here is our example:
 - https://github.com/WALTERKERR/TAP/tree/development/Arduino
 
@@ -70,6 +72,7 @@ To see how we put it all together, here is our example:
   - [GitHub](https://github.com/WALTERKERR)
   - [LinkedIn](https://www.linkedin.com/in/walter-kerr-2163336a)
 
+(Credit goes to [Thomas Huang](https://www.linkedin.com/in/thomas-huang-155693103) for designing our logo.)
 
 License
 ----
