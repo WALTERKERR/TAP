@@ -2,10 +2,9 @@
 
 [Project Link](http://thermo-aggregation-project.herokuapp.com/)
 
-The main and long-term goal of this project is to use sensor data from Arduinos modules to alert public health officials about communities that may be at risk for flu and infectious disease outbreaks.  The other goal of this project is to provide documentation to other Arduino enthusiasts on how to enable their Arduinos to connect to WiFi and connect to an API, since there is a lack of documentation on this topic.  
+We built an open-source system to alert public health officials about communities that may be at high risk for flu and infectious disease outbreaks.  Using infrared non-contact thermometers affixed to Arduino devices in public places, we passively collect human temperatures and feed that data realtime to our servers. Our systems then identify communities with statistically significant amounts of abnormal temperature readings to notify authorities about communities with potential public health concerns.
 
-Using infrared non-contact thermometers in public places, we passively collect human temperatures and feed that data realtime to our servers. Our systems immediately identify communities with abnormal temperature readings to notify authorities about potential public health concerns.
-
+In addition to promoting public health goals, we also make all of our code free and available for other Arduino enthusiasts.  This code is particularly useful for students who want to learn more about connecting Arduino devices to WiFi and APIs since there is limited documentation on this topic.  
 
 ## Details
 Data is collected from infrared thermometer sensors built on Arduino Uno boards. One of the benefits of using an infrared thermometer is that it can collect temperature data quickly and without actually making contact with a person. This means that an Arduino device with an infrared thermometer sensor could be affixed to a building entrance and collect and transmit temperature data for every person that walked by it, providing hundreds of data points a day.
@@ -68,7 +67,7 @@ To see how we put it all together, here is our example:
 - Jonathan Huang
   - [GitHub](https://github.com/jonwhuang)
   - [LinkedIn](https://www.linkedin.com/in/jonathan-huang-84659971)
-- Walter Kerr (The Person Who Started This Idea)
+- Walter Kerr
   - [GitHub](https://github.com/WALTERKERR)
   - [LinkedIn](https://www.linkedin.com/in/walter-kerr-2163336a)
 
